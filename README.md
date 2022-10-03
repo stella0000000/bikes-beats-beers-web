@@ -10,4 +10,6 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-fin.
+you probably need some API keys.
+
+- fin -
