@@ -14,6 +14,15 @@ a {
   text-decoration: none;
 }
 
+input {
+  font-family: 'Space Mono', monospace;
+}
+
+button {
+  font-family: 'Space Mono', monospace;
+
+}
+
 * {
   box-sizing: border-box;
 }
