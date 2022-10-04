@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
@@ -25,24 +26,33 @@ const Transit = styled.input`
     text-align: center;
 `
 
-// const Find = styled.button`
-//     font-size: 17px;
-//     background: #FF0099;
-//     border: none;
-//     border-radius: 100px;
-//     padding: 10px;
-// `
+const Find = styled.button`
+    font-size: 17px;
+    background: #FF0099;
+    border: none;
+    border-radius: 100px;
+    padding: 10px;
+`
 
-const Bike = () => {
+const Search = () => {
+    const [GMaps, setGMaps] = useState(null);
+
+    useEffect(() => {
+        const fetchGMaps = async () => {
+            const response = await fetch('/api/gmaps')
+            console.log(response)
+        }
+    }, [])
+
     return (
         <main className={styles.main}>
             <Image src="/bike.png" alt="bike" width={175} height={100} />
             <Location type="text" placeholder="Current location" />
             Desired transit time
             <span><Transit type="value" placeholder="00" /> mins</span>
-            {/* <Find>FIND BEATS AND BEERS</Find> */}
+            <Find>FIND BEATS AND BEERS</Find>
         </main>
     )
 }
 
-export default Bike
+export default Search
