@@ -16,10 +16,21 @@ a {
 
 input {
   font-family: 'Space Mono', monospace;
+  border: 2px solid #BDFF00;
+  border-radius: 100px;
+  background: transparent;
+  padding: 7px 10px;
+  font-size: 17px;
+  text-align: center;
 }
 
 button {
   font-family: 'Space Mono', monospace;
+  font-size: 17px;
+  background: #FF0099;
+  border: none;
+  border-radius: 100px;
+  padding: 10px;
 }
 
 * {
