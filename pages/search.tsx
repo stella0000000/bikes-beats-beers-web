@@ -3,9 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import styled from 'styled-components'
+import { Client } from '@googlemaps/google-maps-services-js'
+
+const client = new Client({})
 
 const Location = styled.input`
-    width: 350px;
+    width: 300px;
 `
 
 const Transit = styled.input`
@@ -13,13 +16,30 @@ const Transit = styled.input`
 `
 
 const Search = () => {
-    const [GMaps, setGMaps] = useState(null);
+    const [GMaps, setGMaps] = useState(null)
+    
+    const params = {
+        input: 'paris',
+        // sessionToken: '123',
+        // offset: 2,
+        // origin: undefined,
+        // location: undefined,
+        // radius: 2,
+        // language: undefined,
+        // types: undefined,
+        // components: undefined,
+        // strictBounds: false,
+    }
 
+    client.placeAutocomplete('paris', options)
+    
+    console.log({params})
     useEffect(() => {
         const fetchGMaps = async () => {
             const response = await fetch('/api/gmaps')
             console.log(response)
         }
+        fetchGMaps();
     }, [])
 
     return (
@@ -34,3 +54,10 @@ const Search = () => {
 }
 
 export default Search
+
+/**
+ * Input current location
+ * Desired cycle time + mood (speed) => interpolate distance
+ * Search google maps: beer + radius
+ * Suggest 1 location (filter 3+ stars, choose randomly)
+ */
