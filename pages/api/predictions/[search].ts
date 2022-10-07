@@ -8,14 +8,16 @@ type Data = {
   name: string
 }
 
-export default function gmaps(
+export default function predictions(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const location = req.query.toString();
+  
   client
     .placeAutocomplete({
       params: {
-        input: 'Paris',
+        input: location,
         key: process.env.GOOGLE_KEY!
       },
       timeout: 1000,
@@ -26,21 +28,6 @@ export default function gmaps(
     .catch((e) => {
       console.log(e);
     });
-
-  // client
-  //       .elevation({
-  //           params: {
-  //           locations: [{ lat: 45, lng: -110 }],
-  //           key: process.env.GOOGLE_KEY!
-  //           },
-  //           timeout: 1000, // milliseconds
-  //       })
-  //       .then((r) => {
-  //           console.log(r);
-  //       })
-  //       .catch((e) => {
-  //           console.log(e);
-  //       });
 
   // res.status(200).json({ name: 'John Doe' })
   return res

@@ -3,9 +3,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import styled from 'styled-components'
-import { Client } from '@googlemaps/google-maps-services-js'
-
-const client = new Client({})
 
 const Location = styled.input`
     width: 300px;
@@ -16,37 +13,21 @@ const Transit = styled.input`
 `
 
 const Search = () => {
-    const [GMaps, setGMaps] = useState(null)
-    
-    const params = {
-        input: 'paris',
-        // sessionToken: '123',
-        // offset: 2,
-        // origin: undefined,
-        // location: undefined,
-        // radius: 2,
-        // language: undefined,
-        // types: undefined,
-        // components: undefined,
-        // strictBounds: false,
-    }
+    const [location, setLocation] = useState<string | undefined>(undefined)
+    const [predictions, setPredictions] = useState<string[] | undefined>(undefined)
 
-    // client.placeAutocomplete('paris')
-    
-    console.log({params})
-    
     useEffect(() => {
-        const fetchGMaps = async () => {
-            const response = await fetch('/api/gmaps')
+        const fetchPredictions = async () => {
+            const response = await fetch(`/api/predictions/${location}`)
             console.log(response)
         }
-        fetchGMaps();
+        fetchPredictions();
     }, [])
 
     return (
         <main className={styles.main}>
             <Image src="/bike.png" alt="bike" width={175} height={100} />
-            <Location type="text" placeholder="Current location" />
+            <Location type="text" placeholder="Current location" onChange={e => setLocation(e.currentTarget.value)} />
             Desired transit time
             <span><Transit type="value" placeholder="00" /> mins</span>
             <button>FIND BEATS AND BEERS</button>
