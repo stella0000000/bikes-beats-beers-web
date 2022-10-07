@@ -1,19 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Client } from '@googlemaps/google-maps-services-js'
+import { Client, PlaceAutocompleteResult} from '@googlemaps/google-maps-services-js'
 
 const client = new Client({})
 
-type Data = {
-  name: string
-}
 
 export default function predictions(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<PlaceAutocompleteResult[]>
 ) {
   const location = req.query.toString();
-  
   client
     .placeAutocomplete({
       params: {
@@ -23,10 +19,12 @@ export default function predictions(
       timeout: 1000,
       })
       .then((r) => {
-        console.log(r.data.predictions);
+        // console.log(r.data.predictions);
+        return res.status(200).json(r.data.predictions)
     })
     .catch((e) => {
-      console.log(e);
+      res.status(500).json(e)
+      res.end()
     });
 
   // res.status(200).json({ name: 'John Doe' })

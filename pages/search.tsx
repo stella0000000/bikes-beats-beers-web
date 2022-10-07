@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import styled from 'styled-components'
+// import { debounce } from 'lodash.debounce'
 
 const Location = styled.input`
     width: 300px;
@@ -14,15 +15,22 @@ const Transit = styled.input`
 
 const Search = () => {
     const [location, setLocation] = useState<string | undefined>(undefined)
-    const [predictions, setPredictions] = useState<string[] | undefined>(undefined)
+    const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
 
     useEffect(() => {
         const fetchPredictions = async () => {
             const response = await fetch(`/api/predictions/${location}`)
-            console.log(response)
+            const data = await response.json()
+            
+            setPredictions(data)
+
+            console.log(data)
         }
+
         fetchPredictions();
-    }, [])
+
+
+    }, [location])
 
     return (
         <main className={styles.main}>
