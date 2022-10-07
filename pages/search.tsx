@@ -31,9 +31,10 @@ const Search = () => {
         // strictBounds: false,
     }
 
-    client.placeAutocomplete('paris', options)
+    // client.placeAutocomplete('paris')
     
     console.log({params})
+    
     useEffect(() => {
         const fetchGMaps = async () => {
             const response = await fetch('/api/gmaps')

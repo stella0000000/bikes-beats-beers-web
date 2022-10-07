@@ -12,21 +12,36 @@ export default function gmaps(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-
   client
-        .elevation({
-            params: {
-            locations: [{ lat: 45, lng: -110 }],
-            key: process.env.GOOGLE_KEY!
-            },
-            timeout: 1000, // milliseconds
-        })
-        .then((r) => {
-            console.log(r);
-        })
-        .catch((e) => {
-            console.log(e);
-        });
-  res.status(200).json({ name: 'John Doe' })
+    .placeAutocomplete({
+      params: {
+        input: 'Paris',
+        key: process.env.GOOGLE_KEY!
+      },
+      timeout: 1000,
+      })
+      .then((r) => {
+        console.log(r.data.predictions);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  // client
+  //       .elevation({
+  //           params: {
+  //           locations: [{ lat: 45, lng: -110 }],
+  //           key: process.env.GOOGLE_KEY!
+  //           },
+  //           timeout: 1000, // milliseconds
+  //       })
+  //       .then((r) => {
+  //           console.log(r);
+  //       })
+  //       .catch((e) => {
+  //           console.log(e);
+  //       });
+
+  // res.status(200).json({ name: 'John Doe' })
   return res
 }
