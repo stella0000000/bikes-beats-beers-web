@@ -16,6 +16,8 @@ const Transit = styled.input`
 
 const Search = () => {
     const [location, setLocation] = useState<string | undefined>(undefined)
+    const [placeID, setPlaceID] = useState<string | undefined>(undefined)
+    const [coords, setCoords] = useState<any>(undefined)
     const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
     const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
     const [mood, setMood] = useState<number | undefined>(undefined)
@@ -25,19 +27,51 @@ const Search = () => {
             const response = await fetch(`/api/predictions/${location}`)
             const data = await response.json()
             setPredictions(data)
+
+            // TEST
+            setMood(32) // kmh - fast
+        }
+
+        const fetchCoordinates = async () => {
+            const response = await fetch(`/api/coordinates/${placeID}`)
+            const data = await response.json()
+            // setCoords(data)
+            console.log(data)
         }
 
         if (location) fetchPredictions();
+
+        // fetchCoordinates()
     }, [location])
 
     return (
         <main className={styles.main}>
-            <Image src="/bike.png" alt="bike" width={175} height={100} />
-            <Location type="text" placeholder="Current location" onChange={debounce(e => setLocation(e.target.value), 500)} />
-            <Predictions predictions={predictions} />
+            <Image
+                src="/bike.png"
+                alt="bike"
+                width={175}
+                height={100}
+            />
+            <Location
+                type="text"
+                placeholder="Current location"
+                onChange={debounce(e => setLocation(e.target.value), 500)}
+            />
+            <Predictions
+                predictions={predictions}
+            />
             Desired transit time
-            <span><Transit type="value" placeholder="00" /> mins</span>
-            <button>FIND BEATS AND BEERS</button>
+            <span>
+                <Transit
+                    type="number"
+                    placeholder="00"
+                    onKeyUp={e => setTransitTime(parseInt(e.currentTarget.value))}
+                />
+                minutes
+            </span>
+            <button onClick={() => console.log(transitTime)}>
+                FIND BEATS AND BEERS
+            </button>
         </main>
     )
 }
@@ -47,11 +81,13 @@ export default Search
 /**
  * Input current location
  * Display predictions
- * Click prediction - make start location
  * 
+ * Click prediction - make start location => fetch lat/lon
  * Desired cycle time + mood (speed)
  * Interpolate distance
+ * 
  * Search google maps: beer + radius
+ * 0,5h * 32 kmh = 16 km radius from start loc, keyword="beer"
  * 
  * Swipe behavior
  * 

@@ -10,18 +10,21 @@ const Prediction = styled.div`
 `
 
 // fix type
+// change onClick to grab start location
 
 const Predictions = ({ predictions }: any) => {
     if (!predictions) return null;
 
+    console.log(predictions)
+
     return (
-        <>
+        <ul>
             {predictions.map((prediction: any) =>
                 <Prediction key={predictions.indexOf(prediction)} onClick={() => console.log(prediction.description)}>
                     {prediction.description}
                 </Prediction>
             )}
-        </>
+        </ul>
     )
 }
 
