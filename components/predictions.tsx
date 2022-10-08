@@ -1,18 +1,27 @@
-import React from 'react'
+import styled from "styled-components";
+
+const Prediction = styled.div`
+    width: 300px;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 5px;
+`
 
 // fix type
 
 const Predictions = ({ predictions }: any) => {
     if (!predictions) return null;
-    
+
     return (
-        <ul>
+        <>
             {predictions.map((prediction: any) =>
-                <li>
+                <Prediction key={predictions.indexOf(prediction)} onClick={() => console.log(prediction.description)}>
                     {prediction.description}
-                </li>
+                </Prediction>
             )}
-        </ul>
+        </>
     )
 }
 

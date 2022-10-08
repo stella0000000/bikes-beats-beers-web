@@ -17,23 +17,23 @@ const Transit = styled.input`
 const Search = () => {
     const [location, setLocation] = useState<string | undefined>(undefined)
     const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
+    const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
+    const [mood, setMood] = useState<number | undefined>(undefined)
 
     useEffect(() => {
         const fetchPredictions = async () => {
             const response = await fetch(`/api/predictions/${location}`)
             const data = await response.json()
             setPredictions(data)
-            // console.log(data)
         }
 
         if (location) fetchPredictions();
-
     }, [location])
 
     return (
         <main className={styles.main}>
             <Image src="/bike.png" alt="bike" width={175} height={100} />
-            <Location type="text" placeholder="Current location" onChange={debounce(e => setLocation(e.target.value), 900)} />
+            <Location type="text" placeholder="Current location" onChange={debounce(e => setLocation(e.target.value), 500)} />
             <Predictions predictions={predictions} />
             Desired transit time
             <span><Transit type="value" placeholder="00" /> mins</span>
@@ -52,5 +52,8 @@ export default Search
  * Desired cycle time + mood (speed)
  * Interpolate distance
  * Search google maps: beer + radius
+ * 
+ * Swipe behavior
+ * 
  * Suggest 1 location (filter 3+ stars, choose randomly)
  */
