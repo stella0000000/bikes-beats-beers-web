@@ -3,25 +3,21 @@ import { Client, PlaceAutocompleteResult} from '@googlemaps/google-maps-services
 
 const client = new Client({})
 
-export default async function predictions(
+export default function predictions(
   req: NextApiRequest,
-  res: NextApiResponse<PlaceAutocompleteResult[] | any> // fix type
+  res: NextApiResponse<PlaceAutocompleteResult[] | string>
 ) {
-  const location = req.query.location?.toString();
+  const input = req.query.location?.toString();
 
-  if (location) {
-    try {
-      const resp = await client.placeAutocomplete({
-        params: {
-          input: location,
-          key: process.env.GOOGLE_KEY!
-        },
-        timeout: 1000,
-      })
-      res.status(200).json(resp.data.predictions)
-    } catch(error) {
-      res.status(500).json(error)
-      console.log(error)
-    }
+  if (input) {
+    client.placeAutocomplete({
+      params: {
+        input,
+        key: process.env.GOOGLE_KEY!
+      },
+      timeout: 1000,
+    })
+    .then(r => res.status(200).json(r.data.predictions))
+    .catch(e => res.status(500).json(e.response.data.error_message))
   }
 }

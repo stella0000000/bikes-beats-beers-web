@@ -29,6 +29,7 @@ const Search = () => {
             const response = await fetch(`/api/predictions/${location}`)
             const data = await response.json()
             setPredictions(data)
+
             // TEST
             setMood(32) // kmh - fast
         }
@@ -68,7 +69,7 @@ const Search = () => {
                 value={startLocation}
             />
             <Predictions
-                predictions={predictions}
+                predictions={predictions && Array.isArray(predictions) ? predictions : null}
                 setPlaceID={setPlaceID}
                 startLocation={setStartLocation}
                 setPredictions={setPredictions}

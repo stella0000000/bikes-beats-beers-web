@@ -18,22 +18,17 @@ export default async function nearby(
     const opennow = true
 
   if (location && radius) {
-    try {
-      const resp = await client.placesNearby({
-        params: {
-            location: [52.4407709, 13.4445071],
-            radius,
-            keyword,
-            opennow,
-            key: process.env.GOOGLE_KEY!
-        },
-        timeout: 1000,
-      })
-      // console.log(resp)
-      res.status(200).json(resp.data.results)
-    } catch(error) {
-      res.status(500).json(error)
-      console.log(error)
-    }
+    client.placesNearby({
+      params: {
+          location: [52.4407709, 13.4445071],
+          radius,
+          keyword,
+          opennow,
+          key: process.env.GOOGLE_KEY!
+      },
+      timeout: 1000,
+    })
+    .then(r => res.status(200).json(r.data.results))
+    .catch(e => res.status(500).json(e.response.data.error_message))
   }
 }

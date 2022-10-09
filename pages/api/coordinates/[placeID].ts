@@ -1,27 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Client } from '@googlemaps/google-maps-services-js'
+import { Client, LatLngLiteral } from '@googlemaps/google-maps-services-js'
 
 const client = new Client({})
 
-export default async function latLon(
+export default function latLon(
   req: NextApiRequest,
-  res: NextApiResponse<any> // fix type
+  res: NextApiResponse<LatLngLiteral | undefined | string>
 ) {
-  const placeID = req.query.placeID?.toString();
+  const place_id = req.query.placeID?.toString();
 
-  if (placeID) {
-    try {
-      const resp = await client.placeDetails({
-        params: {
-          place_id: placeID,
-          key: process.env.GOOGLE_KEY!
-        },
-        timeout: 1000,        
-      })
-      res.status(200).json(resp.data.result.geometry?.location)
-    } catch(error) {
-      res.status(500).json(error)
-      console.log(error)
-    }
+  if (place_id) {
+    client.placeDetails({
+      params: {
+        place_id,
+        key: process.env.GOOGLE_KEY!
+      },
+      timeout: 1000,        
+    })
+    .then(r => res.status(200).json(r.data.result.geometry?.location))
+    .catch(r => r.status(500).json(r.response.data.error_message))
   }
 }
