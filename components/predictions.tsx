@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+interface Props {
+    predictions: any
+    setPlaceID: any
+    startLocation: any
+    setPredictions: any
+}
+
 const Prediction = styled.div`
     width: 300px;
     font-size: 15px;
@@ -9,10 +16,12 @@ const Prediction = styled.div`
     padding: 5px;
 `
 
-// fix type
-// change onClick to grab start location
-
-const Predictions = ({ predictions }: any) => {
+const Predictions: React.FC<Props> = ({
+    predictions,
+    setPlaceID,
+    startLocation,
+    setPredictions
+}) => {
     if (!predictions) return null;
 
     console.log(predictions)
@@ -20,7 +29,14 @@ const Predictions = ({ predictions }: any) => {
     return (
         <ul>
             {predictions.map((prediction: any) =>
-                <Prediction key={predictions.indexOf(prediction)} onClick={() => console.log(prediction.description)}>
+                <Prediction
+                    key={predictions.indexOf(prediction)}
+                    onClick={() => {
+                        setPlaceID(prediction.place_id)
+                        startLocation(prediction.description)
+                        setPredictions(undefined)
+                    }}
+                >
                     {prediction.description}
                 </Prediction>
             )}

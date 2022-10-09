@@ -16,9 +16,10 @@ const Transit = styled.input`
 
 const Search = () => {
     const [location, setLocation] = useState<string | undefined>(undefined)
+    const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
+    const [startLocation, setStartLocation] = useState<string | undefined>(undefined)
     const [placeID, setPlaceID] = useState<string | undefined>(undefined)
     const [coords, setCoords] = useState<any>(undefined)
-    const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
     const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
     const [mood, setMood] = useState<number | undefined>(undefined)
 
@@ -56,9 +57,13 @@ const Search = () => {
                 type="text"
                 placeholder="Current location"
                 onChange={debounce(e => setLocation(e.target.value), 500)}
+                value={startLocation}
             />
             <Predictions
                 predictions={predictions}
+                setPlaceID={setPlaceID}
+                startLocation={setStartLocation}
+                setPredictions={setPredictions}
             />
             Desired transit time
             <span>
