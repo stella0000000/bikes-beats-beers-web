@@ -36,14 +36,14 @@ const Search = () => {
         const fetchCoordinates = async () => {
             const response = await fetch(`/api/coordinates/${placeID}`)
             const data = await response.json()
-            // setCoords(data)
-            console.log(data)
+            setCoords(data)
+            console.log({data})
         }
 
         if (location) fetchPredictions();
-
-        // fetchCoordinates()
-    }, [location])
+        if (placeID) fetchCoordinates()
+        
+    }, [location, placeID])
 
     return (
         <main className={styles.main}>
@@ -74,7 +74,11 @@ const Search = () => {
                 />
                 minutes
             </span>
-            <button onClick={() => console.log(transitTime)}>
+            <button onClick={() => {
+                console.log(transitTime)
+                // console.log(placeID)
+                console.log(coords)
+            }}>
                 FIND BEATS AND BEERS
             </button>
         </main>

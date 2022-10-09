@@ -13,7 +13,6 @@ export default async function latLon(
     try {
       const resp = await client.placeDetails({
         params: {
-          // place_id: "ChIJw1IMd-j2wokR98jKplFZUKE",
           place_id: placeID,
           key: process.env.GOOGLE_KEY!
         },

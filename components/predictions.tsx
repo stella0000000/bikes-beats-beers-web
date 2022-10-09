@@ -24,8 +24,6 @@ const Predictions: React.FC<Props> = ({
 }) => {
     if (!predictions) return null;
 
-    console.log(predictions)
-
     return (
         <ul>
             {predictions.map((prediction: any) =>
