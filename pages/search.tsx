@@ -22,17 +22,21 @@ const Search = () => {
     const [coords, setCoords] = useState<any>(undefined)
     const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
     const [mood, setMood] = useState<number | undefined>(undefined)
+    const [radius, setRadius] = useState<number | undefined>(50)
 
     useEffect(() => {
         const fetchPredictions = async () => {
             const response = await fetch(`/api/predictions/${location}`)
             const data = await response.json()
             setPredictions(data)
-
             // TEST
             setMood(32) // kmh - fast
         }
 
+        if (location) fetchPredictions();
+    }, [location])
+
+    useEffect(() => {
         const fetchCoordinates = async () => {
             const response = await fetch(`/api/coordinates/${placeID}`)
             const data = await response.json()
@@ -40,19 +44,23 @@ const Search = () => {
             console.log({data})
         }
 
-        if (location) fetchPredictions();
         if (placeID) fetchCoordinates()
-        
-    }, [location, placeID])
+    }, [placeID])
+
+    useEffect(() => {
+        const fetchBeer = async () => {
+            const response = await fetch(`/api/beer/${coords}/${radius}`)
+            const data = await response.json()
+            // setCoords(data)
+            console.log({data})
+        }
+
+        if (coords) fetchBeer();
+    }, [coords])
 
     return (
         <main className={styles.main}>
-            <Image
-                src="/bike.png"
-                alt="bike"
-                width={175}
-                height={100}
-            />
+            <Image src="/bike.png" alt="bike" width={175} height={100} />
             <Location
                 type="text"
                 placeholder="Current location"
@@ -100,5 +108,5 @@ export default Search
  * 
  * Swipe behavior
  * 
- * Suggest 1 location (filter 3+ stars, choose randomly)
+ * Suggest 1 location (random)
  */
