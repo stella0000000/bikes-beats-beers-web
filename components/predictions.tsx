@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-interface Props {
-    predictions: any
-    setPlaceID: any
-    startLocation: any
-    setPredictions: any
-}
-
 const Prediction = styled.div`
     width: 300px;
     font-size: 15px;
@@ -15,6 +8,14 @@ const Prediction = styled.div`
     overflow: hidden;
     padding: 5px;
 `
+
+// fix types
+interface Props {
+    predictions: any
+    setPlaceID: any
+    startLocation: any
+    setPredictions: any
+}
 
 const Predictions: React.FC<Props> = ({
     predictions,
@@ -26,7 +27,7 @@ const Predictions: React.FC<Props> = ({
 
     return (
         <ul>
-            {predictions.map((prediction: any) =>
+            {predictions.map((prediction: any) => // fix type
                 <Prediction
                     key={predictions.indexOf(prediction)}
                     onClick={() => {

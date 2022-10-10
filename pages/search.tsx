@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+// import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import styled from 'styled-components'
 import debounce from 'lodash.debounce'
@@ -13,13 +13,12 @@ const Location = styled.input`
 const Transit = styled.input`
     width: 100px;
 `
-
 const Search = () => {
     const [location, setLocation] = useState<string | undefined>(undefined)
     const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
     const [startLocation, setStartLocation] = useState<string | undefined>(undefined)
     const [placeID, setPlaceID] = useState<string | undefined>(undefined)
-    const [coords, setCoords] = useState<any>(undefined)
+    const [coords, setCoords] = useState<number[] | undefined>(undefined)
     const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
     const [mood, setMood] = useState<number | undefined>(undefined)
     const [radius, setRadius] = useState<number | undefined>(50)
@@ -30,7 +29,7 @@ const Search = () => {
             const data = await response.json()
             setPredictions(data)
 
-            // TEST
+            // FIX
             setMood(32) // kmh - fast
         }
 
@@ -41,7 +40,7 @@ const Search = () => {
         const fetchCoordinates = async () => {
             const response = await fetch(`/api/coordinates/${placeID}`)
             const data = await response.json()
-            setCoords(data)
+            setCoords([data.lat, data.lng])
             console.log({data})
         }
 
@@ -50,7 +49,7 @@ const Search = () => {
 
     useEffect(() => {
         const fetchBeer = async () => {
-            const response = await fetch(`/api/beer/${coords}/${radius}`)
+            const response = await fetch(`/api/beer/${radius}?lat=${coords ? coords[0] : null}&lng=${coords ? coords[1] : null}`)
             const data = await response.json()
             // setCoords(data)
             console.log({data})
@@ -110,4 +109,6 @@ export default Search
  * Swipe behavior
  * 
  * Suggest 1 location (random)
+ * 
+ * ERROR HANDLING
  */

@@ -3,7 +3,7 @@ import { Client, LatLngLiteral } from '@googlemaps/google-maps-services-js'
 
 const client = new Client({})
 
-export default function latLon(
+export default function coordinates(
   req: NextApiRequest,
   res: NextApiResponse<LatLngLiteral | undefined | string>
 ) {
