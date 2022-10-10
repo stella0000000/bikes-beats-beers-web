@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 // import Link from 'next/link'
 import styles from '../styles/Home.module.css'
@@ -14,14 +14,15 @@ const Transit = styled.input`
     width: 100px;
 `
 const Search = () => {
-    const [location, setLocation] = useState<string | undefined>(undefined)
+    const [location, setLocation] = useState<string>('')
     const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
-    const [startLocation, setStartLocation] = useState<string | undefined>(undefined)
+    // const [startLocation, setStartLocation] = useState<string | undefined>(undefined)
+    const [locationSelected, setLocationSelected] = useState<boolean>(false)
     const [placeID, setPlaceID] = useState<string | undefined>(undefined)
-    const [coords, setCoords] = useState<number[] | undefined>(undefined)
-    const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
+    const [coords, setCoords] = useState<number[] | undefined>()
+    const [transitTime, setTransitTime] = useState<number | undefined>()
     const [mood, setMood] = useState<number | undefined>(undefined)
-    const [radius, setRadius] = useState<number | undefined>(50)
+    const [radius, setRadius] = useState<number | undefined>(5000)
 
     useEffect(() => {
         const fetchPredictions = async () => {
@@ -33,7 +34,7 @@ const Search = () => {
             setMood(32) // kmh - fast
         }
 
-        if (location) fetchPredictions();
+        if (location) fetchPredictions(), 800;
     }, [location])
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const Search = () => {
             const response = await fetch(`/api/coordinates/${placeID}`)
             const data = await response.json()
             setCoords([data.lat, data.lng])
-            console.log({data})
+            // console.log({data})
         }
 
         if (placeID) fetchCoordinates()
@@ -49,10 +50,11 @@ const Search = () => {
 
     useEffect(() => {
         const fetchBeer = async () => {
-            const response = await fetch(`/api/beer/${radius}?lat=${coords ? coords[0] : null}&lng=${coords ? coords[1] : null}`)
-            const data = await response.json()
-            // setCoords(data)
-            console.log({data})
+            if (coords) {
+                const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
+                const data = await response.json()
+                console.log({data})
+            }
         }
 
         if (coords) fetchBeer();
@@ -64,13 +66,14 @@ const Search = () => {
             <Location
                 type="text"
                 placeholder="Current location"
-                onChange={debounce(e => setLocation(e.target.value), 500)}
-                value={startLocation}
+                onChange={e => setLocation(e.target.value)}
+                value={location}
             />
             <Predictions
                 predictions={predictions && Array.isArray(predictions) ? predictions : null}
                 setPlaceID={setPlaceID}
-                startLocation={setStartLocation}
+                // startLocation={setStartLocation}
+                setLocation={setLocation}
                 setPredictions={setPredictions}
             />
             Desired transit time

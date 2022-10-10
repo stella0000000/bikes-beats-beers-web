@@ -13,14 +13,16 @@ const Prediction = styled.div`
 interface Props {
     predictions: any
     setPlaceID: any
-    startLocation: any
+    // startLocation: any
+    setLocation: any
     setPredictions: any
 }
 
 const Predictions: React.FC<Props> = ({
     predictions,
     setPlaceID,
-    startLocation,
+    // startLocation,
+    setLocation,
     setPredictions
 }) => {
     if (!predictions) return null;
@@ -32,7 +34,8 @@ const Predictions: React.FC<Props> = ({
                     key={predictions.indexOf(prediction)}
                     onClick={() => {
                         setPlaceID(prediction.place_id)
-                        startLocation(prediction.description)
+                        // startLocation(prediction.description)
+                        setLocation(prediction.description)
                         setPredictions(undefined)
                     }}
                 >

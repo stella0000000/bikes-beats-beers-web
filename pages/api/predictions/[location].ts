@@ -3,7 +3,7 @@ import { Client, PlaceAutocompleteResult} from '@googlemaps/google-maps-services
 
 const client = new Client({})
 
-export default function predictions(
+export default async function predictions(
   req: NextApiRequest,
   res: NextApiResponse<PlaceAutocompleteResult[] | string>
 ) {

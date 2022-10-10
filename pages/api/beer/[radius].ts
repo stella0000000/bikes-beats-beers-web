@@ -10,7 +10,7 @@ export default function nearby(
 
     console.log(req.query)
 
-  if (req.query.radius && req.query.lat && req.query.lng) {
+  // if (req.query.radius && req.query.lat && req.query.lng) {
     // const location = [parseFloat(req.query.lat.toString()), parseFloat(req.query.lng.toString())]
     // const radius = parseFloat(req.query.radius.toString())     // add BUFFER
     // const keyword = 'beer'    // burgers, books
@@ -18,15 +18,15 @@ export default function nearby(
 
     client.placesNearby({
       params: {
-          location: [parseFloat(req.query.lat.toString()), parseFloat(req.query.lng.toString())],
-          radius: parseFloat(req.query.radius.toString()),
+          location: [parseFloat(req.query.lat?.toString()!), parseFloat(req.query.lng?.toString()!)],
+          radius: parseFloat(req.query.radius?.toString()!),
           keyword: 'beer',
           opennow: true,
           key: process.env.GOOGLE_KEY!
       },
       timeout: 1000,
     })
-    .then(r => res.status(200).json(r.data.results))
+    .then(r => res.status(200).json(r.data.results))  // not resolving
     .catch(e => res.status(500).json(e.response.data.error_message))
-  }
+  // }
 }
