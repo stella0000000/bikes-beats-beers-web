@@ -47,7 +47,7 @@ const Search = () => {
         const interpolateRadius = () => {
             if (mood && transitTime) {
                 // mood kmh - transitTime min - radius meter
-                setRadius(mood * transitTime * 0.5 * 1000) // convert
+                setRadius(mood * transitTime / 60 * 1000) // convert
             }
         }
 
@@ -103,9 +103,10 @@ const Search = () => {
 
             <Image src="/beat.png" alt="bike" width={110} height={120} />
             <div>
+                {/* fix default to no mood selected */}
                 <input type="radio" name="mood" onClick={() => setMood(32)} /> SWEAT<br></br>
-                <input type="radio" name="mood" onClick={() => setMood(20)} /> CHILL<br></br>
-                <input type="radio" name="mood" onClick={() => setMood(randomMood(15, 37))} /> WHATEVER
+                <input type="radio" name="mood" onClick={() => setMood(17)} /> CHILL<br></br>
+                <input type="radio" name="mood" onClick={() => setMood(randomMood(15, 35))} /> WHATEVER
             </div>
 
             <button
@@ -132,7 +133,6 @@ export default Search
  * Click prediction - make start location => fetch lat/lon
  * Desired cycle time + mood (speed)
  * Interpolate distance
- * 
  * Search google maps: beer + radius
  * 0,5h * 32 kmh = 16 km radius from start loc, keyword="beer"
  * 
