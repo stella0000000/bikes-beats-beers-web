@@ -7,9 +7,6 @@ export default async function beers(
   req: NextApiRequest,
   res: NextApiResponse<Partial<PlaceData>[] | string>
 ) {
-
-  console.log(req.query)
-
   try {
     const response = await client.placesNearby({
       params: {
