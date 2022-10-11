@@ -10,14 +10,18 @@ export default async function predictions(
   const input = req.query.location?.toString();
 
   if (input) {
-    client.placeAutocomplete({
-      params: {
-        input,
-        key: process.env.GOOGLE_KEY!
-      },
-      timeout: 1000,
-    })
-    .then(r => res.status(200).json(r.data.predictions))
-    .catch(e => res.status(500).json(e.response.data.error_message))
+    try {
+      const response = await client.placeAutocomplete({
+        params: {
+          input,
+          key: process.env.GOOGLE_KEY!
+        },
+        timeout: 1000,
+      })
+      res.status(200).json(response.data.predictions)
+    } catch(err) {
+      res.status(500).json('Uh oh - predictions failed')
+      // res.status(500).json(response.data.error_message)
+    }
   }
 }

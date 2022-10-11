@@ -24,7 +24,6 @@ input {
   text-align: center;
 }
 
-
 textarea:focus, input:focus{
   outline: none;
 }
@@ -39,9 +38,14 @@ button {
   font-family: 'Space Mono', monospace;
   font-size: 17px;
   background: #FF0099;
+  color: white;
   border: none;
   border-radius: 100px;
   padding: 10px;
+}
+
+button:disabled {
+  color: rgb(142, 142, 142);
 }
 
 ul, li {

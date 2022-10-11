@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.logos}>
           <Image src="/bike.png" alt="bike" width={140} height={80} />
-          <Image src="/beat.png" alt="bike" width={100} height={100} />
+          <Image src="/beat.png" alt="bike" width={100} height={110} />
           <Image src="/beer.png" alt="bike" width={90} height={100} />
         </div>
         <Link  href="/search">

@@ -7,25 +7,28 @@ const Prediction = styled.div`
     white-space: nowrap;
     overflow: hidden;
     padding: 5px;
+    cursor: default;
 `
 
 // fix types
 interface Props {
     predictions: any
     setPlaceID: any
-    // startLocation: any
     setLocation: any
     setPredictions: any
+    setLocated: any
+    located: boolean
 }
 
 const Predictions: React.FC<Props> = ({
     predictions,
     setPlaceID,
-    // startLocation,
     setLocation,
-    setPredictions
+    setPredictions,
+    setLocated,
+    located
 }) => {
-    if (!predictions) return null;
+    if (!predictions || located) return null;
 
     return (
         <ul>
@@ -34,9 +37,9 @@ const Predictions: React.FC<Props> = ({
                     key={predictions.indexOf(prediction)}
                     onClick={() => {
                         setPlaceID(prediction.place_id)
-                        // startLocation(prediction.description)
                         setLocation(prediction.description)
                         setPredictions(undefined)
+                        setLocated(true)
                     }}
                 >
                     {prediction.description}
