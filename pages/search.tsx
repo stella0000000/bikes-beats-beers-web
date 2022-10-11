@@ -5,22 +5,7 @@ import styles from '../styles/Home.module.css'
 import styled from 'styled-components'
 import debounce from 'lodash.debounce'
 import Predictions from '../components/predictions'
-
-const randomMood = (min: number, max: number) => {
-    return Math.random() * (max - min) + min
-}
-
-enum MOOD {
-    SWEAT = 'SWEAT',
-    CHILL = 'CHILL',
-    WHATEVER = 'WHATEVER'
-}
-
-enum SPEED {
-    SWEAT = 32,
-    CHILL = 17,
-    WHATEVER = randomMood(15, 35)
-}
+import CyclingMood from '../components/cyclingMood'
 
 const Location = styled.input`
     width: 300px;
@@ -59,13 +44,6 @@ const Search = () => {
 
         if (placeID) fetchCoordinates()
     }, [placeID])
-
-    const interpolateRadius = (speed: number) => {
-        if (mood && transitTime) {
-            // mood kmh - transitTime min - radius meter
-            setRadius(speed * transitTime / 60 * 1000) // convert
-        }
-    }
 
     const fetchBeer = async () => {
         if (coords) {
@@ -111,49 +89,22 @@ const Search = () => {
             </span>
 
             <Image src="/beat.png" alt="bike" width={110} height={120} />
-            <div>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={mood===MOOD.SWEAT}
-                        onChange={() => {
-                            setMood(MOOD.SWEAT)
-                            interpolateRadius(SPEED.SWEAT)
-                        }}
-                    />
-                    SWEAT
-                </label><br></br>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={mood===MOOD.CHILL}
-                        onChange={() => {
-                            setMood(MOOD.CHILL)
-                            interpolateRadius(SPEED.CHILL)
-                        }}
-                    />
-                    CHILL
-                </label><br></br>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={mood===MOOD.WHATEVER}
-                        onChange={() => {
-                            setMood(MOOD.WHATEVER)
-                            interpolateRadius(SPEED.WHATEVER)
-                        }}
-                    />
-                    WHATEVER
-                </label>
-            </div>
+
+            <CyclingMood
+                mood={mood}
+                setMood={setMood}
+                transitTime={transitTime}
+                setRadius={setRadius}
+            />
 
             <button
                 onClick={() => {
                     fetchBeer()
-                    // console.log(transitTime)
-                    // console.log(mood)
-                    // console.log(placeID)
-                    // console.log(coords)
+                    console.log(transitTime)
+                    console.log(mood)
+                    console.log(radius)
+                    console.log(placeID)
+                    console.log(coords)
                 }}
                 disabled={!coords || !mood || !transitTime || !radius}
             >

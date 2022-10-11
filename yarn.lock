@@ -2004,6 +2004,11 @@ split-on-first@^1.0.0:
   resolved "https://registry.yarnpkg.com/split-on-first/-/split-on-first-1.1.0.tgz#f610afeee3b12bce1d0c30425e76398b78249a5f"
   integrity sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw==
 
+spotify-web-api-js@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/spotify-web-api-js/-/spotify-web-api-js-1.5.2.tgz#ab69cab0809e357061c5684d6215bcf107822e0c"
+  integrity sha512-ie1gbg1wCabfobIkXTIBLUMyULS/hMCpF44Cdx2pAO0/+FrjhNSDjlDzcwCEDy+ZIo3Fscs+Gkg/GTeQ/ijo+Q==
+
 strict-uri-encode@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
