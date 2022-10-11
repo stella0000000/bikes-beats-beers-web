@@ -24,6 +24,7 @@ const Search = () => {
     const [transitTime, setTransitTime] = useState<number | undefined>()
     const [mood, setMood] = useState<string | undefined>(undefined)
     const [radius, setRadius] = useState<number | undefined>(undefined)
+    const [destination, setDestination] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         const fetchPredictions = async () => {
@@ -65,6 +66,7 @@ const Search = () => {
             const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
             const data = await response.json()
             console.log({data})
+            setDestination(data[0].name)
         }
     }
 
@@ -126,6 +128,7 @@ const Search = () => {
             >
                 FIND BEATS AND BEERS
             </button>
+            <div>your destination is ... {destination}</div>
         </main>
     )
 }
