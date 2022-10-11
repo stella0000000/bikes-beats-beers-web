@@ -6,6 +6,22 @@ import styled from 'styled-components'
 import debounce from 'lodash.debounce'
 import Predictions from '../components/predictions'
 
+const randomMood = (min: number, max: number) => {
+    return Math.random() * (max - min) + min
+}
+
+enum MOOD {
+    SWEAT = 'SWEAT',
+    CHILL = 'CHILL',
+    WHATEVER = 'WHATEVER'
+}
+
+enum SPEED {
+    SWEAT = 32,
+    CHILL = 17,
+    WHATEVER = randomMood(15, 35)
+}
+
 const Location = styled.input`
     width: 300px;
 `
@@ -13,6 +29,7 @@ const Location = styled.input`
 const Transit = styled.input`
     width: 100px;
 `
+
 const Search = () => {
     const [location, setLocation] = useState<string>('')
     const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
@@ -20,7 +37,7 @@ const Search = () => {
     const [placeID, setPlaceID] = useState<string | undefined>(undefined)
     const [coords, setCoords] = useState<number[] | undefined>()
     const [transitTime, setTransitTime] = useState<number | undefined>()
-    const [mood, setMood] = useState<number | undefined>(undefined)
+    const [mood, setMood] = useState<string | undefined>(undefined)
     const [radius, setRadius] = useState<number | undefined>(undefined)
 
     useEffect(() => {
@@ -43,16 +60,12 @@ const Search = () => {
         if (placeID) fetchCoordinates()
     }, [placeID])
 
-    useEffect(() => {
-        const interpolateRadius = () => {
-            if (mood && transitTime) {
-                // mood kmh - transitTime min - radius meter
-                setRadius(mood * transitTime / 60 * 1000) // convert
-            }
+    const interpolateRadius = (speed: number) => {
+        if (mood && transitTime) {
+            // mood kmh - transitTime min - radius meter
+            setRadius(speed * transitTime / 60 * 1000) // convert
         }
-
-        interpolateRadius()
-    }, [mood])
+    }
 
     const fetchBeer = async () => {
         if (coords) {
@@ -60,10 +73,6 @@ const Search = () => {
             const data = await response.json()
             console.log({data})
         }
-    }
-
-    const randomMood = (min: number, max: number) => {
-        return Math.random() * (max - min) + min
     }
 
     // const updateLocation = (e: any )=> {
@@ -103,10 +112,39 @@ const Search = () => {
 
             <Image src="/beat.png" alt="bike" width={110} height={120} />
             <div>
-                {/* fix default to no mood selected */}
-                <input type="radio" name="mood" onClick={() => setMood(32)} /> SWEAT<br></br>
-                <input type="radio" name="mood" onClick={() => setMood(17)} /> CHILL<br></br>
-                <input type="radio" name="mood" onClick={() => setMood(randomMood(15, 35))} /> WHATEVER
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={mood===MOOD.SWEAT}
+                        onChange={() => {
+                            setMood(MOOD.SWEAT)
+                            interpolateRadius(SPEED.SWEAT)
+                        }}
+                    />
+                    SWEAT
+                </label><br></br>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={mood===MOOD.CHILL}
+                        onChange={() => {
+                            setMood(MOOD.CHILL)
+                            interpolateRadius(SPEED.CHILL)
+                        }}
+                    />
+                    CHILL
+                </label><br></br>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={mood===MOOD.WHATEVER}
+                        onChange={() => {
+                            setMood(MOOD.WHATEVER)
+                            interpolateRadius(SPEED.WHATEVER)
+                        }}
+                    />
+                    WHATEVER
+                </label>
             </div>
 
             <button
