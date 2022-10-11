@@ -45,6 +45,21 @@ const Search = () => {
         if (placeID) fetchCoordinates()
     }, [placeID])
 
+    // useEffect(() => {
+    //     const fetchPlaylist = async () => {
+    //         const response = await fetch(`/api/playlist/${mood}`)
+    //         const data = await response.json()
+    //         setPlaylist(data)
+    //     }
+    // }, [])
+
+    const fetchPlaylist = async () => {
+        const response = await fetch(`/api/playlist/${mood}`)
+        const data = await response.json()
+        console.log(data)
+        // setPlaylist(data)
+    }
+
     const fetchBeer = async () => {
         if (coords) {
             const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
@@ -100,11 +115,12 @@ const Search = () => {
             <button
                 onClick={() => {
                     fetchBeer()
-                    console.log(transitTime)
-                    console.log(mood)
-                    console.log(radius)
-                    console.log(placeID)
-                    console.log(coords)
+                    fetchPlaylist()
+                    // console.log(transitTime)
+                    // console.log(mood)
+                    // console.log(radius)
+                    // console.log(placeID)
+                    // console.log(coords)
                 }}
                 disabled={!coords || !mood || !transitTime || !radius}
             >
