@@ -10,7 +10,9 @@ yarn install
 ## Add your API keys into a .env:
 
 ```
-spotify + google maps
+GOOGLE_KEY='blah'
+SPOTIFY_CLIENT_ID='blah'
+SPOTIFY_CLIENT_SECRET='blah'
 ```
 
 ## Run the dev server:
