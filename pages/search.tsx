@@ -55,140 +55,117 @@ const Bubble = styled.span<{selected?: boolean}>`
   margin: 20px 10px 0px 0px;
 `
 
-const Search = ({ genres }) => {
-    const [location, setLocation] = useState<string>('')
-    const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
-    const [located, setLocated] = useState<boolean>(false)
-    const [placeID, setPlaceID] = useState<string | undefined>(undefined)
-    const [coords, setCoords] = useState<number[] | undefined>()
-    const [transitTime, setTransitTime] = useState<number | undefined>()
-    const [mood, setMood] = useState<string | undefined>(undefined)
-    const [radius, setRadius] = useState<number | undefined>(undefined)
-    const [destination, setDestination] = useState<string | undefined>(undefined)
-    const [selectBubble, setSelectBubble] = useState<boolean>(true)
-    const views = useRef(null)
+const Search = () => {
+  const views = useRef(null)
+  const [location, setLocation] = useState<string>('')
+  const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
+  const [located, setLocated] = useState<boolean>(false)
+  const [placeID, setPlaceID] = useState<string | undefined>(undefined)
+  const [coords, setCoords] = useState<number[] | undefined>()
+  const [transitTime, setTransitTime] = useState<number | undefined>()
+  const [mood, setMood] = useState<string | undefined>(undefined)
+  const [radius, setRadius] = useState<number | undefined>(undefined)
+  const [destination, setDestination] = useState<string | undefined>(undefined)
+  const [selectBubble, setSelectBubble] = useState<boolean>(true)
+  const [playlist, setPlaylist] = useState<string | undefined>(undefined)
 
-    useEffect(() => {
-        const fetchPredictions = async () => {
-            const response = await fetch(`/api/predictions/${location}`)
-            const data = await response.json()
-            setPredictions(data)
-        }
+  useEffect(() => {
+      const fetchPredictions = async () => {
+          const response = await fetch(`/api/predictions/${location}`)
+          const data = await response.json()
+          setPredictions(data)
+      }
 
-        if (location && !located) fetchPredictions();
-    }, [location, located])
+      if (location && !located) fetchPredictions();
+  }, [location, located])
 
-    useEffect(() => {
-        const fetchCoordinates = async () => {
-            const response = await fetch(`/api/coordinates/${placeID}`)
-            const data = await response.json()
-            setCoords([data.lat, data.lng])
-        }
+  useEffect(() => {
+      const fetchCoordinates = async () => {
+          const response = await fetch(`/api/coordinates/${placeID}`)
+          const data = await response.json()
+          setCoords([data.lat, data.lng])
+      }
 
-        if (placeID) fetchCoordinates()
-    }, [placeID])
+      if (placeID) fetchCoordinates()
+  }, [placeID])
 
-    // useEffect(() => {
-    //     const fetchPlaylist = async () => {
-    //         const response = await fetch(`/api/playlist/${mood}`)
-    //         const data = await response.json()
-    //         setPlaylist(data)
-    //     }
-    // }, [])
+  const fetchBeer = async () => {
+      if (coords) {
+          const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
+          const data = await response.json()
+          setDestination(data[0].name)
+      }
+  }
 
-    const fetchPlaylist = async () => {
-        const response = await fetch(`/api/playlist/${mood}`)
-        const data = await response.json()
-        console.log(data)
-        // setPlaylist(data)
-    }
+  const fetchPlaylist = async () => {
+      const response = await fetch(`/api/playlist/${mood}`)
+      const data = await response.json()
+      console.log({ data })
+      // setPlaylist(data)
+  }
 
-    const fetchBeer = async () => {
-        if (coords) {
-            const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
-            const data = await response.json()
-            console.log({data})
-            setDestination(data[0].name)
-        }
-    }
+  // const updateLocation = (e: any )=> {
+  //     setLocation(e?.target?.value)
+  // }
+  // const debouncedLocation = debounce(e => updateLocation(e), 200);
 
-    // const updateLocation = (e: any )=> {
-    //     setLocation(e?.target?.value)
-    // }
-    // const debouncedLocation = debounce(e => updateLocation(e), 200);
+  return (
+      <>
+        <Container
+          ref={views}
+          onScroll={e => {
+            const ele = e.target as HTMLInputElement
+            setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
+          }}
+        >
+          <View>
+            <Tile>
+              <BikeSearch
+                setTransitTime={setTransitTime}
+                predictions={predictions}
+                setPredictions={setPredictions}
+                setPlaceID={setPlaceID}
+                located={located}
+                setLocated={setLocated}
+                location={location}
+                setLocation={setLocation}
+              />
+            </Tile>
+          </View>
 
-    return (
-        <>
-          <Container
-            ref={views}
-            onScroll={e => {
-              const ele = e.target as HTMLInputElement
-              setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
-            }}
+          <View>
+            <Tile>
+              <BeatSearch
+                mood={mood}
+                setMood={setMood}
+                transitTime={transitTime}
+                setRadius={setRadius}
+              />
+            </Tile>
+          </View>
+        </Container>
+        <Button>
+          <button
+              onClick={() => {
+                  fetchBeer()
+                  fetchPlaylist()
+                  // console.log(radius)
+                  // console.log(coords)
+              }}
+              disabled={!coords || !mood || !transitTime || !radius}
           >
-            <View>
-              <Tile>
-                <BikeSearch
-                  setTransitTime={setTransitTime}
-                  predictions={predictions}
-                  setPredictions={setPredictions}
-                  setPlaceID={setPlaceID}
-                  located={located}
-                  setLocated={setLocated}
-                  location={location}
-                  setLocation={setLocation}
-                />
-              </Tile>
-            </View>
-
-            <View>
-              <Tile>
-                <BeatSearch
-                  mood={mood}
-                  setMood={setMood}
-                  transitTime={transitTime}
-                  setRadius={setRadius}
-                />
-              </Tile>
-            </View>
-          </Container>
-          <Button>
-            <button
-                onClick={() => {
-                    fetchBeer()
-                    fetchPlaylist()
-                    // console.log(radius)
-                    // console.log(coords)
-                }}
-                disabled={!coords || !mood || !transitTime || !radius}
-            >
-                FIND BEATS AND BEERS
-            </button>
-            <div>
-              <Bubble selected={selectBubble} />
-              <Bubble selected={!selectBubble} />
-            </div>
-          </Button>
-        </>
-    )
+              FIND BEATS AND BEERS
+          </button>
+          <div>
+            <Bubble selected={selectBubble} />
+            <Bubble selected={!selectBubble} />
+          </div>
+        </Button>
+      </>
+  )
 }
 
 export default Search
-
-// export async function getStaticProps() {
-//   const data = await fetch('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
-//     headers: {
-//       Authorization: `Bearer ${process.env.SPOTIFY_OAUTH_TOKEN}`
-//     }
-//   }).then(r => r.json())
-//
-//   console.log(data)
-//   return {
-//     props: {
-//       genres: data.genres
-//     }
-//   }
-// }
 
 /**
  * Input current location
@@ -197,9 +174,11 @@ export default Search
  * Desired cycle time + mood (speed)
  * Interpolate distance
  * Search google maps: beer + radius
- * 0,5h * 32 kmh = 16 km radius from start loc, keyword="beer"
  * Suggest 1 location (random)
- * Swipe behavior
+ * map moods to playlist kewords => suggest 1 playlist
+
  * ERROR HANDLING
  * TYPES
+ * about modal
+ * display journey
  */

@@ -49,7 +49,7 @@ const BikeSearch: React.FC<Props> = ({
       <Image src="/bike.png" alt="bike" width={165} height={95} />
       <Location
           type="text"
-          placeholder="Current location"
+          placeholder="Start location"
           onChange={e => {
               setLocation(e.target.value)
               setLocated(false)

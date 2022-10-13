@@ -7,14 +7,11 @@ const Moods = styled.div`
 `
 
 const Label = styled.label`
-  color: black;
   padding: 0.7vw;
   font-style: normal;
   font-size: 3.5vw;
-
 `
-
-// move 2 util
+// fix - move 2 util
 const randomMood = (min: number, max: number) => {
     return Math.random() * (max - min) + min
 }
