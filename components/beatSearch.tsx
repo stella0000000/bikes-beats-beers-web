@@ -5,12 +5,13 @@ import CyclingMood from './cyclingMood'
 const Moods = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 18px;
+  font-size: 3.5vw;
 `
 
 const Label = styled.label`
-  color: #FF0099;
-  padding: 3px;
+  color: white;
+  padding: 0.7vw;
+
 `
 
 // move 2 util
@@ -62,8 +63,7 @@ const BeatSearch: React.FC<Props> = ({
                       setMood(MOOD.SWEAT)
                       interpolateRadius(SPEED.SWEAT)
                   }}
-              />
-              SWEAT
+              /> SWEAT
           </Label>
           <Label>
               <input
@@ -73,8 +73,7 @@ const BeatSearch: React.FC<Props> = ({
                       setMood(MOOD.CHILL)
                       interpolateRadius(SPEED.CHILL)
                   }}
-              />
-              CHILL
+              /> CHILL
           </Label>
           <Label>
               <input
@@ -84,8 +83,7 @@ const BeatSearch: React.FC<Props> = ({
                       setMood(MOOD.WHATEVER)
                       interpolateRadius(SPEED.WHATEVER)
                   }}
-              />
-              WHATEVER
+              /> WHATEVER
           </Label>
       </Moods>
     </>

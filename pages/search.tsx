@@ -13,6 +13,7 @@ enum Dot {
 }
 
 const Container = styled.div`
+  font-size: 3.5vw;
   scroll-snap-type: x mandatory;
   display: flex;
   -webkit-overflow-scrolling: touch;
@@ -22,17 +23,15 @@ const Container = styled.div`
 
 const View = styled.div`
   min-width: 100vw;
-  height: 60vh;
+  height: 70vh;
   scroll-snap-align: start;
-  text-align: center;
   position: relative;
 `
 
 const Tile = styled.div`
   position: absolute;
-  top: 40%;s
+  top: 20vh;
   transform: none;
-  text-align: center;
   width: 100%;
   left: 0;
   display: flex;
@@ -169,7 +168,6 @@ const Search = () => {
               <Bubble selected={selectBubble} />
               <Bubble selected={!selectBubble} />
             </div>
-            <div>your destination is ... {destination}</div>
           </Button>
         </>
     )

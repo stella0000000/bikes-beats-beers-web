@@ -3,11 +3,23 @@ import styled from 'styled-components'
 import Predictions from '../components/predictions'
 
 const Location = styled.input`
-  width: 300px;
+  width: 70vw;
+  margin-top: 3vw;
 `
 
 const Transit = styled.input`
-    width: 100px;
+  width: 20vw;
+`
+
+const Text = styled.div`
+  font-style: italic;
+  margin: 10vw 0vw 2vw 0vw;
+
+`
+
+const Min = styled.span`
+  color: #FF0099;
+  font-weight: 700;
 `
 
 // fix type
@@ -53,13 +65,13 @@ const BikeSearch: React.FC<Props> = ({
           setPredictions={setPredictions}
           located={located}
       />
-      Desired transit time
+      <Text>Desired transit time</Text>
       <span>
           <Transit
               type="number"
               placeholder="00"
               onChange={e => setTransitTime(parseInt(e.target.value))}
-          /> minutes
+          /> <Min>min</Min>
       </span>
     </>
   )

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 const Prediction = styled.div`
-    width: 300px;
-    font-size: 15px;
+    width: 60vw;
+    font-size: 3vw;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    padding: 5px;
+    padding: 2px;
     cursor: default;
+    max-height: 5vw;
 `
 
 // fix types

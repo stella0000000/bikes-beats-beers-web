@@ -12,12 +12,6 @@
   align-items: center;
 }
 
-.logos {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 .footer {
   display: flex;
   flex: 1;
