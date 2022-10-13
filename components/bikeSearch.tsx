@@ -5,22 +5,26 @@ import Predictions from '@components/predictions'
 const Location = styled.input`
   width: 70vw;
   margin-top: 12vw;
-  @media only screen and (min-width: 650px) {
-    margin-top: 35px;
+  @media only screen and (min-width: 700px) {
+    margin-top: 30px;
     width: 60vw;
+    font-size: 40px;
   }
 `
 
 const Transit = styled.input`
   width: 40vw;
+  @media only screen and (min-width: 700px) {
+    font-size: 40px;
+  }
 `
 
 const Text = styled.div`
   font-style: italic;
   margin: 7vw 0vw 2vw 0vw;
   font-size: 20px;
-  @media only screen and (min-width: 650px) {
-    font-size: 35px;
+  @media only screen and (min-width: 700px) {
+    font-size: 40px;
     margin-top: 50px;
     width: 60vw;
   }
@@ -31,17 +35,17 @@ const TransitTime = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media only screen and (min-width: 650px) {
+  @media only screen and (min-width: 700px) {
     width: 60vw;
   }
 `
 
 const Min = styled.span`
-  color: #FF0099;
+  color: #FF5EBE;
   font-weight: 700;
   font-size: 20px;
-  @media only screen and (min-width: 650px) {
-    font-size: 35px;
+  @media only screen and (min-width: 700px) {
+    font-size: 40px;
   }
 `
 

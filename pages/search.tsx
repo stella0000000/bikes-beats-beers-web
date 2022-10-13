@@ -9,7 +9,8 @@ import BeatSearch from '@components/beatSearch'
 
 enum Dot {
   BIKE = 'BIKE',
-  BEATS = 'BEATS'
+  BEATS = 'BEATS',
+  BEERS = 'BEERS'
 }
 
 const Container = styled.div`
@@ -44,6 +45,9 @@ const Button = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media only screen and (min-width: 650px) {
+    font-size: 40px;
+  }
 `
 
 const Bubble = styled.span<{selected?: boolean}>`
@@ -163,7 +167,6 @@ const Search = () => {
               disabled={buttonDisabled}
           >FIND BEATS AND BEERS
           </button>
-          <div>{`${buttonDisabled}`}</div>
         </Button>
       </>
   )

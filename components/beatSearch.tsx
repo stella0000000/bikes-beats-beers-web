@@ -8,13 +8,15 @@ const Moods = styled.div`
   margin-top: 12px;
 `
 
-const Label = styled.label`
+const Label = styled.label<{checked?: boolean}>`
   padding: 2px;
   font-size: 30px;
-  font-style: normal;
+  font-style: italic;
+  color: ${props => props.checked ? '#000' : 'inherit'};
+  font-weight: ${props => props.checked ? '700' : '400'};
 
-  @media only screen and (min-width: 650px) {
-    font-size: 45px;
+  @media only screen and (min-width: 700px) {
+    font-size: 55px;
     padding: 0px;
   }
 `
@@ -24,9 +26,9 @@ const randomMood = (min: number, max: number) => {
 }
 
 enum MOOD {
-    SWEAT = 'WORKOUT',
-    CHILL = 'RELAX',
-    WHATEVER = 'WHATEVER'
+    SWEAT = 'Workout',
+    CHILL = 'Relax',
+    WHATEVER = 'Whatever'
 }
 
 enum SPEED {
@@ -65,10 +67,10 @@ const BeatSearch: React.FC<Props> = ({
     <>
       <Image src="/beat.png" alt="bike" width={110} height={120} />
       <Moods>
-          <Label>
+          <Label checked={mood === MOOD.SWEAT}>
               <input
                   type="checkbox"
-                  checked={mood===MOOD.SWEAT}
+                  checked={mood === MOOD.SWEAT}
                   onChange={() => {
                       setMood(MOOD.SWEAT)
                       interpolateRadius(SPEED.SWEAT)
@@ -76,10 +78,10 @@ const BeatSearch: React.FC<Props> = ({
                   }}
               /> {`${MOOD.SWEAT}`}
           </Label>
-          <Label>
+          <Label checked={mood === MOOD.CHILL}>
               <input
                   type="checkbox"
-                  checked={mood===MOOD.CHILL}
+                  checked={mood === MOOD.CHILL}
                   onChange={() => {
                       setMood(MOOD.CHILL)
                       interpolateRadius(SPEED.CHILL)
@@ -87,10 +89,10 @@ const BeatSearch: React.FC<Props> = ({
                   }}
               /> {`${MOOD.CHILL}`}
           </Label>
-          <Label>
+          <Label checked={mood === MOOD.WHATEVER}>
               <input
                   type="checkbox"
-                  checked={mood===MOOD.WHATEVER}
+                  checked={mood === MOOD.WHATEVER}
                   onChange={() => {
                       setMood(MOOD.WHATEVER)
                       interpolateRadius(SPEED.WHATEVER)

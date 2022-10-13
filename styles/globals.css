@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  color: #FF0099;
+  color: #FF5EBE;
   text-decoration: none;
 }
 
@@ -73,15 +73,16 @@ input::placeholder {
 button {
   font-family: 'Space Mono', monospace;
   font-size: 20px;
-  background: #FF0099;
-  color: rgb(225, 225, 225);
+  color: #FF5EBE;
+  background-color: #BDFF00;
   border: none;
   border-radius: 100px;
   padding: 9px;
+  font-weight: 700;
 }
 
 button:disabled {
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 ul, li {
@@ -105,13 +106,14 @@ ul, li {
   }
   body {
     color: #777777;
-    background: #C9C6BD;
+    background: #D3D3D3;
     position: relative;
   }
 }
 
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 700px) {
   input, button {
     font-size: 30px;
+    border-width: 4px;
   }
 }

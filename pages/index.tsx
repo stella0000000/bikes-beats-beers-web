@@ -12,12 +12,12 @@ const Icons = styled.div`
 `
 const Start = styled.div`
   font-size: 25px;
-  color: #FF0099;
+  color: #FF5EBE;
   font-weight: 700;
   padding-top: 140px;
   cursor: default;
 
-  @media only screen and (min-width: 650px) {
+  @media only screen and (min-width: 750px) {
     font-size: 50px;
   }
 `
