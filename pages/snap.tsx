@@ -1,6 +1,12 @@
 import Image from 'next/image'
 import styled from 'styled-components'
+import { useState, useEffect, useRef } from 'react'
 import CyclingMood from '../components/cyclingMood'
+
+enum Dot {
+  BIKE = 'BIKE',
+  BEATS = 'BEATS'
+}
 
 const Container = styled.div`
   scroll-snap-type: x mandatory;
@@ -10,10 +16,9 @@ const Container = styled.div`
 `
 
 const View = styled.div`
-  border-right: 1px solid white;
   padding: 1rem;
   min-width: 100vw;
-  height: 90vh;
+  height: 60vh;
   scroll-snap-align: start;
   text-align: center;
   position: relative;
@@ -22,7 +27,7 @@ const View = styled.div`
 const Tile = styled.div`
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: none;
   text-align: center;
   width: 100%;
   left: 0;
@@ -39,10 +44,29 @@ const Transit = styled.input`
     width: 100px;
 `
 
+const Button = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const Bubble = styled.span`
+  height: 20px;
+  width: 20px;
+  border: 2px solid black;
+  background-color: ${props => props.selected ? '#000' : 'none'};
+  border-radius: 50%;
+  display: inline-block;
+  margin: 20px 10px 0px 0px;
+`
+
 const Snap = () => {
+  const [selectBubble, setSelectBubble] = useState<boolean>(true)
+  const myRef = useRef()
+
   return (
     <>
-      <Container>
+      <Container ref={myRef}>
         <View>
           <Tile>
             <Image src="/bike.png" alt="bike" width={165} height={95} />
@@ -70,16 +94,29 @@ const Snap = () => {
               // transitTime={transitTime}
               // setRadius={setRadius}
           />
-
+          </Tile>
+        </View>
+      </Container>
+      <Button>
+        <div>
           <button
+            onClick={() =>
+              {
+              console.log(myRef.current.scrollLeft)
+              console.log(myRef.current.scrollLeft < window.innerWidth)
+              setSelectBubble(!selectBubble)
+              }
+            }
               // disabled={!coords || !mood || !transitTime || !radius}
           >
               FIND BEATS AND BEERS
           </button>
-          </Tile>
-        </View>
-      </Container>
-      test
+        </div>
+        <div>
+          <Bubble selected={selectBubble} />
+          <Bubble selected={!selectBubble} />
+        </div>
+      </Button>
     </>
   )
 

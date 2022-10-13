@@ -10,7 +10,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: #FF0099;
   text-decoration: none;
 }
 
@@ -67,7 +67,8 @@ ul, li {
     color-scheme: dark;
   }
   body {
-    color: #FF0099;
+    /* color: #FF0099; */
+    color: #606060;
     background: #C9C6BD;
   }
 }

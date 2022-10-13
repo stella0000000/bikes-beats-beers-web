@@ -1,3 +1,17 @@
+import styled from 'styled-components'
+
+const Moods = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+`
+
+const Label = styled.label`
+  color: #FF0099;
+  padding: 3px;
+`
+
+// move 2 util
 const randomMood = (min: number, max: number) => {
     return Math.random() * (max - min) + min
 }
@@ -36,8 +50,8 @@ const CyclingMood: React.FC<Props> = ({
     }
 
     return (
-        <div>
-            <label>
+        <Moods>
+            <Label>
                 <input
                     type="checkbox"
                     checked={mood===MOOD.SWEAT}
@@ -47,8 +61,8 @@ const CyclingMood: React.FC<Props> = ({
                     }}
                 />
                 SWEAT
-            </label><br></br>
-            <label>
+            </Label>
+            <Label>
                 <input
                     type="checkbox"
                     checked={mood===MOOD.CHILL}
@@ -58,8 +72,8 @@ const CyclingMood: React.FC<Props> = ({
                     }}
                 />
                 CHILL
-            </label><br></br>
-            <label>
+            </Label>
+            <Label>
                 <input
                     type="checkbox"
                     checked={mood===MOOD.WHATEVER}
@@ -69,8 +83,8 @@ const CyclingMood: React.FC<Props> = ({
                     }}
                 />
                 WHATEVER
-            </label>
-        </div>
+            </Label>
+        </Moods>
     )
 }
 
