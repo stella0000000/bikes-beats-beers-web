@@ -50,7 +50,7 @@ const Button = styled.div`
   align-items: center;
 `
 
-const Bubble = styled.span<{selected: boolean}>`
+const Bubble = styled.span<{selected?: boolean}>`
   height: 20px;
   width: 20px;
   border: 1px solid #B5A642;
@@ -62,14 +62,15 @@ const Bubble = styled.span<{selected: boolean}>`
 
 const Snap = () => {
   const [selectBubble, setSelectBubble] = useState<boolean>(true)
-  const myRef = useRef()
+  const views = useRef(null)
 
   return (
     <>
       <Container
-        ref={myRef}
+        ref={views}
         onScroll={e => {
-          setSelectBubble(e.target.scrollLeft < e.target.scrollWidth/2 - e.target.scrollWidth/4)
+          const ele = e.target as HTMLInputElement
+          setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
         }}
       >
         <View>
@@ -84,7 +85,7 @@ const Snap = () => {
                 <Transit
                     type="number"
                     placeholder="00"
-                    onChange={e => setTransitTime(parseInt(e.target.value))}
+                    // onChange={e => setTransitTime(parseInt(e.target.value))}
                 /> minutes
             </span>
           </Tile>
@@ -94,10 +95,10 @@ const Snap = () => {
           <Image src="/beat.png" alt="bike" width={110} height={120} />
 
           <CyclingMood
-              // mood={mood}
-              // setMood={setMood}
-              // transitTime={transitTime}
-              // setRadius={setRadius}
+              mood={null}
+              setMood={null}
+              transitTime={null}
+              setRadius={null}
           />
           </Tile>
         </View>
@@ -105,13 +106,7 @@ const Snap = () => {
       <Button>
         <div>
           <button
-            onClick={() =>
-              {
-              console.log(myRef.current.scrollLeft)
-              console.log(myRef.current.scrollLeft < window.innerWidth)
-              setSelectBubble(!selectBubble)
-              }
-            }
+            onClick={() =>setSelectBubble(!selectBubble)}
               // disabled={!coords || !mood || !transitTime || !radius}
           >
               FIND BEATS AND BEERS
