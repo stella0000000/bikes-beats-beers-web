@@ -4,12 +4,13 @@ import styled from 'styled-components'
 const Moods = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 3.5vw;
 `
 
 const Label = styled.label`
-  color: white;
+  color: black;
   padding: 0.7vw;
+  font-style: normal;
+  font-size: 3.5vw;
 
 `
 

@@ -8,6 +8,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
     font-family: 'Space Mono', monospace;
     overflow-y: hidden;
+    font-style: italic;
 }
 
 a {
@@ -23,7 +24,8 @@ input {
   padding: 7px 10px;
   font-size: 3.5vw;
   text-align: center;
-  color: white;
+  color: black;
+  font-style: italic;
 }
 
 textarea:focus, input:focus{
@@ -34,6 +36,11 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   appearance: none;
   margin: 0;
+}
+
+input[type="checkbox"] {
+  width: 2.5vw;
+  height: 2.5vw;
 }
 
 /* input[type="checkbox"]:before {
@@ -71,10 +78,15 @@ button {
   font-family: 'Space Mono', monospace;
   font-size: 3.5vw;
   background: #FF0099;
-  color: white;
+  color: rgb(225, 225, 225);
   border: none;
   border-radius: 100px;
   padding: 10px;
+  font-style: normal;
+}
+
+button:disabled {
+  opacity: 0.5;
 }
 
 button:disabled {
