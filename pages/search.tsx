@@ -1,11 +1,11 @@
 import Image from 'next/image'
 // import Link from 'next/link'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import styles from '../styles/Home.module.css'
+import styles from '@styles/Home.module.css'
 import debounce from 'lodash.debounce'
 import styled from 'styled-components'
-import BikeSearch from '../components/bikeSearch'
-import BeatSearch from '../components/beatSearch'
+import BikeSearch from '@components/bikeSearch'
+import BeatSearch from '@components/beatSearch'
 
 enum Dot {
   BIKE = 'BIKE',
@@ -55,7 +55,7 @@ const Bubble = styled.span<{selected?: boolean}>`
   margin: 20px 10px 0px 0px;
 `
 
-const Search = () => {
+const Search = ({ genres }) => {
     const [location, setLocation] = useState<string>('')
     const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
     const [located, setLocated] = useState<boolean>(false)
@@ -156,7 +156,7 @@ const Search = () => {
             <button
                 onClick={() => {
                     fetchBeer()
-                    // fetchPlaylist()
+                    fetchPlaylist()
                     // console.log(radius)
                     // console.log(coords)
                 }}
@@ -174,6 +174,21 @@ const Search = () => {
 }
 
 export default Search
+
+// export async function getStaticProps() {
+//   const data = await fetch('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
+//     headers: {
+//       Authorization: `Bearer ${process.env.SPOTIFY_OAUTH_TOKEN}`
+//     }
+//   }).then(r => r.json())
+//
+//   console.log(data)
+//   return {
+//     props: {
+//       genres: data.genres
+//     }
+//   }
+// }
 
 /**
  * Input current location

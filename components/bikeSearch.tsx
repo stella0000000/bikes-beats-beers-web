@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styled from 'styled-components'
-import Predictions from '../components/predictions'
+import Predictions from '@components/predictions'
 
 const Location = styled.input`
   width: 70vw;
