@@ -9,11 +9,12 @@ export default async function playlist(
     console.log(req.query.mood)
 
     const spotify = new SpotifyWebApi()
-    // spotify.setAccessToken(process.env.SPOTIFY_CLIENT_ID!);
+    const accessToken = await spotify.getAccessToken();
+    console.log(accessToken)
     
     console.log(spotify.getAccessToken())
-    
-    console.log(spotify)
+
+    // console.log(spotify)
 
     try {
       const response = await spotify.searchPlaylists(

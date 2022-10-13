@@ -10,7 +10,6 @@ import CyclingMood from '../components/cyclingMood'
 const Location = styled.input`
     width: 300px;
 `
-
 const Transit = styled.input`
     width: 100px;
 `
@@ -117,11 +116,8 @@ const Search = () => {
             <button
                 onClick={() => {
                     fetchBeer()
-                    fetchPlaylist()
-                    // console.log(transitTime)
-                    // console.log(mood)
+                    // fetchPlaylist()
                     // console.log(radius)
-                    // console.log(placeID)
                     // console.log(coords)
                 }}
                 disabled={!coords || !mood || !transitTime || !radius}
@@ -143,10 +139,8 @@ export default Search
  * Interpolate distance
  * Search google maps: beer + radius
  * 0,5h * 32 kmh = 16 km radius from start loc, keyword="beer"
- * 
- * Swipe behavior
- * 
  * Suggest 1 location (random)
- * 
+ *
+ * Swipe behavior
  * ERROR HANDLING
  */
