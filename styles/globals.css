@@ -8,7 +8,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
     font-family: 'Space Mono', monospace;
     overflow-y: hidden;
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 a {
