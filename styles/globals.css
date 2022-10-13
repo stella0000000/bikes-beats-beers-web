@@ -99,12 +99,14 @@ ul, li {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
+  html, body {
     color-scheme: dark;
+    overflow: hidden;
   }
   body {
     color: #777777;
     background: #C9C6BD;
+    position: relative;
   }
 }
 
