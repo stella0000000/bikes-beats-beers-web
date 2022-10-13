@@ -1,17 +1,59 @@
-import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 // import Link from 'next/link'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import styles from '../styles/Home.module.css'
-import styled from 'styled-components'
 import debounce from 'lodash.debounce'
-import Predictions from '../components/predictions'
-import CyclingMood from '../components/cyclingMood'
+import styled from 'styled-components'
+import BikeSearch from '../components/bikeSearch'
+import BeatSearch from '../components/beatSearch'
 
-const Location = styled.input`
-    width: 300px;
+enum Dot {
+  BIKE = 'BIKE',
+  BEATS = 'BEATS'
+}
+
+const Container = styled.div`
+  scroll-snap-type: x mandatory;
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `
-const Transit = styled.input`
-    width: 100px;
+
+const View = styled.div`
+  min-width: 100vw;
+  height: 60vh;
+  scroll-snap-align: start;
+  text-align: center;
+  position: relative;
+`
+
+const Tile = styled.div`
+  position: absolute;
+  top: 40%;s
+  transform: none;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const Button = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const Bubble = styled.span<{selected?: boolean}>`
+  height: 20px;
+  width: 20px;
+  border: 1px solid #B5A642;
+  background-color: ${props => props.selected ? '#B5A642' : 'none'};
+  border-radius: 50%;
+  display: inline-block;
+  margin: 20px 10px 0px 0px;
 `
 
 const Search = () => {
@@ -24,6 +66,8 @@ const Search = () => {
     const [mood, setMood] = useState<string | undefined>(undefined)
     const [radius, setRadius] = useState<number | undefined>(undefined)
     const [destination, setDestination] = useState<string | undefined>(undefined)
+    const [selectBubble, setSelectBubble] = useState<boolean>(true)
+    const views = useRef(null)
 
     useEffect(() => {
         const fetchPredictions = async () => {
@@ -75,44 +119,41 @@ const Search = () => {
     // const debouncedLocation = debounce(e => updateLocation(e), 200);
 
     return (
-        <main className={styles.main}>
-            <Image src="/bike.png" alt="bike" width={165} height={95} />
-            <Location
-                type="text"
-                placeholder="Current location"
-                onChange={e => {
-                    setLocation(e.target.value)
-                    setLocated(false)
-                    e.target.value==='' ? setPredictions(undefined) : null
-                }}
-                value={location}
-            />
-            <Predictions
-                predictions={predictions && Array.isArray(predictions) ? predictions : null}
-                setPlaceID={setPlaceID}
-                setLocated={setLocated}
-                setLocation={setLocation}
-                setPredictions={setPredictions}
-                located={located}
-            />
-            Desired transit time
-            <span>
-                <Transit
-                    type="number"
-                    placeholder="00"
-                    onChange={e => setTransitTime(parseInt(e.target.value))}
-                /> minutes
-            </span>
+        <>
+          <Container
+            ref={views}
+            onScroll={e => {
+              const ele = e.target as HTMLInputElement
+              setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
+            }}
+          >
+            <View>
+              <Tile>
+                <BikeSearch
+                  setTransitTime={setTransitTime}
+                  predictions={predictions}
+                  setPredictions={setPredictions}
+                  setPlaceID={setPlaceID}
+                  located={located}
+                  setLocated={setLocated}
+                  location={location}
+                  setLocation={setLocation}
+                />
+              </Tile>
+            </View>
 
-            <Image src="/beat.png" alt="bike" width={110} height={120} />
-
-            <CyclingMood
-                mood={mood}
-                setMood={setMood}
-                transitTime={transitTime}
-                setRadius={setRadius}
-            />
-
+            <View>
+              <Tile>
+                <BeatSearch
+                  mood={mood}
+                  setMood={setMood}
+                  transitTime={transitTime}
+                  setRadius={setRadius}
+                />
+              </Tile>
+            </View>
+          </Container>
+          <Button>
             <button
                 onClick={() => {
                     fetchBeer()
@@ -124,8 +165,13 @@ const Search = () => {
             >
                 FIND BEATS AND BEERS
             </button>
+            <div>
+              <Bubble selected={selectBubble} />
+              <Bubble selected={!selectBubble} />
+            </div>
             <div>your destination is ... {destination}</div>
-        </main>
+          </Button>
+        </>
     )
 }
 
@@ -140,7 +186,7 @@ export default Search
  * Search google maps: beer + radius
  * 0,5h * 32 kmh = 16 km radius from start loc, keyword="beer"
  * Suggest 1 location (random)
- *
  * Swipe behavior
  * ERROR HANDLING
+ * TYPES
  */
