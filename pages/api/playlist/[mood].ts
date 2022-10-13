@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function playlist(
     req: NextApiRequest,
-    res: NextApiResponse<>
+    res: NextApiResponse
     ) {
     const mood = req.query.mood
 
