@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import styled from 'styled-components'
-import CyclingMood from './cyclingMood'
 
 const Moods = styled.div`
   display: flex;

@@ -76,7 +76,7 @@ const Search = () => {
         }
 
         if (location && !located) fetchPredictions();
-    }, [location])
+    }, [location, located])
 
     useEffect(() => {
         const fetchCoordinates = async () => {
