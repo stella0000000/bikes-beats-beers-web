@@ -8,15 +8,11 @@ const Location = styled.input`
   @media only screen and (min-width: 700px) {
     margin-top: 30px;
     width: 60vw;
-    font-size: 40px;
   }
 `
 
 const Transit = styled.input`
   width: 40vw;
-  @media only screen and (min-width: 700px) {
-    font-size: 40px;
-  }
 `
 
 const Text = styled.div`
@@ -45,7 +41,7 @@ const Min = styled.span`
   font-weight: 700;
   font-size: 20px;
   @media only screen and (min-width: 700px) {
-    font-size: 40px;
+    font-size: 50px;
   }
 `
 
