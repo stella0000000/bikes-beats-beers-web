@@ -4,11 +4,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
     font-family: 'Space Mono', monospace;
     overflow-y: hidden;
-    /* font-style: italic; */
 }
 
 a {
@@ -21,9 +18,8 @@ input {
   border: 2px solid #BDFF00;
   border-radius: 100px;
   background: transparent;
-  padding: 7px 10px;
-  font-size: 3.5vw;
-  text-align: center;
+  padding: 7px 20px;
+  font-size: 20px;
   color: black;
   font-style: italic;
 }
@@ -76,21 +72,16 @@ input::placeholder {
 
 button {
   font-family: 'Space Mono', monospace;
-  font-size: 3.5vw;
+  font-size: 20px;
   background: #FF0099;
   color: rgb(225, 225, 225);
   border: none;
   border-radius: 100px;
-  padding: 10px;
-  font-style: normal;
+  padding: 9px;
 }
 
 button:disabled {
   opacity: 0.5;
-}
-
-button:disabled {
-  color: rgb(180, 180, 180);
 }
 
 ul, li {
@@ -112,8 +103,13 @@ ul, li {
     color-scheme: dark;
   }
   body {
-    /* color: #FF0099; */
     color: #777777;
     background: #C9C6BD;
+  }
+}
+
+@media only screen and (min-width: 650px) {
+  input, button {
+    font-size: 30px;
   }
 }

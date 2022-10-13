@@ -6,7 +6,7 @@ const Prediction = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    padding: 2px;
+    padding: 0px;
     cursor: default;
     max-height: 5vw;
 `

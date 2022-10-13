@@ -6,22 +6,22 @@ export default async function playlist(
     ) {
     const mood = req.query.mood
 
-    var authOptions = {
-      url: 'https://accounts.spotify.com/api/token',
-      headers: {
-        'Authorization': 'Basic ' + (new Buffer(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
-      },
-      form: {
-        grant_type: 'client_credentials'
-      },
-      json: true
-    };
-
-    const resp = await fetch(authOptions, function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-        var token = body.access_token;
-        console.log(token)
-      }
+    // var authOptions = {
+    //   url: 'https://accounts.spotify.com/api/token',
+    //   headers: {
+    //     'Authorization': 'Basic ' + (new Buffer(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
+    //   },
+    //   form: {
+    //     grant_type: 'client_credentials'
+    //   },
+    //   json: true
+    // };
+    //
+    // const resp = await fetch(authOptions, function(error, response, body) {
+    //   if (!error && response.statusCode === 200) {
+    //     var token = body.access_token;
+    //     console.log(token)
+    //   }
 
     // try {
     //   const response = await fetch(`https://api.spotify.com/v1/search?q=${mood}&type=playlist&limit=5`, {

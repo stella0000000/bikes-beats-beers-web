@@ -4,7 +4,7 @@
 ## Install packages:
 
 ```
-yarn install
+yarn
 ```
 
 ## Add your API keys into a .env:

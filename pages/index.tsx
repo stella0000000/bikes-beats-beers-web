@@ -11,11 +11,15 @@ const Icons = styled.div`
   align-items: center;
 `
 const Start = styled.div`
-  font-size: 4.5vw;
+  font-size: 25px;
   color: #FF0099;
   font-weight: 700;
   padding-top: 140px;
   cursor: default;
+
+  @media only screen and (min-width: 650px) {
+    font-size: 50px;
+  }
 `
 
 const Home: NextPage = () => {

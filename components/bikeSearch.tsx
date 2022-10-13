@@ -4,22 +4,33 @@ import Predictions from '@components/predictions'
 
 const Location = styled.input`
   width: 70vw;
-  margin-top: 3vw;
+  margin-top: 12vw;
+  @media only screen and (min-width: 650px) {
+    margin-top: 35px;
+    width: 60vw;
+  }
 `
 
 const Transit = styled.input`
   width: 20vw;
+  text-align: center;
 `
 
 const Text = styled.div`
   font-style: italic;
-  margin: 10vw 0vw 2vw 0vw;
-
+  margin: 7vw 0vw 2vw 0vw;
+  @media only screen and (min-width: 650px) {
+    font-size: 35px;
+    margin: 30px 0px;
+  }
 `
 
 const Min = styled.span`
   color: #FF0099;
   font-weight: 700;
+  @media only screen and (min-width: 650px) {
+    font-size: 35px;
+  }
 `
 
 // fix type

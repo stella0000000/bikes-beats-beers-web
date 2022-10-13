@@ -13,24 +13,22 @@ enum Dot {
 }
 
 const Container = styled.div`
-  font-size: 3.5vw;
   scroll-snap-type: x mandatory;
   display: flex;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
   overflow-y: hidden;
+  min-height: 65vh;
 `
 
 const View = styled.div`
   min-width: 100vw;
-  height: 70vh;
   scroll-snap-align: start;
-  position: relative;
+  display: flex;
 `
 
 const Tile = styled.div`
-  position: absolute;
-  top: 20vh;
+  margin-top: 75px;
   transform: none;
   width: 100%;
   left: 0;
@@ -52,7 +50,7 @@ const Bubble = styled.span<{selected?: boolean}>`
   background-color: ${props => props.selected ? '#B5A642' : 'none'};
   border-radius: 50%;
   display: inline-block;
-  margin: 20px 10px 0px 0px;
+  margin: 20px 12px 30px 12px;
 `
 
 const Search = () => {
@@ -61,13 +59,14 @@ const Search = () => {
   const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
   const [located, setLocated] = useState<boolean>(false)
   const [placeID, setPlaceID] = useState<string | undefined>(undefined)
-  const [coords, setCoords] = useState<number[] | undefined>()
-  const [transitTime, setTransitTime] = useState<number | undefined>()
+  const [coords, setCoords] = useState<number[] | undefined>(undefined)
+  const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
   const [mood, setMood] = useState<string | undefined>(undefined)
   const [radius, setRadius] = useState<number | undefined>(undefined)
   const [destination, setDestination] = useState<string | undefined>(undefined)
   const [selectBubble, setSelectBubble] = useState<boolean>(true)
   const [playlist, setPlaylist] = useState<string | undefined>(undefined)
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
 
   useEffect(() => {
       const fetchPredictions = async () => {
@@ -88,6 +87,10 @@ const Search = () => {
 
       if (placeID) fetchCoordinates()
   }, [placeID])
+
+  useEffect(() => {
+    setButtonDisabled(!coords || !mood || !transitTime || !radius)
+  }, [mood, coords, transitTime, radius])
 
   const fetchBeer = async () => {
       if (coords) {
@@ -145,21 +148,19 @@ const Search = () => {
           </View>
         </Container>
         <Button>
-          <button
-              onClick={() => {
-                  fetchBeer()
-                  fetchPlaylist()
-                  // console.log(radius)
-                  // console.log(coords)
-              }}
-              disabled={!coords || !mood || !transitTime || !radius}
-          >
-              FIND BEATS AND BEERS
-          </button>
           <div>
             <Bubble selected={selectBubble} />
             <Bubble selected={!selectBubble} />
           </div>
+          <button
+              onClick={() => {
+                  fetchBeer()
+                  // fetchPlaylist()
+              }}
+              disabled={buttonDisabled}
+          >FIND BEATS AND BEERS
+          </button>
+          <div>{`${buttonDisabled}`}</div>
         </Button>
       </>
   )
@@ -181,4 +182,7 @@ export default Search
  * TYPES
  * about modal
  * display journey
+
+ * make dots clickable to switch views
+ * fix predictions - position absolute.. etc
  */

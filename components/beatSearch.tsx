@@ -1,15 +1,22 @@
+import { useEffect } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 
 const Moods = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 12px;
 `
 
 const Label = styled.label`
-  padding: 0.7vw;
+  padding: 3px;
+  font-size: 20px;
   font-style: normal;
-  font-size: 3.5vw;
+
+  @media only screen and (min-width: 650px) {
+    font-size: 45px;
+    padding: 0px;
+  }
 `
 // fix - move 2 util
 const randomMood = (min: number, max: number) => {
@@ -17,8 +24,8 @@ const randomMood = (min: number, max: number) => {
 }
 
 enum MOOD {
-    SWEAT = 'SWEAT',
-    CHILL = 'CHILL',
+    SWEAT = 'WORKOUT',
+    CHILL = 'RELAX',
     WHATEVER = 'WHATEVER'
 }
 
@@ -42,12 +49,18 @@ const BeatSearch: React.FC<Props> = ({
     transitTime,
     setRadius
 }) => {
-    const interpolateRadius = (speed: number) => {
-        if (mood && transitTime) {
-            // mood kmh - transitTime min - radius meter
-            setRadius(speed * transitTime / 60 * 1000) // convert
-        }
-    }
+  useEffect(() => {
+    // setMood(mood)
+    // console.log(mood)
+  }, [mood])
+
+  const interpolateRadius = (speed: number) => {
+      if (mood && transitTime) {
+          // mood kmh - transitTime min - radius meter
+          setRadius(speed * transitTime / 60 * 1000) // convert
+      }
+  }
+
   return (
     <>
       <Image src="/beat.png" alt="bike" width={110} height={120} />
@@ -59,8 +72,9 @@ const BeatSearch: React.FC<Props> = ({
                   onChange={() => {
                       setMood(MOOD.SWEAT)
                       interpolateRadius(SPEED.SWEAT)
+                      console.log(mood)
                   }}
-              /> SWEAT
+              /> {`${MOOD.SWEAT}`}
           </Label>
           <Label>
               <input
@@ -69,8 +83,9 @@ const BeatSearch: React.FC<Props> = ({
                   onChange={() => {
                       setMood(MOOD.CHILL)
                       interpolateRadius(SPEED.CHILL)
+                      console.log(mood)
                   }}
-              /> CHILL
+              /> {`${MOOD.CHILL}`}
           </Label>
           <Label>
               <input
@@ -79,8 +94,9 @@ const BeatSearch: React.FC<Props> = ({
                   onChange={() => {
                       setMood(MOOD.WHATEVER)
                       interpolateRadius(SPEED.WHATEVER)
+                      console.log(mood)
                   }}
-              /> WHATEVER
+              /> {`${MOOD.WHATEVER}`}
           </Label>
       </Moods>
     </>
