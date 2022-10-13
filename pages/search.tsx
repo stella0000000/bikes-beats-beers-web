@@ -33,7 +33,7 @@ const Tile = styled.div`
   top: 20vh;
   transform: none;
   width: 100%;
-  left: 10;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
