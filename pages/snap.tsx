@@ -50,11 +50,11 @@ const Button = styled.div`
   align-items: center;
 `
 
-const Bubble = styled.span`
+const Bubble = styled.span<{selected: boolean}>`
   height: 20px;
   width: 20px;
-  border: 2px solid black;
-  background-color: ${props => props.selected ? '#000' : 'none'};
+  border: 1px solid #B5A642;
+  background-color: ${props => props.selected ? '#B5A642' : 'none'};
   border-radius: 50%;
   display: inline-block;
   margin: 20px 10px 0px 0px;
@@ -66,7 +66,12 @@ const Snap = () => {
 
   return (
     <>
-      <Container ref={myRef}>
+      <Container
+        ref={myRef}
+        onScroll={e => {
+          setSelectBubble(e.target.scrollLeft < e.target.scrollWidth/2 - e.target.scrollWidth/4)
+        }}
+      >
         <View>
           <Tile>
             <Image src="/bike.png" alt="bike" width={165} height={95} />
