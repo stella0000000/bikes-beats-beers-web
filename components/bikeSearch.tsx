@@ -12,22 +12,34 @@ const Location = styled.input`
 `
 
 const Transit = styled.input`
-  width: 20vw;
-  text-align: center;
+  width: 40vw;
 `
 
 const Text = styled.div`
   font-style: italic;
   margin: 7vw 0vw 2vw 0vw;
+  font-size: 20px;
   @media only screen and (min-width: 650px) {
     font-size: 35px;
-    margin: 30px 0px;
+    margin-top: 50px;
+    width: 60vw;
+  }
+`
+
+const TransitTime = styled.div`
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media only screen and (min-width: 650px) {
+    width: 60vw;
   }
 `
 
 const Min = styled.span`
   color: #FF0099;
   font-weight: 700;
+  font-size: 20px;
   @media only screen and (min-width: 650px) {
     font-size: 35px;
   }
@@ -77,13 +89,13 @@ const BikeSearch: React.FC<Props> = ({
           located={located}
       />
       <Text>Desired transit time</Text>
-      <span>
+      <TransitTime>
           <Transit
               type="number"
               placeholder="00"
               onChange={e => setTransitTime(parseInt(e.target.value))}
           /> <Min>min</Min>
-      </span>
+      </TransitTime>
     </>
   )
 }

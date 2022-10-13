@@ -19,6 +19,9 @@ const Container = styled.div`
   overflow-x: scroll;
   overflow-y: hidden;
   min-height: 60vh;
+  @media only screen and (min-width: 650px) {
+    min-height: 70vh;
+  }
 `
 
 const View = styled.div`
@@ -50,7 +53,7 @@ const Bubble = styled.span<{selected?: boolean}>`
   background-color: ${props => props.selected ? '#B5A642' : 'none'};
   border-radius: 50%;
   display: inline-block;
-  margin: 20px 12px 30px 12px;
+  margin: 20px 12px 25px 12px;
 `
 
 const Search = () => {

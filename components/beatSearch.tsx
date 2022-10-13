@@ -9,8 +9,8 @@ const Moods = styled.div`
 `
 
 const Label = styled.label`
-  padding: 3px;
-  font-size: 20px;
+  padding: 2px;
+  font-size: 30px;
   font-style: normal;
 
   @media only screen and (min-width: 650px) {
