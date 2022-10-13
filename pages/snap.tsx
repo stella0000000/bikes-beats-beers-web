@@ -13,10 +13,10 @@ const Container = styled.div`
   display: flex;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
+  overflow-y: hidden;
 `
 
 const View = styled.div`
-  padding: 1rem;
   min-width: 100vw;
   height: 60vh;
   scroll-snap-align: start;
@@ -26,7 +26,7 @@ const View = styled.div`
 
 const Tile = styled.div`
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: none;
   text-align: center;
   width: 100%;
