@@ -19,7 +19,7 @@ const Home: NextPage = () => {
           <Image src="/beat.png" alt="bike" width={100} height={110} />
           <Image src="/beer.png" alt="bike" width={90} height={100} />
         </div>
-        <Link  href="/search">
+        <Link  href="/snap">
           START YOUR JOURNEY
         </Link>
       </main>
