@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Moods = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 12px;
+  margin-top: 30px;
 `
 
 const Label = styled.label<{checked?: boolean}>`
@@ -65,7 +65,7 @@ const BeatSearch: React.FC<Props> = ({
 
   return (
     <>
-      <Image src="/beat.png" alt="bike" width={110} height={120} />
+      <Image src="/beat.png" alt="bike" width={115} height={95} />
       <Moods>
           <Label checked={mood === MOOD.SWEAT}>
               <input

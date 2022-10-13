@@ -34,8 +34,8 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <Icons>
           <Image src="/bike.png" alt="bike" width={140} height={80} />
-          <Image src="/beat.png" alt="bike" width={100} height={110} />
-          <Image src="/beer.png" alt="bike" width={90} height={100} />
+          <Image src="/beat.png" alt="bike" width={110} height={90} />
+          <Image src="/beer.png" alt="bike" width={100} height={90} />
         </Icons>
         <Link href="/search">
           <Start>START YOUR JOURNEY</Start>
