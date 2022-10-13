@@ -18,7 +18,7 @@ const Container = styled.div`
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
   overflow-y: hidden;
-  min-height: 65vh;
+  min-height: 60vh;
 `
 
 const View = styled.div`
