@@ -4,12 +4,12 @@ const PredictionList = styled.ul`
   position: absolute;
   top: 282px;
   z-index: 1000;
-  padding-left: 10px;
-  background-color: #BDFF00;
-  width: 70vw;
+  padding: 5px 10px 10px 10px;
+  background-color: #D3D3D3;
+  width: 72vw;
 
   @media only screen and (min-width: 650px) {
-    width: 60vw;
+    width: 61vw;
     top: 286px;
     margin: 0px;
   }
@@ -20,10 +20,12 @@ const Prediction = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding: 0px;
+  padding-bottom: 10px;
   cursor: default;
   max-height: 5vw;
-  border-bottom: 1px solid white;
+  &:not(:last-child) {
+    border-bottom: 1px solid white;
+  }
 
   &:hover {
     color: #FF5EBE;

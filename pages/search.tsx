@@ -51,10 +51,10 @@ const Button = styled.div`
 `
 
 const Bubble = styled.span<{selected?: boolean}>`
-  height: 20px;
-  width: 20px;
-  border: 1px solid #B5A642;
-  background-color: ${props => props.selected ? '#B5A642' : 'none'};
+  height: 25px;
+  width: 25px;
+  border: 2px solid #000;
+  background-color: ${props => props.selected ? '#000' : 'none'};
   border-radius: 50%;
   display: inline-block;
   margin: 20px 12px 25px 12px;

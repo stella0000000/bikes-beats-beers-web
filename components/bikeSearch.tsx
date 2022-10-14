@@ -36,8 +36,7 @@ const TransitTime = styled.div`
 `
 
 const Min = styled.span`
-  color: #FF5EBE;
-  font-weight: 700;
+  color: #000;
   font-size: 20px;
   @media only screen and (min-width: 700px) {
     font-size: 50px;
