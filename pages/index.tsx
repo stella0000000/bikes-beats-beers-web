@@ -10,10 +10,8 @@ const Icons = styled.div`
   flex-direction: row;
   align-items: center;
 `
-const Start = styled.div`
+const Start = styled.button`
   font-size: 25px;
-  color: #FF5EBE;
-  font-weight: 700;
   margin-top: 140px;
   cursor: default;
 

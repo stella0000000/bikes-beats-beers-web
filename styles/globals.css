@@ -83,9 +83,9 @@ button {
   border: none;
   background: linear-gradient(29deg, #fea9ff, #6dd7ff);
   background-size: 150% 150%;
-  -webkit-animation: AnimationName 7s ease infinite;
-  -moz-animation: AnimationName 7s ease infinite;
-  animation: AnimationName 7s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
