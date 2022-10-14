@@ -13,7 +13,6 @@ const Label = styled.label<{checked?: boolean}>`
   font-size: 30px;
   font-style: italic;
   color: ${props => props.checked ? '#000' : 'inherit'};
-  font-weight: ${props => props.checked ? '700' : '400'};
 
   @media only screen and (min-width: 700px) {
     font-size: 55px;
@@ -65,7 +64,7 @@ const BeatSearch: React.FC<Props> = ({
 
   return (
     <>
-      <Image src="/beat.png" alt="bike" width={115} height={95} />
+      <Image src="/beat.png" alt="bike" width={135} height={110} />
       <Moods>
           <Label checked={mood === MOOD.SWEAT}>
               <input

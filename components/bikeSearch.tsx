@@ -69,7 +69,7 @@ const BikeSearch: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Image src="/bike.png" alt="bike" width={165} height={90} />
+      <Image src="/bike.png" alt="bike" width={200} height={115} />
       <Location
           type="text"
           placeholder="Start location"

@@ -14,7 +14,7 @@ const Start = styled.div`
   font-size: 25px;
   color: #FF5EBE;
   font-weight: 700;
-  padding-top: 140px;
+  margin-top: 140px;
   cursor: default;
 
   @media only screen and (min-width: 750px) {
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <Icons>
-          <Image src="/bike.png" alt="bike" width={140} height={80} />
+          <Image src="/bike.png" alt="bike" width={160} height={90} />
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Image src="/beer.png" alt="bike" width={100} height={90} />
         </Icons>

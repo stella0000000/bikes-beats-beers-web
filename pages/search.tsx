@@ -32,7 +32,7 @@ const View = styled.div`
 `
 
 const Tile = styled.div`
-  margin-top: 75px;
+  margin-top: 60px;
   transform: none;
   width: 100%;
   left: 0;
