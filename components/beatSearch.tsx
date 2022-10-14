@@ -75,7 +75,7 @@ const BeatSearch: React.FC<Props> = ({
 
   return (
     <>
-      <Image src="/beat.png" alt="bike" width={135} height={110} />
+      <Image src="/beat.png" alt="bike" width={110} height={90} />
       <Moods>
           <Label checked={mood === MOOD.SWEAT}>
               <input
