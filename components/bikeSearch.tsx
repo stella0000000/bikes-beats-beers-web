@@ -12,7 +12,7 @@ const Location = styled.input`
 `
 
 const Transit = styled.input`
-  width: 40vw;
+  width: 30vw;
 `
 
 const Text = styled.div`
@@ -93,7 +93,7 @@ const BikeSearch: React.FC<Props> = ({
               type="number"
               placeholder="00"
               onChange={e => setTransitTime(parseInt(e.target.value))}
-          /> <Min>min</Min>
+          /> <Min>minutes</Min>
       </TransitTime>
     </>
   )
