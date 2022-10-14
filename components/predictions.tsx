@@ -6,6 +6,7 @@ const PredictionList = styled.ul`
   z-index: 1000;
   padding-left: 10px;
   background-color: #BDFF00;
+  width: 70vw;
 
   @media only screen and (min-width: 650px) {
     width: 60vw;
