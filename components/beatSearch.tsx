@@ -9,46 +9,57 @@ const Moods = styled.div`
 `
 
 const Label = styled.label<{checked?: boolean}>`
-  padding: 2px;
+  margin: 10px;
   font-size: 30px;
-  font-style: italic;
   color: ${props => props.checked ? '#000' : 'inherit'};
+  display: flex;
 
   @media only screen and (min-width: 700px) {
-    font-size: 55px;
+    font-size: 50px;
     padding: 0px;
+    margin: 15px;
   }
 `
+
+const Selection = styled.div`
+  margin-left: 40px;
+  line-height: 40px;
+
+  @media only screen and (min-width: 700px) {
+    line-height: 30px;
+  }
+`
+
 // fix - move 2 util
 const randomMood = (min: number, max: number) => {
-    return Math.random() * (max - min) + min
+  return Math.random() * (max - min) + min
 }
 
 enum MOOD {
-    SWEAT = 'Workout',
-    CHILL = 'Relax',
-    WHATEVER = 'Whatever'
+  SWEAT = 'Workout',
+  CHILL = 'Relax',
+  WHATEVER = 'Whatever'
 }
 
 enum SPEED {
-    SWEAT = 32,
-    CHILL = 17,
-    WHATEVER = randomMood(15, 35)
+  SWEAT = 32,
+  CHILL = 17,
+  WHATEVER = randomMood(15, 35)
 }
 
 // fix types
 interface Props {
-    mood: any
-    setMood: any
-    transitTime: any
-    setRadius: any
+  mood: any
+  setMood: any
+  transitTime: any
+  setRadius: any
 }
 
 const BeatSearch: React.FC<Props> = ({
-    mood,
-    setMood,
-    transitTime,
-    setRadius
+  mood,
+  setMood,
+  transitTime,
+  setRadius
 }) => {
   useEffect(() => {
     // setMood(mood)
@@ -56,10 +67,10 @@ const BeatSearch: React.FC<Props> = ({
   }, [mood])
 
   const interpolateRadius = (speed: number) => {
-      if (mood && transitTime) {
-          // mood kmh - transitTime min - radius meter
-          setRadius(speed * transitTime / 60 * 1000) // convert
-      }
+    if (mood && transitTime) {
+        // mood kmh - transitTime min - radius meter
+        setRadius(speed * transitTime / 60 * 1000) // convert
+    }
   }
 
   return (
@@ -75,7 +86,8 @@ const BeatSearch: React.FC<Props> = ({
                       interpolateRadius(SPEED.SWEAT)
                       console.log(mood)
                   }}
-              /> {`${MOOD.SWEAT}`}
+              />
+              <Selection>{`${MOOD.SWEAT}`}</Selection>
           </Label>
           <Label checked={mood === MOOD.CHILL}>
               <input
@@ -86,7 +98,8 @@ const BeatSearch: React.FC<Props> = ({
                       interpolateRadius(SPEED.CHILL)
                       console.log(mood)
                   }}
-              /> {`${MOOD.CHILL}`}
+              />
+              <Selection>{`${MOOD.CHILL}`}</Selection>
           </Label>
           <Label checked={mood === MOOD.WHATEVER}>
               <input
@@ -97,7 +110,8 @@ const BeatSearch: React.FC<Props> = ({
                       interpolateRadius(SPEED.WHATEVER)
                       console.log(mood)
                   }}
-              /> {`${MOOD.WHATEVER}`}
+              />
+              <Selection>{`${MOOD.WHATEVER}`}</Selection>
           </Label>
       </Moods>
     </>

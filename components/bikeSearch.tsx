@@ -16,7 +16,6 @@ const Transit = styled.input`
 `
 
 const Text = styled.div`
-  font-style: italic;
   margin: 7vw 0vw 2vw 0vw;
   font-size: 20px;
   @media only screen and (min-width: 700px) {

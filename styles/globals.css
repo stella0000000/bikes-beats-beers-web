@@ -15,13 +15,12 @@ a {
 
 input {
   font-family: 'Space Mono', monospace;
-  border: 2px solid #BDFF00;
-  border-radius: 100px;
+  border: 2px solid #000;
+  box-shadow: -3px 3px #000;
   background: transparent;
-  padding: 7px 20px;
+  padding: 7px 10px;
   font-size: 20px;
   color: black;
-  font-style: italic;
 }
 
 textarea:focus, input:focus{
@@ -37,33 +36,38 @@ input::-webkit-inner-spin-button {
 input[type="checkbox"] {
   width: 2.5vw;
   height: 2.5vw;
+  box-shadow: none;
 }
 
-/* input[type="checkbox"]:before {
-  position: relative;
-  display: block;
-  width: 11px;
-  height: 11px;
-  border: 1px solid #808080;
-  content: "";
-  background: #FFF;
+input[type=checkbox] {
+   position: relative;
 }
 
-.myinput[type="checkbox"]:after {
-  position: relative;
-  display: block;
-  left: 2px;
-  top: -11px;
-  width: 7px;
-  height: 7px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #B3B3B3 #dcddde #dcddde #B3B3B3;
-  content: "";
-  background-image: linear-gradient(135deg, #B1B6BE 0%, #FFF 100%);
-  background-repeat: no-repeat;
-  background-position: center;
-} */
+input[type=checkbox]:before {
+   content: "";
+   display: block;
+   /* position: absolute; */
+   width: 30px;
+   height: 30px;
+   border: 2px solid #000;
+   background-color: #D3D3D3;
+   box-shadow: -2px 2px #000;
+}
+
+input[type=checkbox]:checked:after {
+   content: "";
+   /* display: block; */
+   width: 10px;
+   height: 25px;
+   border: solid black;
+   border-width: 0 4px 4px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+   position: absolute;
+   top: 0px;
+   left: 10px;
+}
 
 input::placeholder {
   color: #9D9D9D;
@@ -73,10 +77,12 @@ input::placeholder {
 button {
   font-family: 'Space Mono', monospace;
   font-size: 20px;
-  background-color: #FF5EBE;
+  background-color: transparent;
+  border: 2px solid #FF5EBE;
+  border-bottom: 4px solid #FF5EBE;
   color: #BDFF00;
-  border: none;
-  border-radius: 100px;
+  box-shadow: -4px 4px #FF5EBE;
+  /* border-radius: 100px; */
   padding: 7px 18px;
   font-weight: 700;
 }
@@ -114,6 +120,10 @@ ul, li {
 @media only screen and (min-width: 700px) {
   input, button {
     font-size: 40px;
-    border-width: 4px;
+    border-width: 3px;
+  }
+
+  button {
+    border-bottom: 7px solid #FF5EBE;
   }
 }

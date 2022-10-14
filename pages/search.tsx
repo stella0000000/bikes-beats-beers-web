@@ -120,55 +120,55 @@ const Search = () => {
   // const debouncedLocation = debounce(e => updateLocation(e), 200);
 
   return (
-      <>
-        <Container
-          ref={views}
-          onScroll={e => {
-            const ele = e.target as HTMLInputElement
-            setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
-          }}
-        >
-          <View>
-            <Tile>
-              <BikeSearch
-                setTransitTime={setTransitTime}
-                predictions={predictions}
-                setPredictions={setPredictions}
-                setPlaceID={setPlaceID}
-                located={located}
-                setLocated={setLocated}
-                location={location}
-                setLocation={setLocation}
-              />
-            </Tile>
-          </View>
+    <>
+      <Container
+        ref={views}
+        onScroll={e => {
+          const ele = e.target as HTMLInputElement
+          setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
+        }}
+      >
+        <View>
+          <Tile>
+            <BikeSearch
+              setTransitTime={setTransitTime}
+              predictions={predictions}
+              setPredictions={setPredictions}
+              setPlaceID={setPlaceID}
+              located={located}
+              setLocated={setLocated}
+              location={location}
+              setLocation={setLocation}
+            />
+          </Tile>
+        </View>
 
-          <View>
-            <Tile>
-              <BeatSearch
-                mood={mood}
-                setMood={setMood}
-                transitTime={transitTime}
-                setRadius={setRadius}
-              />
-            </Tile>
-          </View>
-        </Container>
-        <Button>
-          <div>
-            <Bubble selected={selectBubble} />
-            <Bubble selected={!selectBubble} />
-          </div>
-          <button
-              onClick={() => {
-                  fetchBeer()
-                  // fetchPlaylist()
-              }}
-              disabled={buttonDisabled}
-          >FIND BEATS AND BEERS
-          </button>
-        </Button>
-      </>
+        <View>
+          <Tile>
+            <BeatSearch
+              mood={mood}
+              setMood={setMood}
+              transitTime={transitTime}
+              setRadius={setRadius}
+            />
+          </Tile>
+        </View>
+      </Container>
+      <Button>
+        <div>
+          <Bubble selected={selectBubble} />
+          <Bubble selected={!selectBubble} />
+        </div>
+        <button
+            onClick={() => {
+                fetchBeer()
+                // fetchPlaylist()
+            }}
+            disabled={buttonDisabled}
+        >FIND BEATS AND BEERS
+        </button>
+      </Button>
+    </>
   )
 }
 
