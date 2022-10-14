@@ -16,7 +16,7 @@ const Transit = styled.input`
 `
 
 const Text = styled.div`
-  margin: 7vw 0vw 2vw 0vw;
+  margin: 7vw 0vw 0.5vw 0vw;
   font-size: 20px;
   @media only screen and (min-width: 700px) {
     font-size: 40px;
