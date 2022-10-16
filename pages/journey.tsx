@@ -1,4 +1,7 @@
-const Journey = (props) => {
+import styled from 'styled-components'
+
+// fix type
+const Journey = (props: any) => {
   console.log(props)
   return (
     <div>
@@ -10,10 +13,12 @@ const Journey = (props) => {
 export default Journey
 
 export  const getServerSideProps= (ctx)=> {
-  console.log(ctx.query)
+  const query = ctx.query
+
   return {
       props: {
-         destination: ctx.query.destination //pass it to the page props
+         destination: query.destination,
+         playlist: query.playlist
       }
   }
 }

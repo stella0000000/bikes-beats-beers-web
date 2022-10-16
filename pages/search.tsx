@@ -108,8 +108,7 @@ const Search = () => {
       if (coords) {
           const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
           const data = await response.json()
-          setDestination(data[0].name)
-          console.log(data)
+          setDestination(data[Math.floor(Math.random()*data.length)].name)
       }
   }
 
@@ -129,7 +128,7 @@ const Search = () => {
     <>
       <MenuIcon>
         {modalOpen
-          ? <Image src="/burgerClose.png" alt="bike" width={65} height={60} onClick={() => setModalOpen(false)}/>
+           ? <Image src="/burgerClose.png" alt="bike" width={65} height={60} onClick={() => setModalOpen(false)}/>
           : <Image src="/burger.png" alt="bike" width={75} height={60} onClick={() => setModalOpen(true)}/>
         }
       </MenuIcon>
@@ -169,7 +168,8 @@ const Search = () => {
         </div>
         <Link
           href={
-            { pathname: '/journey',
+            {
+              // pathname: '/journey',
               query: {
                 destination: destination,
                 playlist: 'some playlist when i fix the api call'
@@ -177,8 +177,9 @@ const Search = () => {
             }}>
           <button
             onClick={() => {
-                fetchBeer()
-                // fetchPlaylist()
+              fetchBeer()
+              console.log(destination)
+              // fetchPlaylist()
             }}
             disabled={buttonDisabled}
           >FIND BEATS AND BEERS

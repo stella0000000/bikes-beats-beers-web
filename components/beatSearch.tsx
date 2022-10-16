@@ -62,8 +62,7 @@ const BeatSearch: React.FC<Props> = ({
   setRadius
 }) => {
   useEffect(() => {
-    // setMood(mood)
-    // console.log(mood)
+    setMood(mood)
   }, [mood])
 
   const interpolateRadius = (speed: number) => {
@@ -71,6 +70,11 @@ const BeatSearch: React.FC<Props> = ({
         // mood kmh - transitTime min - radius meter
         setRadius(speed * transitTime / 60 * 1000) // convert
     }
+  }
+
+  const checkMood = (mood: string, speed: number) => {
+    setMood(mood)
+    interpolateRadius(speed)
   }
 
   return (
@@ -81,11 +85,7 @@ const BeatSearch: React.FC<Props> = ({
               <input
                 type="checkbox"
                 checked={mood === MOOD.SWEAT}
-                onChange={() => {
-                    setMood(MOOD.SWEAT)
-                    interpolateRadius(SPEED.SWEAT)
-                    console.log(mood)
-                }}
+                onChange={() => checkMood(MOOD.SWEAT, SPEED.SWEAT)}
               />
               <Selection>{`${MOOD.SWEAT}`}</Selection>
           </Label>
@@ -93,11 +93,7 @@ const BeatSearch: React.FC<Props> = ({
               <input
                 type="checkbox"
                 checked={mood === MOOD.CHILL}
-                onChange={() => {
-                    setMood(MOOD.CHILL)
-                    interpolateRadius(SPEED.CHILL)
-                    console.log(mood)
-                }}
+                onChange={() => checkMood(MOOD.CHILL, SPEED.CHILL)}
               />
               <Selection>{`${MOOD.CHILL}`}</Selection>
           </Label>
@@ -105,11 +101,7 @@ const BeatSearch: React.FC<Props> = ({
               <input
                 type="checkbox"
                 checked={mood === MOOD.WHATEVER}
-                onChange={() => {
-                    setMood(MOOD.WHATEVER)
-                    interpolateRadius(SPEED.WHATEVER)
-                    console.log(mood)
-                }}
+                onChange={() => checkMood(MOOD.WHATEVER, SPEED.WHATEVER)}
               />
               <Selection>{`${MOOD.WHATEVER}`}</Selection>
           </Label>
