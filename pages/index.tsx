@@ -6,6 +6,12 @@ import Link from 'next/link'
 import styles from '@styles/Home.module.css'
 import styled from 'styled-components'
 
+const About = styled.div`
+  padding-top: 20px;
+  font-size: 25px;
+  font-style: italic;
+`
+
 const Icons = styled.div`
   display: flex;
   flex-direction: row;
@@ -13,7 +19,7 @@ const Icons = styled.div`
 `
 const Start = styled.button`
   font-size: 20px;
-  margin-top: 140px;
+  margin-top: 120px;
   cursor: default;
 
   @media only screen and (min-width: 750px) {
@@ -65,6 +71,9 @@ const Home: NextPage = () => {
           <Image src="/beat.png" alt="bike" width={140} height={110} />
           <Image src="/beer.png" alt="bike" width={140} height={120} />
         </Icons>
+        <About>
+          Explore your neighborhood.
+        </About>
         <Link href="/search">
           <Start>START YOUR JOURNEY</Start>
         </Link>
