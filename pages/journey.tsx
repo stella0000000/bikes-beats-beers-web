@@ -12,7 +12,8 @@ const Journey = (props: any) => {
 
 export default Journey
 
-export  const getServerSideProps= (ctx)=> {
+// fix type
+export  const getServerSideProps= (ctx: any)=> {
   const query = ctx.query
 
   return {

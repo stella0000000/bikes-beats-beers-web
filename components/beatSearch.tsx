@@ -63,7 +63,7 @@ const BeatSearch: React.FC<Props> = ({
 }) => {
   useEffect(() => {
     setMood(mood)
-  }, [mood])
+  }, [setMood, mood])
 
   const interpolateRadius = (speed: number) => {
     if (mood && transitTime) {

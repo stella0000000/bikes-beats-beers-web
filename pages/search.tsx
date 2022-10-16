@@ -14,11 +14,11 @@ enum Dot {
   BEERS = 'BEERS'
 }
 
-const MenuIcon = styled.div`
+const MenuIcon = styled.div<{modalOpen?: boolean}>`
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 10000;
+  z-index: ${props => props.modalOpen ? '10000' : '0'};
 `
 
 const Container = styled.div`
@@ -126,7 +126,7 @@ const Search = () => {
 
   return (
     <>
-      <MenuIcon>
+      <MenuIcon modalOpen={modalOpen}>
         {modalOpen
            ? <Image src="/burgerClose.png" alt="bike" width={65} height={60} onClick={() => setModalOpen(false)}/>
           : <Image src="/burger.png" alt="bike" width={75} height={60} onClick={() => setModalOpen(true)}/>
