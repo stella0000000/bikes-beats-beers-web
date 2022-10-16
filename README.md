@@ -1,8 +1,9 @@
 ## `Reasonable font sizes are so 2022.`
-<img width="600" alt="Capture d’écran 2022-10-15 à 22 02 55 " src="https://user-images.githubusercontent.com/112890821/196014396-b226c4dd-9a93-4247-850c-4a62f3381407.png">
-<img width="600" alt="Capture d’écran 2022-10-15 à 21 50 34 " src="https://user-images.githubusercontent.com/112890821/196014105-0dc91ada-3393-4946-9ac0-2ae5cb021b13.png">
-<img width="600" alt="Capture d’écran 2022-10-15 à 21 51 07 " src="https://user-images.githubusercontent.com/112890821/196014123-0fa1c553-1f07-4dc3-a115-5e69326e32ac.png">
-<img width="600" alt="Capture d’écran 2022-10-15 à 21 51 24 " src="https://user-images.githubusercontent.com/112890821/196014126-3b234722-6ccb-4b93-8beb-accd9fc7c17e.png">
+<img width="600" alt="Capture d’écran 2022-10-15 à 22 09 32 " src="https://user-images.githubusercontent.com/112890821/196014588-b6df37b6-55cd-42d0-8089-a402b0f71b3d.png">
+<img width="600" alt="Capture d’écran 2022-10-15 à 22 09 41 " src="https://user-images.githubusercontent.com/112890821/196014589-032f9a75-3860-4cb1-af4d-2782b6718c6c.png">
+<img width="600" alt="Capture d’écran 2022-10-15 à 22 09 53 " src="https://user-images.githubusercontent.com/112890821/196014590-9888d49d-01e0-4500-a5b0-ba81b2396d45.png">
+<img width="600" alt="Capture d’écran 2022-10-15 à 22 10 09 " src="https://user-images.githubusercontent.com/112890821/196014591-911bb7e0-1afb-4df9-b7db-6abc5b74bb25.png">
+
 
 ## Install packages:
 
