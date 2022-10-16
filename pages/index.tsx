@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+// import React, { useState, useEffect, useRef } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -12,7 +12,7 @@ const Icons = styled.div`
   align-items: center;
 `
 const Start = styled.button`
-  font-size: 25px;
+  font-size: 20px;
   margin-top: 140px;
   cursor: default;
 
@@ -21,35 +21,35 @@ const Start = styled.button`
   }
 `
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
+// function useInterval(callback: () => void, delay: number) {
+//   const savedCallback = useRef();
 
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+//   useEffect(() => {
+//     savedCallback.current = callback;
+//   }, [callback]);
 
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
+//   useEffect(() => {
+//     function tick() {
+//       savedCallback.current();
+//     }
+//     if (delay !== null) {
+//       let id = setInterval(tick, delay);
+//       return () => clearInterval(id);
+//     }
+//   }, [delay]);
+// }
 
 const Home: NextPage = () => {
   const images = [
-    <Image src="/bike.png" alt="bike" width={200} height={130} />,
+    <Image src="/bike.png" alt="bike" width={230} height={130} />,
     <Image src="/beat.png" alt="bike" width={170} height={130} />,
     <Image src="/beer.png" alt="bike" width={155} height={130} />
   ]
-  const [idx, setIdx] = useState(0)
+  // const [idx, setIdx] = useState(0)
 
-  useInterval(() => {
-        setIdx((idx + 1) % images.length);
-    }, 300);
+  // useInterval(() => {
+  //       setIdx((idx + 1) % images.length);
+  //   }, 300);
 
   return (
     <div className={styles.container}>
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <Icons>
-          {images[idx]}
+          {images}
         </Icons>
         <Link href="/search">
           <Start>START YOUR JOURNEY</Start>

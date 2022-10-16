@@ -21,7 +21,7 @@ const Container = styled.div`
   overflow-y: hidden;
   min-height: 60vh;
   @media only screen and (min-width: 650px) {
-    min-height: 70vh;
+    min-height: 65vh;
   }
 `
 
@@ -29,16 +29,12 @@ const View = styled.div`
   min-width: 100vw;
   scroll-snap-align: start;
   display: flex;
-`
-
-const Tile = styled.div`
+  flex-direction: column;
+  align-items: center;
   margin-top: 60px;
   transform: none;
   width: 100%;
   left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `
 
 const Button = styled.div`
@@ -51,10 +47,10 @@ const Button = styled.div`
 `
 
 const Bubble = styled.span<{selected?: boolean}>`
-  height: 25px;
-  width: 25px;
-  border: 2px solid #000;
-  background-color: ${props => props.selected ? '#000' : 'none'};
+  height: 27px;
+  width: 27px;
+  border: 2px solid #BDFF00;
+  background-color: ${props => props.selected ? '#BDFF00' : 'none'};
   border-radius: 50%;
   display: inline-block;
   margin: 20px 12px 25px 12px;
@@ -129,29 +125,24 @@ const Search = () => {
         }}
       >
         <View>
-          <Tile>
-            <BikeSearch
-              setTransitTime={setTransitTime}
-              predictions={predictions}
-              setPredictions={setPredictions}
-              setPlaceID={setPlaceID}
-              located={located}
-              setLocated={setLocated}
-              location={location}
-              setLocation={setLocation}
-            />
-          </Tile>
+          <BikeSearch
+            setTransitTime={setTransitTime}
+            predictions={predictions}
+            setPredictions={setPredictions}
+            setPlaceID={setPlaceID}
+            located={located}
+            setLocated={setLocated}
+            location={location}
+            setLocation={setLocation}
+          />
         </View>
-
         <View>
-          <Tile>
-            <BeatSearch
-              mood={mood}
-              setMood={setMood}
-              transitTime={transitTime}
-              setRadius={setRadius}
-            />
-          </Tile>
+          <BeatSearch
+            mood={mood}
+            setMood={setMood}
+            transitTime={transitTime}
+            setRadius={setRadius}
+          />
         </View>
       </Container>
       <Button>
@@ -160,11 +151,11 @@ const Search = () => {
           <Bubble selected={!selectBubble} />
         </div>
         <button
-            onClick={() => {
-                fetchBeer()
-                // fetchPlaylist()
-            }}
-            disabled={buttonDisabled}
+          onClick={() => {
+              fetchBeer()
+              // fetchPlaylist()
+          }}
+          disabled={buttonDisabled}
         >FIND BEATS AND BEERS
         </button>
       </Button>

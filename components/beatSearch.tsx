@@ -79,37 +79,37 @@ const BeatSearch: React.FC<Props> = ({
       <Moods>
           <Label checked={mood === MOOD.SWEAT}>
               <input
-                  type="checkbox"
-                  checked={mood === MOOD.SWEAT}
-                  onChange={() => {
-                      setMood(MOOD.SWEAT)
-                      interpolateRadius(SPEED.SWEAT)
-                      console.log(mood)
-                  }}
+                type="checkbox"
+                checked={mood === MOOD.SWEAT}
+                onChange={() => {
+                    setMood(MOOD.SWEAT)
+                    interpolateRadius(SPEED.SWEAT)
+                    console.log(mood)
+                }}
               />
               <Selection>{`${MOOD.SWEAT}`}</Selection>
           </Label>
           <Label checked={mood === MOOD.CHILL}>
               <input
-                  type="checkbox"
-                  checked={mood === MOOD.CHILL}
-                  onChange={() => {
-                      setMood(MOOD.CHILL)
-                      interpolateRadius(SPEED.CHILL)
-                      console.log(mood)
-                  }}
+                type="checkbox"
+                checked={mood === MOOD.CHILL}
+                onChange={() => {
+                    setMood(MOOD.CHILL)
+                    interpolateRadius(SPEED.CHILL)
+                    console.log(mood)
+                }}
               />
               <Selection>{`${MOOD.CHILL}`}</Selection>
           </Label>
           <Label checked={mood === MOOD.WHATEVER}>
               <input
-                  type="checkbox"
-                  checked={mood === MOOD.WHATEVER}
-                  onChange={() => {
-                      setMood(MOOD.WHATEVER)
-                      interpolateRadius(SPEED.WHATEVER)
-                      console.log(mood)
-                  }}
+                type="checkbox"
+                checked={mood === MOOD.WHATEVER}
+                onChange={() => {
+                    setMood(MOOD.WHATEVER)
+                    interpolateRadius(SPEED.WHATEVER)
+                    console.log(mood)
+                }}
               />
               <Selection>{`${MOOD.WHATEVER}`}</Selection>
           </Label>
