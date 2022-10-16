@@ -40,11 +40,11 @@ const Start = styled.button`
 // }
 
 const Home: NextPage = () => {
-  const images = [
-    <Image src="/bike.png" alt="bike" width={230} height={130} />,
-    <Image src="/beat.png" alt="bike" width={170} height={130} />,
-    <Image src="/beer.png" alt="bike" width={155} height={130} />
-  ]
+  // const images = [
+  //   <Image src="/bike.png" alt="bike" width={230} height={130} />,
+  //   <Image src="/beat.png" alt="bike" width={170} height={130} />,
+  //   <Image src="/beer.png" alt="bike" width={155} height={130} />
+  // ]
   // const [idx, setIdx] = useState(0)
 
   // useInterval(() => {
@@ -61,7 +61,9 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <Icons>
-          {images}
+          <Image src="/bike.png" alt="bike" width={230} height={130} />,
+          <Image src="/beat.png" alt="bike" width={170} height={130} />,
+          <Image src="/beer.png" alt="bike" width={155} height={130} />
         </Icons>
         <Link href="/search">
           <Start>START YOUR JOURNEY</Start>
