@@ -89,6 +89,10 @@ button {
   animation: AnimationName 3s ease infinite;
 }
 
+button:hover {
+  background: #BDFF00;
+}
+
 @-webkit-keyframes AnimationName {
     0%{background-position:0% 15%}
     50%{background-position:100% 86%}
