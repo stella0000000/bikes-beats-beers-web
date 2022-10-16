@@ -21,13 +21,15 @@ const MenuIcon = styled.div<{modalOpen?: boolean}>`
   z-index: ${props => props.modalOpen ? '10000' : '0'};
 `
 
-const Container = styled.div`
+const Container = styled.div<{modalOpen?: boolean}>`
   scroll-snap-type: x mandatory;
   display: flex;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
   overflow-y: hidden;
-  min-height: 60vh;
+  min-height: 65vh;
+  filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
+
   @media only screen and (min-width: 650px) {
     min-height: 65vh;
   }
@@ -39,16 +41,19 @@ const View = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 100px;
   transform: none;
   width: 100%;
   left: 0;
 `
 
-const Button = styled.div`
+const Button = styled.div<{modalOpen?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
+
   @media only screen and (min-width: 650px) {
     font-size: 40px;
   }
@@ -61,7 +66,7 @@ const Bubble = styled.span<{selected?: boolean}>`
   background-color: ${props => props.selected ? '#BDFF00' : 'none'};
   border-radius: 50%;
   display: inline-block;
-  margin: 20px 12px 25px 12px;
+  margin: 30px 12px 25px 12px;
 `
 
 const Search = () => {
@@ -101,7 +106,7 @@ const Search = () => {
   }, [placeID])
 
   useEffect(() => {
-    setButtonDisabled(!coords || !mood || !transitTime || !radius)
+    setButtonDisabled(!location || !coords || !mood || !transitTime || !radius)
   }, [mood, coords, transitTime, radius])
 
   const fetchBeer = async () => {
@@ -135,6 +140,7 @@ const Search = () => {
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Container
         ref={views}
+        modalOpen={modalOpen}
         onScroll={e => {
           const ele = e.target as HTMLInputElement
           setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
@@ -161,7 +167,7 @@ const Search = () => {
           />
         </View>
       </Container>
-      <Button>
+      <Button modalOpen={modalOpen}>
         <div>
           <Bubble selected={selectBubble} />
           <Bubble selected={!selectBubble} />
@@ -179,7 +185,7 @@ const Search = () => {
             onClick={() => {
               fetchBeer()
               console.log(destination)
-              // fetchPlaylist()
+              fetchPlaylist()
             }}
             disabled={buttonDisabled}
           >FIND BEATS AND BEERS
@@ -201,5 +207,6 @@ export default Search
  * TYPES
  * display journey
 
+ * button double click bug
  * make dots clickable to switch views
  */

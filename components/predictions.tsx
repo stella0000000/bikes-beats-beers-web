@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PredictionList = styled.ul`
   position: absolute;
-  top: 265px;
+  top: 280px;
   z-index: 1000;
   padding: 0px 10px 7px 10px;
   background-color: #D3D3D3;
@@ -10,7 +10,7 @@ const PredictionList = styled.ul`
 
   @media only screen and (min-width: 650px) {
     width: 61vw;
-    top: 265px;
+    top: 310px;
     margin: 0px;
   }
 `
@@ -21,7 +21,7 @@ const Prediction = styled.div`
   white-space: nowrap;
   overflow: hidden;
   padding: 5px;
-  cursor: poin;
+  cursor: default;
 
   &:not(:last-child) {
     border-bottom: 1px solid white;

@@ -7,7 +7,7 @@ import styles from '@styles/Home.module.css'
 import styled from 'styled-components'
 
 const About = styled.div`
-  padding-top: 20px;
+  padding-top: 5px;
   font-size: 25px;
   font-style: italic;
 `

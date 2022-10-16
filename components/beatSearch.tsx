@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 
@@ -37,13 +37,13 @@ const randomMood = (min: number, max: number) => {
 
 enum MOOD {
   SWEAT = 'Sweat',
-  CHILL = 'Relax',
+  RELAX = 'Relax',
   WHATEVER = 'Whatever'
 }
 
 enum SPEED {
   SWEAT = 32,
-  CHILL = 17,
+  RELAX = 17,
   WHATEVER = randomMood(15, 35)
 }
 
@@ -61,20 +61,23 @@ const BeatSearch: React.FC<Props> = ({
   transitTime,
   setRadius
 }) => {
+  const [speed, setSpeed] = useState<number>(undefined)
+
   useEffect(() => {
     setMood(mood)
-  }, [setMood, mood])
+    interpolateRadius(speed)
+  }, [setMood, mood, speed])
 
   const interpolateRadius = (speed: number) => {
     if (mood && transitTime) {
         // mood kmh - transitTime min - radius meter
-        setRadius(speed * transitTime / 60 * 1000) // convert
+        setRadius(speed * transitTime / 60 * 1000)
     }
   }
 
   const checkMood = (mood: string, speed: number) => {
     setMood(mood)
-    interpolateRadius(speed)
+    setSpeed(speed)
   }
 
   return (
@@ -89,13 +92,13 @@ const BeatSearch: React.FC<Props> = ({
               />
               <Selection>{`${MOOD.SWEAT}`}</Selection>
           </Label>
-          <Label checked={mood === MOOD.CHILL}>
+          <Label checked={mood === MOOD.RELAX}>
               <input
                 type="checkbox"
-                checked={mood === MOOD.CHILL}
-                onChange={() => checkMood(MOOD.CHILL, SPEED.CHILL)}
+                checked={mood === MOOD.RELAX}
+                onChange={() => checkMood(MOOD.RELAX, SPEED.RELAX)}
               />
-              <Selection>{`${MOOD.CHILL}`}</Selection>
+              <Selection>{`${MOOD.RELAX}`}</Selection>
           </Label>
           <Label checked={mood === MOOD.WHATEVER}>
               <input
