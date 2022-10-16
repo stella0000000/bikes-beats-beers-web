@@ -1,6 +1,8 @@
-## I decided to make everything massive on desktop.
-<img width="600" alt="Capture d’écran 2022-10-13 à 22 11 06 " src="https://user-images.githubusercontent.com/112890821/195746159-3ba8709e-d698-4ed6-b86c-dca38271ccc6.png">
-<img width="600" alt="Capture d’écran 2022-10-13 à 22 11 17 " src="https://user-images.githubusercontent.com/112890821/195746176-ab4032f2-39fc-422a-b392-dc7a2c44614e.png">
+## `Reasonable font sizes are so 2022.`
+<img width="600" alt="Capture d’écran 2022-10-15 à 21 50 13 " src="https://user-images.githubusercontent.com/112890821/196014099-ad889aca-b71a-4e5d-ab7e-a6d2503c303a.png">
+<img width="600" alt="Capture d’écran 2022-10-15 à 21 50 34 " src="https://user-images.githubusercontent.com/112890821/196014105-0dc91ada-3393-4946-9ac0-2ae5cb021b13.png">
+<img width="600" alt="Capture d’écran 2022-10-15 à 21 51 07 " src="https://user-images.githubusercontent.com/112890821/196014123-0fa1c553-1f07-4dc3-a115-5e69326e32ac.png">
+<img width="600" alt="Capture d’écran 2022-10-15 à 21 51 24 " src="https://user-images.githubusercontent.com/112890821/196014126-3b234722-6ccb-4b93-8beb-accd9fc7c17e.png">
 
 ## Install packages:
 
