@@ -15,8 +15,8 @@ a {
 
 input {
   font-family: 'Space Mono', monospace;
-  border: 2px solid #BDFF00;
-  box-shadow: -2px 2px #BDFF00;
+  border: 2px solid #000;
+  box-shadow: -4px 4px #BDFF00;
   background: transparent;
   padding: 7px 10px;
   font-size: 20px;
@@ -49,9 +49,9 @@ input[type=checkbox]:before {
    /* position: absolute; */
    width: 30px;
    height: 30px;
-   border: 2px solid #BDFF00;
+   border: 2px solid #000;
    background-color: #D3D3D3;
-   box-shadow: -2px 2px #BDFF00;
+   box-shadow: -4px 4px #BDFF00;
 }
 
 input[type=checkbox]:checked:after {
@@ -138,6 +138,6 @@ ul, li {
 @media only screen and (min-width: 650px) {
   input, button {
     font-size: 40px;
-    border-width: 2px;
+    border-width: 3px;
   }
 }

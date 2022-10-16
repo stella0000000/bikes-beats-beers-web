@@ -1,5 +1,5 @@
 import Image from 'next/image'
-// import Link from 'next/link'
+import Link from 'next/link'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import styles from '@styles/Home.module.css'
 import debounce from 'lodash.debounce'
@@ -109,6 +109,7 @@ const Search = () => {
           const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
           const data = await response.json()
           setDestination(data[0].name)
+          console.log(data)
       }
   }
 
@@ -166,14 +167,23 @@ const Search = () => {
           <Bubble selected={selectBubble} />
           <Bubble selected={!selectBubble} />
         </div>
-        <button
-          onClick={() => {
-              fetchBeer()
-              // fetchPlaylist()
-          }}
-          disabled={buttonDisabled}
-        >FIND BEATS AND BEERS
-        </button>
+        <Link
+          href={
+            { pathname: '/journey',
+              query: {
+                destination: destination,
+                playlist: 'some playlist when i fix the api call'
+              }
+            }}>
+          <button
+            onClick={() => {
+                fetchBeer()
+                // fetchPlaylist()
+            }}
+            disabled={buttonDisabled}
+          >FIND BEATS AND BEERS
+          </button>
+        </Link>
       </Button>
     </>
   )
