@@ -81,36 +81,16 @@ button {
   color: black;
   padding: 7px 15px;
   border: none;
-  /* background: linear-gradient(29deg, #fea9ff, #6dd7ff); */
   background: #FF5EBE;
   background-size: 150% 150%;
-  -webkit-animation: AnimationName 3s ease infinite;
-  -moz-animation: AnimationName 3s ease infinite;
-  animation: AnimationName 3s ease infinite;
-}
-
-button:hover {
-  background: #BDFF00;
-}
-
-@-webkit-keyframes AnimationName {
-    0%{background-position:0% 15%}
-    50%{background-position:100% 86%}
-    100%{background-position:0% 15%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:0% 15%}
-    50%{background-position:100% 86%}
-    100%{background-position:0% 15%}
-}
-@keyframes AnimationName {
-    0%{background-position:0% 15%}
-    50%{background-position:100% 86%}
-    100%{background-position:0% 15%}
 }
 
 button:disabled {
   opacity: 0.5;
+}
+
+button:hover:not([disabled]) {
+  background: #BDFF00;
 }
 
 ul, li {
