@@ -6,12 +6,20 @@ import debounce from 'lodash.debounce'
 import styled from 'styled-components'
 import BikeSearch from '@components/bikeSearch'
 import BeatSearch from '@components/beatSearch'
+import Modal from '@components/modal'
 
 enum Dot {
   BIKE = 'BIKE',
   BEATS = 'BEATS',
   BEERS = 'BEERS'
 }
+
+const MenuIcon = styled.div`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+`
 
 const Container = styled.div`
   scroll-snap-type: x mandatory;
@@ -58,6 +66,7 @@ const Bubble = styled.span<{selected?: boolean}>`
 
 const Search = () => {
   const views = useRef(null)
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [location, setLocation] = useState<string>('')
   const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
   const [located, setLocated] = useState<boolean>(false)
@@ -117,6 +126,13 @@ const Search = () => {
 
   return (
     <>
+      <MenuIcon>
+        {modalOpen
+          ? <Image src="/burgerClose.png" alt="bike" width={65} height={60} onClick={() => setModalOpen(false)}/>
+          : <Image src="/burger.png" alt="bike" width={75} height={60} onClick={() => setModalOpen(true)}/>
+        }
+      </MenuIcon>
+      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Container
         ref={views}
         onScroll={e => {
@@ -166,20 +182,13 @@ const Search = () => {
 export default Search
 
 /**
- * Input current location
- * Display predictions
  * Click prediction - make start location => fetch lat/lon
- * Desired cycle time + mood (speed)
- * Interpolate distance
- * Search google maps: beer + radius
  * Suggest 1 location (random)
  * map moods to playlist kewords => suggest 1 playlist
 
  * ERROR HANDLING
  * TYPES
- * about modal
  * display journey
 
  * make dots clickable to switch views
- * fix predictions - position absolute.. etc
  */

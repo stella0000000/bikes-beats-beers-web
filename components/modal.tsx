@@ -1,1 +1,44 @@
-export {}
+import styled from 'styled-components'
+
+const About = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  font-style: italic;
+  background-color: #D3D3D3;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 50px;
+  @media only screen and (min-width: 800px) {
+    padding: 200px;
+    font-size: 30px;
+  }
+`
+
+// fix type
+interface Props {
+  modalOpen: any,
+  setModalOpen: any,
+}
+
+const Modal: React.FC<Props> = ({
+  modalOpen,
+  setModalOpen
+}) => {
+
+  if (!modalOpen) return null
+
+  return (
+    <About>
+      Let’s keep ourselves and the environment healthy. Explore your neighborhood by biking to beers, while listening to beats.<br></br><br></br>
+      Share your location, transit time, and cycling mood. We'll find a playlist that suites your cycling mood, and surprise you with a destination to meet your friend.<br></br><br></br>
+      Use responsibly.
+    </About>
+  )
+}
+
+export default Modal

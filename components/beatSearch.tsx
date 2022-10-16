@@ -36,7 +36,7 @@ const randomMood = (min: number, max: number) => {
 }
 
 enum MOOD {
-  SWEAT = 'Workout',
+  SWEAT = 'Sweat',
   CHILL = 'Relax',
   WHATEVER = 'Whatever'
 }

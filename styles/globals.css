@@ -4,8 +4,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-    font-family: 'Space Mono', monospace;
-    overflow-y: hidden;
+  font-family: 'Space Mono', monospace;
+  overflow-y: hidden;
 }
 
 a {
@@ -135,13 +135,9 @@ ul, li {
   }
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 650px) {
   input, button {
     font-size: 40px;
     border-width: 2px;
-  }
-
-  button {
-    /* border-bottom: 7px solid #FF5EBE; */
   }
 }
