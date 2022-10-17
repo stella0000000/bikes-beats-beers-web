@@ -18,7 +18,7 @@ const MenuIcon = styled.div<{modalOpen?: boolean}>`
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: ${props => props.modalOpen ? '10000' : '0'};
+  z-index: ${props => props.modalOpen ? '10000' : '100'};
 `
 
 const Container = styled.div<{modalOpen?: boolean}>`
@@ -28,7 +28,7 @@ const Container = styled.div<{modalOpen?: boolean}>`
   overflow-x: scroll;
   overflow-y: hidden;
   min-height: 65vh;
-  filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
+  filter: ${props => props.modalOpen ? 'blur(40px)' : 'none'};
 
   @media only screen and (min-width: 650px) {
     min-height: 65vh;
@@ -201,13 +201,15 @@ export default Search
 /**
  * Click prediction - make start location => fetch lat/lon
  * Suggest 1 location (random)
- * map moods to playlist kewords => suggest 1 playlist
+ * map moods to playlist keywords => suggest 1 playlist
 
  * ERROR HANDLING
  * TYPES
+ * polish styling (mobile + web)
  * display journey
 
  * button double click bug
  * data loader
  * make dots clickable to switch views
+ * loading - button shifting, etc
  */

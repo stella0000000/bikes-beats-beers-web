@@ -6,27 +6,27 @@ export default async function playlist(
     ) {
     const mood = req.query.mood
 
-    // var authOptions = {
-    //   url: 'https://accounts.spotify.com/api/token',
-    //   headers: {
-    //     'Authorization': 'Basic ' + (new Buffer(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
-    //   },
-    //   form: {
-    //     grant_type: 'client_credentials'
-    //   },
-    //   json: true
-    // };
-    //
-    // const resp = await fetch(authOptions, function(error, response, body) {
-    //   if (!error && response.statusCode === 200) {
-    //     var token = body.access_token;
-    //     console.log(token)
-    //   }
+    const getAccessToken = async () => {
+      const response = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+          'Authorization': 'Basic ' + (new Buffer(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
+        },
+        body: new URLSearchParams({
+          grant_type: "client_credentials"
+        }),
+      })
+
+      const auth = await response.json()
+      return auth.access_token
+    };
 
     try {
+      const accessToken = await getAccessToken()
+
       const response = await fetch(`https://api.spotify.com/v1/search?q=${mood}&type=playlist&limit=5`, {
         headers: {
-          Authorization: `Bearer ${process.env.SPOTIFY_OAUTH_TOKEN}`
+          Authorization: `Bearer ${accessToken}`
         }
       }).then(r => r.json())
       console.log(response)

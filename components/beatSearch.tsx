@@ -14,6 +14,10 @@ const Label = styled.label<{checked?: boolean}>`
   color: ${props => props.checked ? '#000' : 'inherit'};
   display: flex;
 
+  &:hover {
+    color: black;
+  }
+
   @media only screen and (min-width: 700px) {
     font-size: 50px;
     padding: 0px;
