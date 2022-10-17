@@ -8,14 +8,19 @@ import styled from 'styled-components'
 
 const About = styled.div`
   padding-top: 5px;
-  font-size: 25px;
-  font-style: italic;
+  font-size: 17px;
+  text-align: center;
+
+  @media only screen and (min-width: 750px) {
+    font-size: 25px;
+  }
 `
 
 const Icons = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
 `
 const Start = styled.button`
   font-size: 20px;
@@ -68,11 +73,11 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <Icons>
           <Image src="/bike.png" alt="bike" width={200} height={110} />
-          <Image src="/beat.png" alt="bike" width={140} height={110} />
-          <Image src="/beer.png" alt="bike" width={140} height={120} />
+          <Image src="/beat.png" alt="beat" width={140} height={110} />
+          <Image src="/beer.png" alt="beer" width={125} height={110} />
         </Icons>
         <About>
-          Explore your neighborhood.
+          ✿ explore your neighborhood ✿
         </About>
         <Link href="/search">
           <Start>START YOUR JOURNEY</Start>

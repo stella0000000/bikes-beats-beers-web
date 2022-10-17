@@ -36,9 +36,9 @@ const randomMood = (min: number, max: number) => {
 }
 
 enum MOOD {
-  SWEAT = 'Sweat',
-  RELAX = 'Relax',
-  WHATEVER = 'Whatever'
+  SWEAT = 'SWEAT',
+  RELAX = 'RELAX',
+  WHATEVER = 'WHATEVER'
 }
 
 enum SPEED {
@@ -61,24 +61,22 @@ const BeatSearch: React.FC<Props> = ({
   transitTime,
   setRadius
 }) => {
-  const [speed, setSpeed] = useState<number>(undefined)
-
-  useEffect(() => {
-    setMood(mood)
-    interpolateRadius(speed)
-  }, [setMood, mood, speed])
-
-  const interpolateRadius = (speed: number) => {
-    if (mood && transitTime) {
-        // mood kmh - transitTime min - radius meter
-        setRadius(speed * transitTime / 60 * 1000)
-    }
-  }
+  const [speed, setSpeed] = useState<number | undefined>(undefined)
 
   const checkMood = (mood: string, speed: number) => {
     setMood(mood)
     setSpeed(speed)
   }
+
+  useEffect(() => {
+    const interpolateRadius = (speed: number | undefined) => {
+      if (speed) setRadius(speed * transitTime / 60 * 1000)
+      // mood kmh - transitTime min - radius meter
+    }
+
+    setMood(mood)
+    if (speed && transitTime) interpolateRadius(speed)
+  }, [setMood, mood, speed, setRadius, transitTime])
 
   return (
     <>

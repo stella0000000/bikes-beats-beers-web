@@ -107,7 +107,7 @@ const Search = () => {
 
   useEffect(() => {
     setButtonDisabled(!location || !coords || !mood || !transitTime || !radius)
-  }, [mood, coords, transitTime, radius])
+  }, [location, mood, coords, transitTime, radius])
 
   const fetchBeer = async () => {
       if (coords) {
@@ -133,8 +133,8 @@ const Search = () => {
     <>
       <MenuIcon modalOpen={modalOpen}>
         {modalOpen
-           ? <Image src="/burgerClose.png" alt="bike" width={65} height={60} onClick={() => setModalOpen(false)}/>
-          : <Image src="/burger.png" alt="bike" width={75} height={60} onClick={() => setModalOpen(true)}/>
+           ? <Image src="/burgerClose.png" alt="bike" width={55} height={50} onClick={() => setModalOpen(false)}/>
+          : <Image src="/burger.png" alt="bike" width={60} height={45} onClick={() => setModalOpen(true)}/>
         }
       </MenuIcon>
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
@@ -208,5 +208,6 @@ export default Search
  * display journey
 
  * button double click bug
+ * data loader
  * make dots clickable to switch views
  */

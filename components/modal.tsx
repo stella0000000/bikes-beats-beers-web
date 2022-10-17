@@ -11,6 +11,7 @@ const About = styled.div`
   align-items: center;
   font-size: 19px;
   padding: 50px;
+  color: black;
 
   @media only screen and (min-width: 800px) {
     padding: 200px;
