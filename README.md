@@ -1,8 +1,8 @@
 ## `Reasonable font sizes are so 2022.`
-<img width="600" alt="Capture d’écran 2022-10-15 à 22 09 32 " src="https://user-images.githubusercontent.com/112890821/196014588-b6df37b6-55cd-42d0-8089-a402b0f71b3d.png">
-<img width="600" alt="Capture d’écran 2022-10-15 à 22 09 41 " src="https://user-images.githubusercontent.com/112890821/196014589-032f9a75-3860-4cb1-af4d-2782b6718c6c.png">
-<img width="600" alt="Capture d’écran 2022-10-15 à 22 09 53 " src="https://user-images.githubusercontent.com/112890821/196014590-9888d49d-01e0-4500-a5b0-ba81b2396d45.png">
-<img width="600" alt="Capture d’écran 2022-10-15 à 22 10 09 " src="https://user-images.githubusercontent.com/112890821/196014591-911bb7e0-1afb-4df9-b7db-6abc5b74bb25.png">
+<img width="600" alt="Capture d’écran 2022-10-16 à 20 49 48 " src="https://user-images.githubusercontent.com/112890821/196067861-c62c3af7-6d99-4728-b183-562cdc82b7df.png">
+<img width="600" alt="Capture d’écran 2022-10-16 à 20 50 02 " src="https://user-images.githubusercontent.com/112890821/196067865-18aeeb8c-22ff-4a60-a2a5-0fa098d23bcb.png">
+<img width="600" alt="Capture d’écran 2022-10-16 à 20 50 12 " src="https://user-images.githubusercontent.com/112890821/196067866-1969b4fd-59ce-466f-adce-54e591972647.png">
+<img width="600" alt="Capture d’écran 2022-10-16 à 20 50 20 " src="https://user-images.githubusercontent.com/112890821/196067867-2b55c29d-b629-475d-a1d0-6bcc471a8741.png">
 
 
 ## Install packages:
@@ -11,7 +11,7 @@
 yarn
 ```
 
-## Add your API keys into a .env:
+## .env.local:
 
 ```
 GOOGLE_KEY='blah'
