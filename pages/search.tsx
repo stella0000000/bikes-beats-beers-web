@@ -69,6 +69,7 @@ const Bubble = styled.span<{selected?: boolean}>`
 `
 
 const Search = () => {
+  // rename states .. locationValue, apiLocation.. etc
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [location, setLocation] = useState<string>('')
@@ -85,23 +86,23 @@ const Search = () => {
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
 
   useEffect(() => {
-      const fetchPredictions = async () => {
-          const response = await fetch(`/api/predictions/${location}`)
-          const data = await response.json()
-          setPredictions(data)
-      }
+    const fetchPredictions = async () => {
+      const response = await fetch(`/api/predictions/${location}`)
+      const data = await response.json()
+      setPredictions(data)
+    }
 
-      if (location && !located) fetchPredictions();
+    if (location && !located) fetchPredictions();
   }, [location, located])
 
   useEffect(() => {
-      const fetchCoordinates = async () => {
-          const response = await fetch(`/api/coordinates/${placeID}`)
-          const data = await response.json()
-          setCoords([data.lat, data.lng])
-      }
+    const fetchCoordinates = async () => {
+      const response = await fetch(`/api/coordinates/${placeID}`)
+      const data = await response.json()
+      setCoords([data.lat, data.lng])
+    }
 
-      if (placeID) fetchCoordinates()
+    if (placeID) fetchCoordinates()
   }, [placeID])
 
   useEffect(() => {
@@ -109,18 +110,18 @@ const Search = () => {
   }, [location, mood, coords, transitTime, radius])
 
   const fetchBeer = async () => {
-      if (coords) {
-          const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
-          const data = await response.json()
-          setDestination(data[Math.floor(Math.random()*data.length)].name)
-      }
+    if (coords) {
+      const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
+      const data = await response.json()
+      setDestination(data[Math.floor(Math.random()*data.length)].name)
+    }
   }
 
   const fetchPlaylist = async () => {
-      const response = await fetch(`/api/playlist/${mood}`)
-      const data = await response.json()
-      console.log({ data })
-      // setPlaylist(data)
+    const response = await fetch(`/api/playlist/${mood}`)
+    const data = await response.json()
+    console.log({ data })
+    // setPlaylist(data)
   }
 
   // const updateLocation = (e: any )=> {
@@ -206,10 +207,11 @@ export default Search
  * TYPES
  * polish styling (mobile + web)
  * display journey
+ * useswr
 
  * button double click bug
  * data loader
- * make dots clickable to switch views
+        * make dots clickable to switch views
  * refactor bajillion usestates
  * on load - button shifting, etc bug
  */

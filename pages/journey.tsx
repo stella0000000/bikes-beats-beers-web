@@ -77,7 +77,7 @@ const Journey = (props: any) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectBubble, setSelectBubble] = useState<string>(DOT.BIKES)
 
-  console.log(props)
+  console.log({ props })
   return (
     <>
       <MenuIcon modalOpen={modalOpen}>
@@ -93,9 +93,9 @@ const Journey = (props: any) => {
         modalOpen={modalOpen}
         onScroll={e => {
           const ele = e.target as HTMLInputElement
-          if (ele.scrollLeft < ele.scrollWidth/3) {
+          if (ele.scrollLeft < ele.scrollWidth/3 - ele.scrollWidth/6) {
             setSelectBubble(DOT.BIKES)
-          } else if (ele.scrollLeft > ele.scrollWidth/3) {
+          } else if (ele.scrollLeft > ele.scrollWidth/3) { // fix for center
             setSelectBubble(DOT.BEERS)
           } else {
             setSelectBubble(DOT.BEATS)
@@ -122,17 +122,8 @@ const Journey = (props: any) => {
           <Bubble selected={selectBubble === DOT.BEATS} />
           <Bubble selected={selectBubble === DOT.BEERS} />
         </div>
-        <Link
-          href={
-            {
-              pathname: '/search',
-            }}>
-          <button
-            onClick={() => {
-              console.log('back to search')
-            }}
-          >↻ NEW JOURNEY
-          </button>
+        <Link href='/search'>
+          <button>↻ NEW JOURNEY</button>
         </Link>
       </Button>
     </>

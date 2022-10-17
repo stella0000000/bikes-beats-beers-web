@@ -86,30 +86,30 @@ const BeatSearch: React.FC<Props> = ({
     <>
       <Image src="/beat.png" alt="bike" width={110} height={90} />
       <Moods>
-          <Label checked={mood === MOOD.SWEAT}>
-              <input
-                type="checkbox"
-                checked={mood === MOOD.SWEAT}
-                onChange={() => checkMood(MOOD.SWEAT, SPEED.SWEAT)}
-              />
-              <Selection>{`${MOOD.SWEAT}`}</Selection>
-          </Label>
-          <Label checked={mood === MOOD.RELAX}>
-              <input
-                type="checkbox"
-                checked={mood === MOOD.RELAX}
-                onChange={() => checkMood(MOOD.RELAX, SPEED.RELAX)}
-              />
-              <Selection>{`${MOOD.RELAX}`}</Selection>
-          </Label>
-          <Label checked={mood === MOOD.WHATEVER}>
-              <input
-                type="checkbox"
-                checked={mood === MOOD.WHATEVER}
-                onChange={() => checkMood(MOOD.WHATEVER, SPEED.WHATEVER)}
-              />
-              <Selection>{`${MOOD.WHATEVER}`}</Selection>
-          </Label>
+        <Label checked={mood === MOOD.SWEAT}>
+          <input
+            type="checkbox"
+            checked={mood === MOOD.SWEAT}
+            onChange={() => checkMood(MOOD.SWEAT, SPEED.SWEAT)}
+          />
+          <Selection>{`${MOOD.SWEAT}`}</Selection>
+        </Label>
+        <Label checked={mood === MOOD.RELAX}>
+          <input
+            type="checkbox"
+            checked={mood === MOOD.RELAX}
+            onChange={() => checkMood(MOOD.RELAX, SPEED.RELAX)}
+          />
+          <Selection>{`${MOOD.RELAX}`}</Selection>
+        </Label>
+        <Label checked={mood === MOOD.WHATEVER}>
+          <input
+            type="checkbox"
+            checked={mood === MOOD.WHATEVER}
+            onChange={() => checkMood(MOOD.WHATEVER, SPEED.WHATEVER)}
+          />
+          <Selection>{`${MOOD.WHATEVER}`}</Selection>
+        </Label>
       </Moods>
     </>
   )
