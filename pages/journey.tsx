@@ -93,7 +93,13 @@ const Journey = (props: any) => {
         modalOpen={modalOpen}
         onScroll={e => {
           const ele = e.target as HTMLInputElement
-          setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4) // fix for 3 enum
+          if (ele.scrollLeft < ele.scrollWidth/3) {
+            setSelectBubble(DOT.BIKES)
+          } else if (ele.scrollLeft > ele.scrollWidth/3) {
+            setSelectBubble(DOT.BEERS)
+          } else {
+            setSelectBubble(DOT.BEATS)
+          }
         }}
       >
         <View>
@@ -105,7 +111,7 @@ const Journey = (props: any) => {
           YOUR BEATS
         </View>
         <View>
-          <Image src="/beer.png" alt="beer" width={105} height={90} />
+          <Image src="/beer.png" alt="beer" width={100} height={90} />
           YOUR BEERS
         </View>
       </Container>
@@ -125,7 +131,7 @@ const Journey = (props: any) => {
             onClick={() => {
               console.log('back to search')
             }}
-          >NEW JOURNEY ⟳
+          >↻ NEW JOURNEY
           </button>
         </Link>
       </Button>
