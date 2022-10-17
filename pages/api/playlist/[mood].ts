@@ -29,8 +29,8 @@ export default async function playlist(
           Authorization: `Bearer ${accessToken}`
         }
       }).then(r => r.json())
-      console.log(response)
-      // res.status(200).json(response)
+      console.log(response.playlists.items)
+      res.status(200).json(response.playlists.items)
     } catch(err) {
       res.status(500).json('Uh oh - playlists failed')
       // res.status(500).json(response.data.error_message)

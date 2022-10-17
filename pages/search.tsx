@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import styles from '@styles/Home.module.css'
 import debounce from 'lodash.debounce'
 import styled from 'styled-components'
 import BikeSearch from '@components/bikeSearch'
@@ -9,7 +8,7 @@ import BeatSearch from '@components/beatSearch'
 import Modal from '@components/modal'
 
 enum Dot {
-  BIKE = 'BIKE',
+  BIKES = 'BIKES',
   BEATS = 'BEATS',
   BEERS = 'BEERS'
 }
@@ -175,7 +174,7 @@ const Search = () => {
         <Link
           href={
             {
-              // pathname: '/journey',
+              pathname: '/journey',
               query: {
                 destination: destination,
                 playlist: 'some playlist when i fix the api call'
@@ -211,5 +210,6 @@ export default Search
  * button double click bug
  * data loader
  * make dots clickable to switch views
- * loading - button shifting, etc
+ * refactor bajillion usestates
+ * on load - button shifting, etc bug
  */
