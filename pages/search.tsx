@@ -167,9 +167,9 @@ const Search = () => {
             {
               pathname: '/journey',
               query: {
-                radius: radius,
-                coords: coords,
-                mood: mood
+                radius,
+                coords,
+                mood
               }
             }}>
           <button disabled={buttonDisabled}>

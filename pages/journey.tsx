@@ -49,8 +49,12 @@ const View = styled.div`
   color: black;
 
   @media only screen and (min-width: 650px) {
-    font-size: 40px;
+    font-size: 20px;
   }
+`
+
+const Title = styled.div`
+  font-size: 40px;
 `
 
 const Button = styled.div<{modalOpen?: boolean}>`
@@ -80,12 +84,8 @@ const Journey = (props: any) => {
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectBubble, setSelectBubble] = useState<string>(DOT.BIKES)
-  const [destination, setDestination] = useState<string>(props.destination)
-  const [playlist, setPlaylist] = useState<string>(props.playlist)
 
-  // redirect to search if undeef.
-
-  console.log({props})
+  // fix - redirect to search if undeef.
 
   return (
     <>
@@ -113,15 +113,19 @@ const Journey = (props: any) => {
       >
         <View>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
-          YOUR BIKE RIDE
+          <Title>YOUR BIKE RIDE</Title>
+          distance, time, wx
         </View>
         <View>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
-          YOUR BEATS
+          <Title>YOUR BEATS</Title>
+          {props.playlist}
         </View>
         <View>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
-          YOUR BEERS
+          <Title>YOUR BEERS</Title>
+          {props.destination[0].name}<br></br>
+          {props.destination[0].vicinity}
         </View>
       </Container>
 
@@ -188,7 +192,8 @@ export const getServerSideProps = async (ctx: any)=> {
           Authorization: `Bearer ${accessToken}`
         }
       }).then(r => r.json())
-      return response.playlists.items[0].external_urls.spotify
+      console.log(response.playlists.items)
+      return response.playlists.items[0].external_urls.spotify // fix
     } catch(err) {
       return console.log('fetch playlist', err)
     }
@@ -198,32 +203,20 @@ export const getServerSideProps = async (ctx: any)=> {
   const destination = await fetchBeer()
   const playlist = await fetchPlaylist()
 
-  console.log(destination)
-  console.log(playlist)
-
   // const [destination, playlist] = (await Promise.allSettled([fetchBeer(), fetchPlaylist()])).map(result => (
   //   result.value
   // ))
   // or Promise.all - test - doesn't allow breaking
 
-  console.log(destination)
+  // console.log(destination)
   console.log(playlist)
 
-  return { 
-    props: { 
+  return {
+    props: {
       destination,
       playlist
     }
   }
 
-
   // url shareable
-  // pass through coords, etc
-
-  // return {
-  //     props: {
-  //        destination: query.destination,
-  //        playlist: query.playlist
-  //     }
-  // }
 }

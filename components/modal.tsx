@@ -34,7 +34,7 @@ const Modal: React.FC<Props> = ({
 
   return (
     <About>
-      Let&apos;s keep ourselves and the atmosphere healthy. Explore your neighborhood by biking to beers while listening to beats.<br></br><br></br>
+      Let&apos;s keep ourselves and the atmosphere healthy. Explore your neighborhood by biking to a beer (just one) while listening to beats.<br></br><br></br>
       Share your location, desired transit time, and cycling mood. We&apos;ll suggest a playlist that suits your mood and surprise you with a destination to meet your friend 😘<br></br><br></br>
       Use responsibly.
     </About>
