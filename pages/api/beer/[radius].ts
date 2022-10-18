@@ -24,3 +24,5 @@ export default async function beers(
     // res.status(500).json(response.data.error_message)
   }
 }
+
+//move to separate simple js file without res.status etc just await client.placesnearby

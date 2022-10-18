@@ -70,6 +70,11 @@ const Bubble = styled.span<{selected?: boolean}>`
 
 const Search = () => {
   // rename states .. locationValue, apiLocation.. etc
+  // nest user input states into object
+  // const [userData, setUserData] = useState<{}>({})
+  // const setMood = (mood) => { setUserData(prevData => ({ ...prevData, mood })) }
+  // for booleans => single state "state" => string "editing", "located"..
+
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [location, setLocation] = useState<string>('')
@@ -108,21 +113,6 @@ const Search = () => {
   useEffect(() => {
     setButtonDisabled(!location || !coords || !mood || !transitTime || !radius)
   }, [location, mood, coords, transitTime, radius])
-
-  const fetchBeer = async () => {
-    if (coords) {
-      const response = await fetch(`/api/beer/${radius}?lat=${coords[0]}&lng=${coords[1]}`)
-      const data = await response.json()
-      setDestination(data[Math.floor(Math.random()*data.length)].name)
-    }
-  }
-
-  const fetchPlaylist = async () => {
-    const response = await fetch(`/api/playlist/${mood}`)
-    const data = await response.json()
-    console.log({ data })
-    // setPlaylist(data)
-  }
 
   // const updateLocation = (e: any )=> {
   //     setLocation(e?.target?.value)
@@ -177,18 +167,13 @@ const Search = () => {
             {
               pathname: '/journey',
               query: {
-                destination: destination,
-                playlist: 'some playlist when i fix the api call'
+                radius: radius,
+                coords: coords,
+                mood: mood
               }
             }}>
-          <button
-            onClick={() => {
-              fetchBeer()
-              console.log(destination)
-              fetchPlaylist()
-            }}
-            disabled={buttonDisabled}
-          >FIND BEATS AND BEERS
+          <button disabled={buttonDisabled}>
+            FIND BEATS AND BEERS
           </button>
         </Link>
       </Button>
@@ -203,15 +188,13 @@ export default Search
  * Suggest 1 location (random)
  * map moods to playlist keywords => suggest 1 playlist
 
- * ERROR HANDLING
+ * ERROR HANDLING => think of the flow
  * TYPES
  * polish styling (mobile + web)
  * display journey
  * useswr
 
- * button double click bug
- * data loader
-        * make dots clickable to switch views
- * refactor bajillion usestates
+ * make dots clickable to switch views
+ * many usestates
  * on load - button shifting, etc bug
  */

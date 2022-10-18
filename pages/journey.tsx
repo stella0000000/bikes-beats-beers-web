@@ -4,6 +4,10 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import Modal from '@components/modal'
 
+import { Client, PlaceData } from '@googlemaps/google-maps-services-js'
+
+const client = new Client({})
+
 enum DOT {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
@@ -76,8 +80,13 @@ const Journey = (props: any) => {
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectBubble, setSelectBubble] = useState<string>(DOT.BIKES)
+  const [destination, setDestination] = useState<string>(props.destination)
+  const [playlist, setPlaylist] = useState<string>(props.playlist)
 
-  console.log({ props })
+  // redirect to search if undeef.
+
+  console.log({props})
+
   return (
     <>
       <MenuIcon modalOpen={modalOpen}>
@@ -133,13 +142,88 @@ const Journey = (props: any) => {
 export default Journey
 
 // fix type
-export  const getServerSideProps= (ctx: any)=> {
-  const query = ctx.query
+export const getServerSideProps = async (ctx: any)=> {
+  const { radius, coords, mood } = ctx.query
 
-  return {
-      props: {
-         destination: query.destination,
-         playlist: query.playlist
-      }
+  // move to separate files
+  const fetchBeer = async () => {
+    try {
+      const response = await client.placesNearby({
+        params: {
+            location: [parseFloat(coords[0].toString()), parseFloat(coords[1].toString())],
+            radius: parseFloat(radius.toString()!),    // metres
+            keyword: 'bar',
+            opennow: true,
+            key: process.env.GOOGLE_KEY!
+        },
+        timeout: 1000,
+      })
+      return response.data.results
+    } catch(err) {
+      return console.log('beer', err)
+    }
   }
+
+  const fetchPlaylist = async () => {
+    const getAccessToken = async () => {
+      const response = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+          'Authorization': 'Basic ' + (new Buffer(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
+        },
+        body: new URLSearchParams({
+          grant_type: "client_credentials"
+        }),
+      })
+
+      const auth = await response.json()
+      return auth.access_token
+    };
+
+    try {
+      const accessToken = await getAccessToken()
+
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${mood}&type=playlist&limit=5`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then(r => r.json())
+      return response.playlists.items[0].external_urls.spotify
+    } catch(err) {
+      return console.log('fetch playlist', err)
+    }
+  }
+
+  // 2 awaits
+  const destination = await fetchBeer()
+  const playlist = await fetchPlaylist()
+
+  console.log(destination)
+  console.log(playlist)
+
+  // const [destination, playlist] = (await Promise.allSettled([fetchBeer(), fetchPlaylist()])).map(result => (
+  //   result.value
+  // ))
+  // or Promise.all - test - doesn't allow breaking
+
+  console.log(destination)
+  console.log(playlist)
+
+  return { 
+    props: { 
+      destination,
+      playlist
+    }
+  }
+
+
+  // url shareable
+  // pass through coords, etc
+
+  // return {
+  //     props: {
+  //        destination: query.destination,
+  //        playlist: query.playlist
+  //     }
+  // }
 }
