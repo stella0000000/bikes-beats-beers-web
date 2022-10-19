@@ -47,6 +47,7 @@ const View = styled.div`
   left: 0;
   font-size: 30px;
   color: black;
+  text-align: center;
 
   @media only screen and (min-width: 650px) {
     font-size: 20px;
@@ -55,6 +56,7 @@ const View = styled.div`
 
 const Title = styled.div`
   font-size: 40px;
+  padding-bottom: 20px;
 `
 
 const Button = styled.div<{modalOpen?: boolean}>`
@@ -114,12 +116,18 @@ const Journey = (props: any) => {
         <View>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Title>YOUR BIKE RIDE</Title>
-          distance, time, wx
+          X kilometers<br></br>
+          Y minutes<br></br>
+          Grab a jacket, it's Z°
         </View>
         <View>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Title>YOUR BEATS</Title>
-          {props.playlist}
+          <Image src={`${props.playlist[3]}`} alt="playlist image" width={150} height={150} />
+          <Link href={`${props.playlist[1]}`}>
+            {props.playlist[0]}
+          </Link>
+          {props.playlist[2]}
         </View>
         <View>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
@@ -192,14 +200,23 @@ export const getServerSideProps = async (ctx: any)=> {
           Authorization: `Bearer ${accessToken}`
         }
       }).then(r => r.json())
-      console.log(response.playlists.items)
-      return response.playlists.items[0].external_urls.spotify // fix
+
+      const data = response.playlists.items[0]
+
+      const results = [
+        data.name,
+        data.external_urls.spotify,
+        data.description,
+        data.images[0].url
+        ]
+
+        console.log(data.images[0].url)
+      return results
     } catch(err) {
       return console.log('fetch playlist', err)
     }
   }
 
-  // 2 awaits
   const destination = await fetchBeer()
   const playlist = await fetchPlaylist()
 
@@ -209,7 +226,7 @@ export const getServerSideProps = async (ctx: any)=> {
   // or Promise.all - test - doesn't allow breaking
 
   // console.log(destination)
-  console.log(playlist)
+  // console.log(playlist)
 
   return {
     props: {

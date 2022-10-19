@@ -7,7 +7,7 @@ import BikeSearch from '@components/bikeSearch'
 import BeatSearch from '@components/beatSearch'
 import Modal from '@components/modal'
 
-enum Dot {
+enum DOT {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
   BEERS = 'BEERS'
