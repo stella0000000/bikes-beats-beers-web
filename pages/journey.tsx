@@ -118,7 +118,7 @@ const Journey = (props: any) => {
           <Title>YOUR BIKE RIDE</Title>
           X kilometers<br></br>
           Y minutes<br></br>
-          Grab a jacket, it's Z°
+          Grab a jacket, it&apos;s Z°
         </View>
         <View>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
