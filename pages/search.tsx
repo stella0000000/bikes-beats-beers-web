@@ -76,12 +76,14 @@ const Search = () => {
     locationInput?: string,
     placeID?: string,
     coords?: number[],
+    address?: string,
     transitTime?: number,
     mood?: string,
     radius?: number}>({})
   const setLocationInput = (locationInput?: string) => { setUserData(prevData => ({ ...prevData, locationInput }))}
   const setPlaceID = (placeID: string) => { setUserData(prevData => ({ ...prevData, placeID }))}
   const setCoords = (coords?: number[]) => { setUserData(prevData => ({ ...prevData, coords }))}
+  const setAddress = (address?: string) => { setUserData(prevData => ({ ...prevData, address }))}
   const setTransitTime = (transitTime?: number) => { setUserData(prevData => ({ ...prevData, transitTime }))}
   const setMood = (mood?: string) => { setUserData(prevData => ({ ...prevData, mood }))}
   const setRadius = (radius?: number) => { setUserData(prevData => ({ ...prevData, radius }))}
@@ -104,7 +106,8 @@ const Search = () => {
     const fetchCoordinates = async () => {
       const response = await fetch(`/api/coordinates/${userData.placeID}`)
       const data = await response.json()
-      setCoords([data.lat, data.lng])
+      setAddress(data.address)
+      setCoords([data.coords.lat, data.coords.lng])
     }
 
     if (userData.placeID) fetchCoordinates()
@@ -177,9 +180,11 @@ const Search = () => {
               pathname: '/journey',
               query: {
                 radius: userData.radius,
-                coords: userData.coords,
+                lat: userData.coords?.[0],
+                lng: userData.coords?.[1],
                 mood: userData.mood,
-                transitTime: userData.transitTime
+                transitTime: userData.transitTime,
+                address: userData.address
               }
             }}>
           <button

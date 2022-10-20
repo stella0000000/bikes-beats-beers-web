@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Modal from '@components/modal'
 import BurgerMenu from '@components/burgerMenu'
 
-import { Client, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
+import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
 
 enum BUBBLES {
@@ -20,7 +20,7 @@ type JourneyProps = {
   destination: any
   playlist: any
   transitTime: any
-  coords: any
+  bikeRide: any
 }
 
 const Container = styled.div<{modalOpen?: boolean}>`
@@ -93,29 +93,6 @@ const Journey = (props: JourneyProps) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
-  const fetchDistance = async () => {
-    try {
-      const response = await client.distancematrix({
-        params: {
-          origins: [props.coords[0], props.coords[1]],
-          destinations: props.destination.geometry?.location,
-          // mode: TravelMode.bicycling,
-          // units: UnitSystem.metric,
-          // avoid: [TravelRestriction.highways],
-          key: process.env.GOOGLE_KEY!
-        },
-        timeout: 1000
-      })
-      console.log(response)
-    } catch(err) {
-      return console.log('distance', err)
-    }
-  }
-
-  useEffect(() => {
-    fetchDistance()
-  }, [])
-
   return (
     <>
       <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
@@ -137,8 +114,9 @@ const Journey = (props: JourneyProps) => {
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Header>YOUR BIKE RIDE</Header>
-          X kilometers<br></br>
-          {props.transitTime} minutes
+          {props.bikeRide.distance}<br></br>
+          {props.bikeRide.duration} - string int coordinate issue<br></br>
+          desired transit time: {props.transitTime} minutes
         </View>
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
@@ -183,9 +161,9 @@ export default Journey
 export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promise<
   GetServerSidePropsResult<JourneyProps>
 > => {
-  const { radius, coords, mood, transitTime } = ctx.query
+  const { radius, lat, lng, mood, transitTime, address } = ctx.query
 
-  if (!radius || !coords || !mood) {
+  if (!radius || !lat || !lng || !mood) {
     return {
       redirect: {
         destination: '/search',
@@ -195,11 +173,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
   }
 
   // move to separate files
-  const fetchBeer = async () => {
+  const fetchBeer = async (): Promise<Partial<PlaceData> | string> => {
     try {
       const response = await client.placesNearby({
         params: {
-            location: [parseFloat(coords[0].toString()), parseFloat(coords[1].toString())],
+            location: [parseFloat(lat.toString()), parseFloat(lng.toString())],
             radius: parseFloat(radius.toString()!), // metres
             keyword: 'bar',
             opennow: true,
@@ -207,28 +185,24 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
         },
         timeout: 1000,
       })
-      // console.log(response.data.results[0].geometry?.location)
+
+      // const distance = await client.distancematrix({
+      //   params: {
+      //     origins: [coords[0], coords[1]],
+      //     destinations: [response.data.results[0].geometry?.location!],
+      //     mode: TravelMode.bicycling,
+      //     units: UnitSystem.metric,
+      //     avoid: [TravelRestriction.highways],
+      //     key: process.env.GOOGLE_KEY!
+      //   },
+      //   timeout: 1000
+      // })
+      
       return response.data.results[0]
     } catch(err) {
-      return console.log('beer', err)
+      return `beer, ${err}`
     }
   }
-
-  // const fetchDistance = async () => {
-  //   try {
-  //     const response = await client.distancematrix({
-  //       params: {
-  //         origins: [coords[0], coords[1]],
-  //         // destinations: destination.geometry?.location,
-  //         // avoid: ,
-  //         key: process.env.GOOGLE_KEY!
-  //       },
-  //       timeout: 1000
-  //     })
-  //   } catch(err) {
-  //     return console.log('distance', err)
-  //   }
-  // }
 
   const fetchPlaylist = async () => {
     const getAccessToken = async () => {
@@ -271,12 +245,42 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
 
   const [destination, playlist] = await Promise.all([fetchBeer(), fetchPlaylist()])
 
+  const fetchBikeRide = async () => {
+    try {
+      if (typeof destination !== 'string') {
+        const distance = await client.distancematrix({
+          params: {
+            origins: [[parseInt(lat.toString()), parseInt(lng.toString())]],  //fix string, int weird
+            destinations: [destination.vicinity!],
+            mode: TravelMode.bicycling,
+            units: UnitSystem.metric,
+            key: process.env.GOOGLE_KEY!
+          },
+          timeout: 1000
+        })
+        console.log(distance.data)
+        // console.log(distance.data.rows[0].elements[0].distance)
+        // console.log(distance.data.rows[0].elements[0].duration)
+        return {
+          distance: distance.data.rows[0].elements[0].distance.text,
+          duration: distance.data.rows[0].elements[0].duration.text,
+        }
+        // return distance
+    }
+      return 'hi'
+    } catch(err) {
+      return console.log('distance', err)
+    }
+  }
+
+  const bikeRide = await fetchBikeRide()
+
   return {
     props: {
       destination,
       playlist,
       transitTime,
-      coords
+      bikeRide
     }
   }
 

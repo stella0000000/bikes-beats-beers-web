@@ -5,7 +5,7 @@ const client = new Client({})
 
 export default async function coordinates(
   req: NextApiRequest,
-  res: NextApiResponse<LatLngLiteral | undefined | string>
+  res: NextApiResponse<any> // fix
 ) {
   const place_id = req.query.placeID?.toString();
 
@@ -16,9 +16,12 @@ export default async function coordinates(
           place_id,
           key: process.env.GOOGLE_KEY!
         },
-        timeout: 1000,        
+        timeout: 1000,
       })
-      res.status(200).json(response.data.result.geometry?.location)
+      res.status(200).json({
+        coords: response.data.result.geometry?.location,
+        address: response.data.result.formatted_address
+      })
     } catch(err) {
       res.status(500).json('Uh oh - coordinates failed')
       // res.status(500).json(response.data.error_message)
