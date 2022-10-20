@@ -31,7 +31,7 @@ const Container = styled.div<{modalOpen?: boolean}>`
   filter: ${props => props.modalOpen ? 'blur(40px)' : 'none'};
 
   @media only screen and (min-width: 650px) {
-    min-height: 65vh;
+    min-height: 71vh;
   }
 `
 
@@ -43,7 +43,7 @@ const View = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 70px;
   transform: none;
   width: 100%;
   left: 0;
@@ -68,7 +68,11 @@ const Bubble = styled.span<{selected?: boolean}>`
   background-color: ${props => props.selected ? '#BDFF00' : 'none'};
   border-radius: 50%;
   display: inline-block;
-  margin: 30px 12px 25px 12px;
+  margin: 0px 0px 20px 0px;
+  
+  &:not(:last-child) {
+    margin-right: 25px;
+  }
 `
 
 const Search = () => {
@@ -88,9 +92,7 @@ const Search = () => {
   const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
   const [mood, setMood] = useState<string | undefined>(undefined)
   const [radius, setRadius] = useState<number | undefined>(undefined)
-  const [destination, setDestination] = useState<string | undefined>(undefined)
   const [selectBubble, setSelectBubble] = useState<boolean>(true)
-  const [playlist, setPlaylist] = useState<string | undefined>(undefined)
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -147,7 +149,7 @@ const Search = () => {
           setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
         }}
       >
-        <View id={"bike"}>
+        <View id={DOT.BIKES}>
           <BikeSearch
             setTransitTime={setTransitTime}
             predictions={predictions}
@@ -159,7 +161,7 @@ const Search = () => {
             setLocation={setLocation}
           />
         </View>
-        <View id={"beat"}>
+        <View id={DOT.BEATS}>
           <BeatSearch
             mood={mood}
             setMood={setMood}
@@ -170,10 +172,10 @@ const Search = () => {
       </Container>
       <Button modalOpen={modalOpen}>
         <div>
-          <Link href={'#bike'}>
+          <Link href={`#${DOT.BIKES}`}>
             <Bubble selected={selectBubble} />
           </Link>
-          <Link href={'#beat'}>
+          <Link href={`#${DOT.BEATS}`}>
             <Bubble selected={!selectBubble} />
           </Link>
         </div>

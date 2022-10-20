@@ -5,6 +5,7 @@ import Predictions from '@components/predictions'
 const Location = styled.input`
   width: 80vw;
   margin-top: 12vw;
+
   @media only screen and (min-width: 650px) {
     margin-top: 30px;
     width: 60vw;
@@ -23,6 +24,7 @@ const Container = styled.div`
 const Text = styled.div`
   margin: 7vw 0vw 0.5vw 0vw;
   font-size: 20px;
+  
   @media only screen and (min-width: 650px) {
     font-size: 40px;
     margin-top: 50px;
@@ -35,6 +37,7 @@ const TransitTime = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @media only screen and (min-width: 650px) {
     width: 60vw;
   }
@@ -43,6 +46,7 @@ const TransitTime = styled.div`
 const Min = styled.span`
   color: #000;
   font-size: 20px;
+  
   @media only screen and (min-width: 650px) {
     font-size: 45px;
   }

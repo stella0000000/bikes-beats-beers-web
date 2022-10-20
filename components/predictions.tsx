@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 const PredictionList = styled.ul`
   position: absolute;
-  top: 280px;
+  top: 200px;
   z-index: 1000;
-  padding: 0px 10px 7px 10px;
+  padding: 0px 10px 7px 12px;
   background-color: #D3D3D3;
   width: 85vw;
 
   @media only screen and (min-width: 650px) {
     width: 61vw;
-    top: 310px;
+    top: 280px;
     margin: 0px;
   }
 `
@@ -33,7 +33,7 @@ const Prediction = styled.div`
 
   @media only screen and (min-width: 650px) {
     font-size: 30px;
-    padding: 6px;
+    padding: 5px;
   }
 `
 

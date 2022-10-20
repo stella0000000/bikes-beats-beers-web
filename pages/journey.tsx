@@ -31,7 +31,7 @@ const Container = styled.div<{modalOpen?: boolean}>`
   filter: ${props => props.modalOpen ? 'blur(40px)' : 'none'};
 
   @media only screen and (min-width: 650px) {
-    min-height: 65vh;
+    min-height: 75vh;
   }
 `
 
@@ -78,7 +78,11 @@ const Bubble = styled.span<{selected?: boolean}>`
   background-color: ${props => props.selected ? '#BDFF00' : 'none'};
   border-radius: 50%;
   display: inline-block;
-  margin: 30px 12px 25px 12px;
+  margin: 0px 0px 20px 0px;
+  
+  &:not(:last-child) {
+    margin-right: 25px;
+  }
 `
 
 // fix type
@@ -113,14 +117,14 @@ const Journey = (props: any) => {
           }
         }}
       >
-        <View id={"bike"}>
+        <View id={DOT.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Title>YOUR BIKE RIDE</Title>
           X kilometers<br></br>
           Y minutes<br></br>
           Grab a jacket, it&apos;s Z°
         </View>
-        <View id={"beat"}>
+        <View id={DOT.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Title>YOUR BEATS</Title>
           <Image src={`${props.playlist[3]}`} alt="playlist image" width={150} height={150} />
@@ -129,7 +133,7 @@ const Journey = (props: any) => {
           </Link>
           {props.playlist[2]}
         </View>
-        <View id={"beer"}>
+        <View id={DOT.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Title>YOUR BEERS</Title>
           {props.destination[0].name}<br></br>
@@ -139,13 +143,13 @@ const Journey = (props: any) => {
 
       <Button modalOpen={modalOpen}>
         <div>
-          <Link href={'#bike'}>
+          <Link href={`#${DOT.BIKES}`}>
             <Bubble selected={selectBubble === DOT.BIKES} />
           </Link>
-          <Link href={'#beat'}>
+          <Link href={`#${DOT.BEATS}`}>
             <Bubble selected={selectBubble === DOT.BEATS} />
           </Link>
-          <Link href={'#beer'}>
+          <Link href={`#${DOT.BEERS}`}>
             <Bubble selected={selectBubble === DOT.BEERS} />
           </Link>
         </div>
