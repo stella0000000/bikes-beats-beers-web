@@ -53,31 +53,29 @@ enum SPEED {
 
 type BeatSearchProps = {
   mood?: string
-  setMood: (mood?: string) => void
   transitTime?: number
-  setRadius: (speed?: number) => void
+  setUserData: (key: string, data?: string | number) => void
 }
 
 const BeatSearch: React.FC<BeatSearchProps> = ({
   mood,
-  setMood,
+  setUserData,
   transitTime,
-  setRadius
 }) => {
   const [speed, setSpeed] = useState<number | undefined>(undefined)
 
   const checkMood = (mood: string, speed: number) => {
-    setMood(mood)
+    setUserData('mood', mood)
     setSpeed(speed)
   }
 
   useEffect(() => {
     const interpolateRadius = (speed: number | undefined) => {
-      if (speed && transitTime) setRadius(speed * transitTime / 60 * 1000)
+      if (speed && transitTime) setUserData('radius', (speed * transitTime / 60 * 1000))
       // mood kmh - transitTime min - radius meter
     }
 
-    setMood(mood)
+    setUserData('mood', mood)
     if (speed && transitTime) interpolateRadius(speed)
   }, [mood, speed, transitTime])
 

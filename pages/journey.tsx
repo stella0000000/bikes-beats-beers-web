@@ -21,6 +21,7 @@ type JourneyProps = {
   playlist: any
   transitTime: any
   bikeRide: any
+  details: any
 }
 
 const Container = styled.div<{modalOpen?: boolean}>`
@@ -62,6 +63,12 @@ const Header = styled.div`
   padding-bottom: 20px;
 `
 
+const Review = styled.div`
+  width: 75vw;
+  font-size: 15px;
+  font-style: italic;
+`
+
 const Buttons = styled.div<{modalOpen?: boolean}>`
   display: flex;
   flex-direction: column;
@@ -92,6 +99,8 @@ const Journey = (props: JourneyProps) => {
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
+
+  console.log(props.details.hours)
 
   return (
     <>
@@ -134,8 +143,8 @@ const Journey = (props: JourneyProps) => {
           {props.destination.vicinity}<br></br>
           {("$").repeat(props.destination.price_level)}<br></br><br></br>
           ✰ {props.destination.rating} ✰<br></br>
-          "yuck!" - stranger on internet<br></br>
-          Closes at: time<br></br>
+          <Review>{props.details.review}</Review><br></br>
+          {/* Closes at: {props.details.hours}<br></br> */}
         </View>
       </Container>
 
@@ -266,12 +275,43 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
 
   const bikeRide = await fetchBikeRide()
 
+  const fetchDetails = async () => {
+    if (typeof destination !== 'string') {
+      try {
+        const response = await client.placeDetails({
+          params: {
+            place_id: destination.place_id!,
+            key: process.env.GOOGLE_KEY!
+          },
+          timeout: 1000,
+        })
+
+        return {
+          hours: response.data.result.opening_hours,
+          url: response.data.result.url,
+          review: response.data.result.reviews![Math.floor(Math.random()*response.data.result.reviews!.length)].text
+        }
+      } catch(err) {
+        return console.log('details', err)
+      }
+    }
+  }
+
+  const details = await fetchDetails()
+
+  console.log(details)
+
+  const fetchWeather = async () => {
+    // https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+  }
+
   return {
     props: {
       destination,
       playlist,
       transitTime,
-      bikeRide
+      bikeRide,
+      details
     }
   }
 }

@@ -72,21 +72,15 @@ const Bubble = styled.span<{selected?: boolean}>`
 const Search = () => {
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
+
+  // custom hook => can return context
   const [userData, setUserData] = useState<{
     locationInput?: string,
     placeID?: string,
     coords?: number[],
-    address?: string,
     transitTime?: number,
     mood?: string,
     radius?: number}>({})
-  const setLocationInput = (locationInput?: string) => { setUserData(prevData => ({ ...prevData, locationInput }))}
-  const setPlaceID = (placeID: string) => { setUserData(prevData => ({ ...prevData, placeID }))}
-  const setCoords = (coords?: number[]) => { setUserData(prevData => ({ ...prevData, coords }))}
-  const setAddress = (address?: string) => { setUserData(prevData => ({ ...prevData, address }))}
-  const setTransitTime = (transitTime?: number) => { setUserData(prevData => ({ ...prevData, transitTime }))}
-  const setMood = (mood?: string) => { setUserData(prevData => ({ ...prevData, mood }))}
-  const setRadius = (radius?: number) => { setUserData(prevData => ({ ...prevData, radius }))}
   const [predictions, setPredictions] = useState<Prediction[] | undefined>(undefined)
   const [located, setLocated] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
@@ -106,8 +100,8 @@ const Search = () => {
     const fetchCoordinates = async () => {
       const response = await fetch(`/api/coordinates/${userData.placeID}`)
       const data = await response.json()
-      setAddress(data.address)
-      setCoords([data.coords.lat, data.coords.lng])
+
+      setUserData(prevData => ({ ...prevData, coords: [data.coords.lat, data.coords.lng] }))
     }
 
     if (userData.placeID) fetchCoordinates()
@@ -121,7 +115,12 @@ const Search = () => {
       !userData.transitTime ||
       !userData.radius
     )
-  }, [userData.locationInput, userData.mood, userData.coords, userData.transitTime, userData.radius])
+  }, [userData.locationInput,
+      userData.mood,
+      userData.coords,
+      userData.transitTime,
+      userData.radius
+  ])
 
   // const updateLocation = (e: any )=> {
   //     setLocation(e?.target?.value)
@@ -146,22 +145,23 @@ const Search = () => {
       >
         <View id={BUBBLES.BIKES}>
           <BikeSearch
-            setTransitTime={setTransitTime}
             predictions={predictions}
             setPredictions={setPredictions}
-            setPlaceID={setPlaceID}
             located={located}
             setLocated={setLocated}
             locationInput={userData.locationInput}
-            setLocationInput={setLocationInput}
+            setUserData={(key: string, data: string | number) =>
+              setUserData(prevData => ({ ...prevData, [`${key}`]: data }))
+            }
           />
         </View>
         <View id={BUBBLES.BEATS}>
           <BeatSearch
             mood={userData.mood}
-            setMood={setMood}
             transitTime={userData.transitTime}
-            setRadius={setRadius}
+            setUserData={(key: string, data?: string | number) =>
+              setUserData(prevData => ({ ...prevData, [`${key}`]: data }))
+            }
           />
         </View>
       </Container>
@@ -176,17 +176,16 @@ const Search = () => {
         </div>
         <Link
           href={
-            {
-              pathname: '/journey',
+            { pathname: '/journey',
               query: {
                 radius: userData.radius,
                 lat: userData.coords?.[0],
                 lng: userData.coords?.[1],
                 mood: userData.mood,
                 transitTime: userData.transitTime,
-                address: userData.address
               }
-            }}>
+            }
+          }>
           <button
             disabled={buttonDisabled}
             onClick={() => setButtonDisabled(true)}
@@ -206,8 +205,10 @@ export default Search
  * journey loading
 
  * useswr
-
- * useStates, custom hook?
  * refactor components
  * ERROR HANDLING => think of the flow
+ * landing page animation - types
+
+ * adjust speeds
+ * map moods for playlist keywords
  */

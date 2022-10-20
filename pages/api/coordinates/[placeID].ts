@@ -19,12 +19,13 @@ export default async function coordinates(
         timeout: 1000,
       })
       
-      console.log(response.data.result)
+      console.log('*************RESPONSE', response)
       res.status(200).json({
         coords: response.data.result.geometry?.location,
         address: response.data.result.formatted_address
       })
-    } catch(err) {
+    } catch(err: any) {
+      console.log('*************ERROR', err.data.error_message)
       res.status(500).json('Uh oh - coordinates failed')
       // res.status(500).json(response.data.error_message)
     }

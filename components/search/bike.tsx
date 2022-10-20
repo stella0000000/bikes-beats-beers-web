@@ -53,25 +53,21 @@ const Min = styled.span`
 `
 
 type BikeSearchProps = {
-  setTransitTime: (transitTime: number) => void
   predictions?: Prediction[]
   setPredictions: (predictions?: Prediction[]) => void
-  setPlaceID: (placeId: string) => void
   located: boolean
   setLocated: (located: boolean) => void
   locationInput?: string
-  setLocationInput: (locationInput: string) => void
+  setUserData: (key: string, data: string | number) => void
 }
 
 const BikeSearch: React.FC<BikeSearchProps> = ({
-  setTransitTime,
   predictions,
   setPredictions,
-  setPlaceID,
   located,
   setLocated,
   locationInput,
-  setLocationInput
+  setUserData
 }) => (
   <>
     <Image src="/bike.png" alt="bike" width={180} height={95} />
@@ -79,7 +75,7 @@ const BikeSearch: React.FC<BikeSearchProps> = ({
         type="text"
         placeholder="Start location"
         onChange={e => {
-            setLocationInput(e.target.value)
+          setUserData('locationInput', e.target.value)
             setLocated(false)
             e.target.value==='' ? setPredictions(undefined) : null
         }}
@@ -87,9 +83,8 @@ const BikeSearch: React.FC<BikeSearchProps> = ({
     />
     <Predictions
         predictions={predictions && Array.isArray(predictions) ? predictions : undefined}
-        setPlaceID={setPlaceID}
         setLocated={setLocated}
-        setLocationInput={setLocationInput}
+        setUserData={setUserData}
         setPredictions={setPredictions}
         located={located}
     />
@@ -99,7 +94,9 @@ const BikeSearch: React.FC<BikeSearchProps> = ({
           <Transit
               type="number"
               placeholder="00"
-              onChange={e => setTransitTime(parseInt(e.target.value))}
+              onChange={e => 
+                setUserData('transitTime', (parseInt(e.target.value)))
+              }
           /> <Min>minutes</Min>
       </TransitTime>
     </Container>

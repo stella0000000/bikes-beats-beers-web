@@ -48,18 +48,16 @@ export type Prediction = {
 }
 
 type PredictionsProps = {
-  setLocationInput: (locationInput: string) => void
+  setUserData: (key: string, data: string | number) => void
   predictions?: Prediction[]
   setPredictions: (predictions?: Prediction[]) => void
-  setPlaceID: (placeId: string) => void
   located: boolean
   setLocated: (located: boolean) => void
 }
 
 const Predictions: React.FC<PredictionsProps> = ({
   predictions,
-  setPlaceID,
-  setLocationInput,
+  setUserData,
   setPredictions,
   setLocated,
   located
@@ -72,10 +70,10 @@ const Predictions: React.FC<PredictionsProps> = ({
               <Prediction
                   key={predictions.indexOf(prediction)}
                   onClick={() => {
-                      setPlaceID(prediction.place_id)
-                      setLocationInput(prediction.description)
-                      setPredictions(undefined)
-                      setLocated(true)
+                    setUserData('locationInput', prediction.description)
+                    setUserData('placeID', prediction.place_id)
+                    setPredictions(undefined)
+                    setLocated(true)
                   }}
               >
                   {prediction.description}
