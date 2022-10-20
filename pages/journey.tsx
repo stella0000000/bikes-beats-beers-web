@@ -4,8 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import Modal from '@components/modal'
 
-import { Client, PlaceData } from '@googlemaps/google-maps-services-js'
-
+import { Client } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
 
 enum DOT {
@@ -23,6 +22,7 @@ const MenuIcon = styled.div<{modalOpen?: boolean}>`
 
 const Container = styled.div<{modalOpen?: boolean}>`
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   display: flex;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
@@ -41,7 +41,7 @@ const View = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  padding-top: 100px;
   transform: none;
   width: 100%;
   left: 0;
@@ -113,14 +113,14 @@ const Journey = (props: any) => {
           }
         }}
       >
-        <View>
+        <View id={"bike"}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Title>YOUR BIKE RIDE</Title>
           X kilometers<br></br>
           Y minutes<br></br>
           Grab a jacket, it&apos;s Z°
         </View>
-        <View>
+        <View id={"beat"}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Title>YOUR BEATS</Title>
           <Image src={`${props.playlist[3]}`} alt="playlist image" width={150} height={150} />
@@ -129,7 +129,7 @@ const Journey = (props: any) => {
           </Link>
           {props.playlist[2]}
         </View>
-        <View>
+        <View id={"beer"}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Title>YOUR BEERS</Title>
           {props.destination[0].name}<br></br>
@@ -139,9 +139,15 @@ const Journey = (props: any) => {
 
       <Button modalOpen={modalOpen}>
         <div>
-          <Bubble selected={selectBubble === DOT.BIKES} />
-          <Bubble selected={selectBubble === DOT.BEATS} />
-          <Bubble selected={selectBubble === DOT.BEERS} />
+          <Link href={'#bike'}>
+            <Bubble selected={selectBubble === DOT.BIKES} />
+          </Link>
+          <Link href={'#beat'}>
+            <Bubble selected={selectBubble === DOT.BEATS} />
+          </Link>
+          <Link href={'#beer'}>
+            <Bubble selected={selectBubble === DOT.BEERS} />
+          </Link>
         </div>
         <Link href='/search'>
           <button>↻ NEW JOURNEY</button>
@@ -209,24 +215,13 @@ export const getServerSideProps = async (ctx: any)=> {
         data.description,
         data.images[0].url
         ]
-
-        console.log(data.images[0].url)
       return results
     } catch(err) {
       return console.log('fetch playlist', err)
     }
   }
 
-  const destination = await fetchBeer()
-  const playlist = await fetchPlaylist()
-
-  // const [destination, playlist] = (await Promise.allSettled([fetchBeer(), fetchPlaylist()])).map(result => (
-  //   result.value
-  // ))
-  // or Promise.all - test - doesn't allow breaking
-
-  // console.log(destination)
-  // console.log(playlist)
+  const [destination, playlist] = await Promise.all([fetchBeer(), fetchPlaylist()])
 
   return {
     props: {

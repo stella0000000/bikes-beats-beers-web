@@ -22,6 +22,7 @@ const MenuIcon = styled.div<{modalOpen?: boolean}>`
 
 const Container = styled.div<{modalOpen?: boolean}>`
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   display: flex;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
@@ -36,11 +37,13 @@ const Container = styled.div<{modalOpen?: boolean}>`
 
 const View = styled.div`
   min-width: 100vw;
+  position: relative;
   scroll-snap-align: start;
+  scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  padding-top: 100px;
   transform: none;
   width: 100%;
   left: 0;
@@ -89,6 +92,7 @@ const Search = () => {
   const [selectBubble, setSelectBubble] = useState<boolean>(true)
   const [playlist, setPlaylist] = useState<string | undefined>(undefined)
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchPredictions = async () => {
@@ -111,8 +115,15 @@ const Search = () => {
   }, [placeID])
 
   useEffect(() => {
-    setButtonDisabled(!location || !coords || !mood || !transitTime || !radius)
-  }, [location, mood, coords, transitTime, radius])
+    setButtonDisabled(
+      !location ||
+      !coords ||
+      !mood ||
+      !transitTime ||
+      !radius ||
+      loading
+    )
+  }, [location, mood, coords, transitTime, radius, loading])
 
   // const updateLocation = (e: any )=> {
   //     setLocation(e?.target?.value)
@@ -136,7 +147,7 @@ const Search = () => {
           setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
         }}
       >
-        <View>
+        <View id={"bike"}>
           <BikeSearch
             setTransitTime={setTransitTime}
             predictions={predictions}
@@ -148,7 +159,7 @@ const Search = () => {
             setLocation={setLocation}
           />
         </View>
-        <View>
+        <View id={"beat"}>
           <BeatSearch
             mood={mood}
             setMood={setMood}
@@ -159,8 +170,12 @@ const Search = () => {
       </Container>
       <Button modalOpen={modalOpen}>
         <div>
-          <Bubble selected={selectBubble} />
-          <Bubble selected={!selectBubble} />
+          <Link href={'#bike'}>
+            <Bubble selected={selectBubble} />
+          </Link>
+          <Link href={'#beat'}>
+            <Bubble selected={!selectBubble} />
+          </Link>
         </div>
         <Link
           href={
@@ -172,8 +187,10 @@ const Search = () => {
                 mood
               }
             }}>
-          <button disabled={buttonDisabled}>
-            FIND BEATS AND BEERS
+          <button
+            disabled={buttonDisabled}
+            onClick={() => setLoading(true)}
+          >FIND BEATS AND BEERS
           </button>
         </Link>
       </Button>
@@ -186,15 +203,16 @@ export default Search
 /**
  * Click prediction - make start location => fetch lat/lon
  * Suggest 1 location (random)
- * map moods to playlist keywords => suggest 1 playlist
 
  * ERROR HANDLING => think of the flow
  * TYPES
  * polish styling (mobile + web)
- * display journey
- * useswr
+ * distance, time, weather
 
- * make dots clickable to switch views
+ * refactor components
+ * useswr
+ * map moods w/ genres? for better, randomized playlist
+
  * many usestates
  * on load - button shifting, etc bug
  */
