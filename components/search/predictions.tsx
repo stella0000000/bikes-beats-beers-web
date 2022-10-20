@@ -37,7 +37,7 @@ const Prediction = styled.div`
   }
 `
 
-export interface Prediction {
+export type Prediction = {
   description: string
   matched_substrings: []
   place_id: string
@@ -47,7 +47,7 @@ export interface Prediction {
   types: string[]
 }
 
-interface Props {
+type PredictionsProps = {
   setLocationInput: (locationInput: string) => void
   predictions?: Prediction[]
   setPredictions: (predictions?: Prediction[]) => void
@@ -56,7 +56,7 @@ interface Props {
   setLocated: (located: boolean) => void
 }
 
-const Predictions: React.FC<Props> = ({
+const Predictions: React.FC<PredictionsProps> = ({
   predictions,
   setPlaceID,
   setLocationInput,

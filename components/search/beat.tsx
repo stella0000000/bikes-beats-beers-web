@@ -51,14 +51,14 @@ enum SPEED {
   WHATEVER = randomSpeed(15, 35)
 }
 
-interface Props {
+type BeatSearchProps = {
   mood?: string
   setMood: (mood?: string) => void
   transitTime?: number
   setRadius: (speed?: number) => void
 }
 
-const BeatSearch: React.FC<Props> = ({
+const BeatSearch: React.FC<BeatSearchProps> = ({
   mood,
   setMood,
   transitTime,

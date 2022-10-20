@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import { useState, useRef } from 'react'
 import styled from 'styled-components'
 import Modal from '@components/modal'
@@ -12,6 +13,12 @@ enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
   BEERS = 'BEERS'
+}
+
+// fix type
+type JourneyProps = {
+  destination: any
+  playlist: any
 }
 
 const Container = styled.div<{modalOpen?: boolean}>`
@@ -53,7 +60,7 @@ const Title = styled.div`
   padding-bottom: 20px;
 `
 
-const Button = styled.div<{modalOpen?: boolean}>`
+const Buttons = styled.div<{modalOpen?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,13 +86,10 @@ const Bubble = styled.span<{selected?: boolean}>`
   }
 `
 
-// fix type
-const Journey = (props: any) => {
+const Journey = (props: JourneyProps) => {
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
-
-  // fix - redirect to search if undeef.
 
   return (
     <>
@@ -129,7 +133,7 @@ const Journey = (props: any) => {
         </View>
       </Container>
 
-      <Button modalOpen={modalOpen}>
+      <Buttons modalOpen={modalOpen}>
         <div>
           <Link href={`#${BUBBLES.BIKES}`}>
             <Bubble selected={selectedBubble === BUBBLES.BIKES} />
@@ -144,16 +148,27 @@ const Journey = (props: any) => {
         <Link href='/search'>
           <button>↻ NEW JOURNEY</button>
         </Link>
-      </Button>
+      </Buttons>
     </>
   )
 }
 
 export default Journey
 
-// fix type
-export const getServerSideProps = async (ctx: any)=> {
+// fix type - async return
+export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promise<
+  GetServerSidePropsResult<JourneyProps>
+> => {
   const { radius, coords, mood } = ctx.query
+
+  if (!radius || !coords || !mood) {
+    return {
+      redirect: {
+        destination: '/search',
+        permanent: false
+      }
+    }
+  }
 
   // move to separate files
   const fetchBeer = async () => {

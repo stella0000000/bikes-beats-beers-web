@@ -43,7 +43,7 @@ const View = styled.div`
   left: 0;
 `
 
-const Button = styled.div<{modalOpen?: boolean}>`
+const Buttons = styled.div<{modalOpen?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,7 +85,6 @@ const Search = () => {
   const setTransitTime = (transitTime?: number) => { setUserData(prevData => ({ ...prevData, transitTime }))}
   const setMood = (mood?: string) => { setUserData(prevData => ({ ...prevData, mood }))}
   const setRadius = (radius?: number) => { setUserData(prevData => ({ ...prevData, radius }))}
-
   const [predictions, setPredictions] = useState<Prediction[] | undefined>(undefined)
   const [located, setLocated] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
@@ -163,7 +162,7 @@ const Search = () => {
           />
         </View>
       </Container>
-      <Button modalOpen={modalOpen}>
+      <Buttons modalOpen={modalOpen}>
         <div>
           <Link href={`#${BUBBLES.BIKES}`}>
             <Bubble selected={selectedBubble === BUBBLES.BIKES}/>
@@ -188,7 +187,7 @@ const Search = () => {
           >FIND BEATS AND BEERS
           </button>
         </Link>
-      </Button>
+      </Buttons>
     </>
   )
 }
@@ -196,14 +195,14 @@ const Search = () => {
 export default Search
 
 /**
- * ERROR HANDLING => think of the flow
  * polish styling (mobile + web)
  * debounce
  * distance, time, weather
+ * journey loading
 
  * useswr
- * map moods w/ genres? for better, randomized playlist
 
- * many usestates
- * on load - button shifting, etc bug
+ * useStates, custom hook?
+ * refactor components
+ * ERROR HANDLING => think of the flow
  */

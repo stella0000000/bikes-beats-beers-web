@@ -52,7 +52,7 @@ const Min = styled.span`
   }
 `
 
-interface Props {
+type BikeSearchProps = {
   setTransitTime: (transitTime: number) => void
   predictions?: Prediction[]
   setPredictions: (predictions?: Prediction[]) => void
@@ -63,7 +63,7 @@ interface Props {
   setLocationInput: (locationInput: string) => void
 }
 
-const BikeSearch: React.FC<Props> = ({
+const BikeSearch: React.FC<BikeSearchProps> = ({
   setTransitTime,
   predictions,
   setPredictions,
