@@ -37,34 +37,45 @@ const Prediction = styled.div`
   }
 `
 
-// fix types
+export interface Prediction {
+  description: string
+  matched_substrings: []
+  place_id: string
+  reference: string
+  structured_formatting: string
+  terms: []
+  types: string[]
+}
+
 interface Props {
-  predictions: any
-  setPlaceID: any
-  setLocation: any
-  setPredictions: any
-  setLocated: any
+  setLocationInput: (locationInput: string) => void
+  predictions?: Prediction[]
+  setPredictions: (predictions?: Prediction[]) => void
+  setPlaceID: (placeId: string) => void
   located: boolean
+  setLocated: (located: boolean) => void
 }
 
 const Predictions: React.FC<Props> = ({
   predictions,
   setPlaceID,
-  setLocation,
+  setLocationInput,
   setPredictions,
   setLocated,
   located
 }) => {
   if (!predictions || located) return null;
 
+  console.log(predictions)
+
   return (
       <PredictionList>
-          {predictions.map((prediction: any) => // fix type
+          {predictions.map((prediction: Prediction) =>
               <Prediction
                   key={predictions.indexOf(prediction)}
                   onClick={() => {
                       setPlaceID(prediction.place_id)
-                      setLocation(prediction.description)
+                      setLocationInput(prediction.description)
                       setPredictions(undefined)
                       setLocated(true)
                   }}

@@ -35,7 +35,7 @@ const Selection = styled.div`
 `
 
 // fix - move 2 util
-const randomMood = (min: number, max: number) => {
+const randomSpeed = (min: number, max: number) => {
   return Math.random() * (max - min) + min
 }
 
@@ -48,15 +48,14 @@ enum MOOD {
 enum SPEED {
   SWEAT = 32,
   RELAX = 17,
-  WHATEVER = randomMood(15, 35)
+  WHATEVER = randomSpeed(15, 35)
 }
 
-// fix types
 interface Props {
-  mood: any
-  setMood: any
-  transitTime: any
-  setRadius: any
+  mood?: string
+  setMood: (mood?: string) => void
+  transitTime?: number
+  setRadius: (speed?: number) => void
 }
 
 const BeatSearch: React.FC<Props> = ({
@@ -74,7 +73,7 @@ const BeatSearch: React.FC<Props> = ({
 
   useEffect(() => {
     const interpolateRadius = (speed: number | undefined) => {
-      if (speed) setRadius(speed * transitTime / 60 * 1000)
+      if (speed && transitTime) setRadius(speed * transitTime / 60 * 1000)
       // mood kmh - transitTime min - radius meter
     }
 

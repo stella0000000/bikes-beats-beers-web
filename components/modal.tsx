@@ -19,10 +19,9 @@ const About = styled.div`
   }
 `
 
-// fix type
 interface Props {
-  modalOpen: any,
-  setModalOpen: any,
+  modalOpen: boolean
+  setModalOpen: (modalOpen: boolean) => void
 }
 
 const Modal: React.FC<Props> = ({

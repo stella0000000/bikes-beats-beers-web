@@ -5,11 +5,10 @@ import styled from 'styled-components'
 import Modal from '@components/modal'
 import BurgerMenu from '@components/burgerMenu'
 
-
 import { Client } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
 
-enum DOT {
+enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
   BEERS = 'BEERS'
@@ -84,7 +83,7 @@ const Bubble = styled.span<{selected?: boolean}>`
 const Journey = (props: any) => {
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [selectedBubble, setSelectedBubble] = useState<string>(DOT.BIKES)
+  const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
   // fix - redirect to search if undeef.
 
@@ -98,22 +97,22 @@ const Journey = (props: any) => {
         onScroll={e => {
           const ele = e.target as HTMLInputElement
           if (ele.scrollLeft < ele.scrollWidth/3 - ele.scrollWidth/6) {
-            setSelectedBubble(DOT.BIKES)
+            setSelectedBubble(BUBBLES.BIKES)
           } else if (ele.scrollLeft > ele.scrollWidth/3) { // fix for center
-            setSelectedBubble(DOT.BEERS)
+            setSelectedBubble(BUBBLES.BEERS)
           } else {
-            setSelectedBubble(DOT.BEATS)
+            setSelectedBubble(BUBBLES.BEATS)
           }
         }}
       >
-        <View id={DOT.BIKES}>
+        <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Title>YOUR BIKE RIDE</Title>
           X kilometers<br></br>
           Y minutes<br></br>
           Grab a jacket, it&apos;s Z°
         </View>
-        <View id={DOT.BEATS}>
+        <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Title>YOUR BEATS</Title>
           <Image src={`${props.playlist[3]}`} alt="playlist image" width={150} height={150} />
@@ -122,7 +121,7 @@ const Journey = (props: any) => {
           </Link>
           {props.playlist[2]}
         </View>
-        <View id={DOT.BEERS}>
+        <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Title>YOUR BEERS</Title>
           {props.destination[0].name}<br></br>
@@ -132,14 +131,14 @@ const Journey = (props: any) => {
 
       <Button modalOpen={modalOpen}>
         <div>
-          <Link href={`#${DOT.BIKES}`}>
-            <Bubble selected={selectedBubble === DOT.BIKES} />
+          <Link href={`#${BUBBLES.BIKES}`}>
+            <Bubble selected={selectedBubble === BUBBLES.BIKES} />
           </Link>
-          <Link href={`#${DOT.BEATS}`}>
-            <Bubble selected={selectedBubble === DOT.BEATS} />
+          <Link href={`#${BUBBLES.BEATS}`}>
+            <Bubble selected={selectedBubble === BUBBLES.BEATS} />
           </Link>
-          <Link href={`#${DOT.BEERS}`}>
-            <Bubble selected={selectedBubble === DOT.BEERS} />
+          <Link href={`#${BUBBLES.BEERS}`}>
+            <Bubble selected={selectedBubble === BUBBLES.BEERS} />
           </Link>
         </div>
         <Link href='/search'>

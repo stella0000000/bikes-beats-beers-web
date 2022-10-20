@@ -1,14 +1,14 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import debounce from 'lodash.debounce'
 import styled from 'styled-components'
+import BurgerMenu from '@components/burgerMenu'
+import Modal from '@components/modal'
 import BikeSearch from '@components/search/bike'
 import BeatSearch from '@components/search/beat'
-import Modal from '@components/modal'
-import BurgerMenu from '@components/burgerMenu'
+import { Prediction } from '@components/search/predictions'
 
-enum DOT {
+enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
   BEERS = 'BEERS'
@@ -78,27 +78,26 @@ const Search = () => {
 
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [location, setLocation] = useState<string>('')
-  const [predictions, setPredictions] = useState<any | undefined>(undefined) // fix type
+  const [locationInput, setLocationInput] = useState<string>('')
+  const [predictions, setPredictions] = useState<Prediction[] | undefined>(undefined)
   const [located, setLocated] = useState<boolean>(false)
   const [placeID, setPlaceID] = useState<string | undefined>(undefined)
   const [coords, setCoords] = useState<number[] | undefined>(undefined)
   const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
   const [mood, setMood] = useState<string | undefined>(undefined)
   const [radius, setRadius] = useState<number | undefined>(undefined)
-  const [selectedBubble, setSelectedBubble] = useState<string>(DOT.BIKES)
+  const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
-  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchPredictions = async () => {
-      const response = await fetch(`/api/predictions/${location}`)
+      const response = await fetch(`/api/predictions/${locationInput}`)
       const data = await response.json()
       setPredictions(data)
     }
 
-    if (location && !located) fetchPredictions();
-  }, [location, located])
+    if (locationInput && !located) fetchPredictions();
+  }, [locationInput, located])
 
   useEffect(() => {
     const fetchCoordinates = async () => {
@@ -112,14 +111,13 @@ const Search = () => {
 
   useEffect(() => {
     setButtonDisabled(
-      !location ||
+      !locationInput ||
       !coords ||
       !mood ||
       !transitTime ||
-      !radius ||
-      loading
+      !radius
     )
-  }, [location, mood, coords, transitTime, radius, loading])
+  }, [locationInput, mood, coords, transitTime, radius])
 
   // const updateLocation = (e: any )=> {
   //     setLocation(e?.target?.value)
@@ -136,13 +134,13 @@ const Search = () => {
         onScroll={e => {
           const ele = e.target as HTMLInputElement
           if (ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4) {
-            setSelectedBubble(DOT.BIKES)
+            setSelectedBubble(BUBBLES.BIKES)
           } else {
-            setSelectedBubble(DOT.BEATS)
+            setSelectedBubble(BUBBLES.BEATS)
           }
         }}
       >
-        <View id={DOT.BIKES}>
+        <View id={BUBBLES.BIKES}>
           <BikeSearch
             setTransitTime={setTransitTime}
             predictions={predictions}
@@ -150,11 +148,11 @@ const Search = () => {
             setPlaceID={setPlaceID}
             located={located}
             setLocated={setLocated}
-            location={location}
-            setLocation={setLocation}
+            locationInput={locationInput}
+            setLocationInput={setLocationInput}
           />
         </View>
-        <View id={DOT.BEATS}>
+        <View id={BUBBLES.BEATS}>
           <BeatSearch
             mood={mood}
             setMood={setMood}
@@ -165,11 +163,11 @@ const Search = () => {
       </Container>
       <Button modalOpen={modalOpen}>
         <div>
-          <Link href={`#${DOT.BIKES}`}>
-            <Bubble selected={selectedBubble === DOT.BIKES}/>
+          <Link href={`#${BUBBLES.BIKES}`}>
+            <Bubble selected={selectedBubble === BUBBLES.BIKES}/>
           </Link>
-          <Link href={`#${DOT.BEATS}`}>
-            <Bubble selected={selectedBubble === DOT.BEATS} />
+          <Link href={`#${BUBBLES.BEATS}`}>
+            <Bubble selected={selectedBubble === BUBBLES.BEATS} />
           </Link>
         </div>
         <Link
@@ -184,7 +182,7 @@ const Search = () => {
             }}>
           <button
             disabled={buttonDisabled}
-            onClick={() => setLoading(true)}
+            onClick={() => setButtonDisabled(true)}
           >FIND BEATS AND BEERS
           </button>
         </Link>
@@ -197,7 +195,6 @@ export default Search
 
 /**
  * ERROR HANDLING => think of the flow
- * TYPES
  * polish styling (mobile + web)
  * distance, time, weather
 

@@ -8,10 +8,9 @@ const MenuIcon = styled.div<{modalOpen?: boolean}>`
   z-index: ${props => props.modalOpen ? '10000' : '100'};
 `
 
-// fix types
 interface Props {
-    modalOpen: any,
-    setModalOpen: any
+    modalOpen: boolean
+    setModalOpen: (modalOpen: boolean) => void
   }
 
 const BurgerMenu: React.FC<Props> = ({

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styled from 'styled-components'
-import Predictions from '@components/search/predictions'
+import Predictions, { Prediction } from '@components/search/predictions'
 
 const Location = styled.input`
   width: 80vw;
@@ -52,17 +52,17 @@ const Min = styled.span`
   }
 `
 
-// fix type
 interface Props {
-  setTransitTime: any,
-  predictions: any,
-  setPredictions: any,
-  setPlaceID: any,
-  located: any,
-  setLocated: any,
-  location: any,
-  setLocation: any,
+  setTransitTime: (transitTime: number) => void
+  predictions?: Prediction[]
+  setPredictions: (predictions?: Prediction[]) => void
+  setPlaceID: (placeId: string) => void
+  located: boolean
+  setLocated: (located: boolean) => void
+  locationInput: string
+  setLocationInput: (locationInput: string) => void
 }
+
 
 const BikeSearch: React.FC<Props> = ({
   setTransitTime,
@@ -71,8 +71,8 @@ const BikeSearch: React.FC<Props> = ({
   setPlaceID,
   located,
   setLocated,
-  location,
-  setLocation
+  locationInput,
+  setLocationInput
 }) => (
   <>
     <Image src="/bike.png" alt="bike" width={180} height={95} />
@@ -80,17 +80,17 @@ const BikeSearch: React.FC<Props> = ({
         type="text"
         placeholder="Start location"
         onChange={e => {
-            setLocation(e.target.value)
+            setLocationInput(e.target.value)
             setLocated(false)
             e.target.value==='' ? setPredictions(undefined) : null
         }}
-        value={location}
+        value={locationInput}
     />
     <Predictions
-        predictions={predictions && Array.isArray(predictions) ? predictions : null}
+        predictions={predictions && Array.isArray(predictions) ? predictions : undefined}
         setPlaceID={setPlaceID}
         setLocated={setLocated}
-        setLocation={setLocation}
+        setLocationInput={setLocationInput}
         setPredictions={setPredictions}
         located={located}
     />
