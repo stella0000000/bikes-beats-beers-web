@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useRef } from 'react'
 import styled from 'styled-components'
 import Modal from '@components/modal'
+import BurgerMenu from '@components/burgerMenu'
+
 
 import { Client } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
@@ -12,13 +14,6 @@ enum DOT {
   BEATS = 'BEATS',
   BEERS = 'BEERS'
 }
-
-const MenuIcon = styled.div<{modalOpen?: boolean}>`
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: ${props => props.modalOpen ? '10000' : '100'};
-`
 
 const Container = styled.div<{modalOpen?: boolean}>`
   scroll-snap-type: x mandatory;
@@ -89,31 +84,25 @@ const Bubble = styled.span<{selected?: boolean}>`
 const Journey = (props: any) => {
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [selectBubble, setSelectBubble] = useState<string>(DOT.BIKES)
+  const [selectedBubble, setSelectedBubble] = useState<string>(DOT.BIKES)
 
   // fix - redirect to search if undeef.
 
   return (
     <>
-      <MenuIcon modalOpen={modalOpen}>
-        {modalOpen
-           ? <Image src="/burgerClose.png" alt="bike" width={55} height={50} onClick={() => setModalOpen(false)}/>
-          : <Image src="/burger.png" alt="bike" width={60} height={45} onClick={() => setModalOpen(true)}/>
-        }
-      </MenuIcon>
+      <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-
       <Container
         ref={views}
         modalOpen={modalOpen}
         onScroll={e => {
           const ele = e.target as HTMLInputElement
           if (ele.scrollLeft < ele.scrollWidth/3 - ele.scrollWidth/6) {
-            setSelectBubble(DOT.BIKES)
+            setSelectedBubble(DOT.BIKES)
           } else if (ele.scrollLeft > ele.scrollWidth/3) { // fix for center
-            setSelectBubble(DOT.BEERS)
+            setSelectedBubble(DOT.BEERS)
           } else {
-            setSelectBubble(DOT.BEATS)
+            setSelectedBubble(DOT.BEATS)
           }
         }}
       >
@@ -144,13 +133,13 @@ const Journey = (props: any) => {
       <Button modalOpen={modalOpen}>
         <div>
           <Link href={`#${DOT.BIKES}`}>
-            <Bubble selected={selectBubble === DOT.BIKES} />
+            <Bubble selected={selectedBubble === DOT.BIKES} />
           </Link>
           <Link href={`#${DOT.BEATS}`}>
-            <Bubble selected={selectBubble === DOT.BEATS} />
+            <Bubble selected={selectedBubble === DOT.BEATS} />
           </Link>
           <Link href={`#${DOT.BEERS}`}>
-            <Bubble selected={selectBubble === DOT.BEERS} />
+            <Bubble selected={selectedBubble === DOT.BEERS} />
           </Link>
         </div>
         <Link href='/search'>

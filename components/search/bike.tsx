@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styled from 'styled-components'
-import Predictions from '@components/predictions'
+import Predictions from '@components/search/predictions'
 
 const Location = styled.input`
   width: 80vw;
@@ -73,40 +73,38 @@ const BikeSearch: React.FC<Props> = ({
   setLocated,
   location,
   setLocation
-}) => {
-  return (
-    <>
-      <Image src="/bike.png" alt="bike" width={180} height={95} />
-      <Location
-          type="text"
-          placeholder="Start location"
-          onChange={e => {
-              setLocation(e.target.value)
-              setLocated(false)
-              e.target.value==='' ? setPredictions(undefined) : null
-          }}
-          value={location}
-      />
-      <Predictions
-          predictions={predictions && Array.isArray(predictions) ? predictions : null}
-          setPlaceID={setPlaceID}
-          setLocated={setLocated}
-          setLocation={setLocation}
-          setPredictions={setPredictions}
-          located={located}
-      />
-      <Container>
-        <Text>Desired transit time</Text>
-        <TransitTime>
-            <Transit
-                type="number"
-                placeholder="00"
-                onChange={e => setTransitTime(parseInt(e.target.value))}
-            /> <Min>minutes</Min>
-        </TransitTime>
-      </Container>
-    </>
-  )
-}
+}) => (
+  <>
+    <Image src="/bike.png" alt="bike" width={180} height={95} />
+    <Location
+        type="text"
+        placeholder="Start location"
+        onChange={e => {
+            setLocation(e.target.value)
+            setLocated(false)
+            e.target.value==='' ? setPredictions(undefined) : null
+        }}
+        value={location}
+    />
+    <Predictions
+        predictions={predictions && Array.isArray(predictions) ? predictions : null}
+        setPlaceID={setPlaceID}
+        setLocated={setLocated}
+        setLocation={setLocation}
+        setPredictions={setPredictions}
+        located={located}
+    />
+    <Container>
+      <Text>Desired transit time</Text>
+      <TransitTime>
+          <Transit
+              type="number"
+              placeholder="00"
+              onChange={e => setTransitTime(parseInt(e.target.value))}
+          /> <Min>minutes</Min>
+      </TransitTime>
+    </Container>
+  </>
+)
 
 export default BikeSearch

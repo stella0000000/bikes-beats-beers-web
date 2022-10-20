@@ -3,22 +3,16 @@ import Link from 'next/link'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import debounce from 'lodash.debounce'
 import styled from 'styled-components'
-import BikeSearch from '@components/bikeSearch'
-import BeatSearch from '@components/beatSearch'
+import BikeSearch from '@components/search/bike'
+import BeatSearch from '@components/search/beat'
 import Modal from '@components/modal'
+import BurgerMenu from '@components/burgerMenu'
 
 enum DOT {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
   BEERS = 'BEERS'
 }
-
-const MenuIcon = styled.div<{modalOpen?: boolean}>`
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: ${props => props.modalOpen ? '10000' : '100'};
-`
 
 const Container = styled.div<{modalOpen?: boolean}>`
   scroll-snap-type: x mandatory;
@@ -92,7 +86,7 @@ const Search = () => {
   const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
   const [mood, setMood] = useState<string | undefined>(undefined)
   const [radius, setRadius] = useState<number | undefined>(undefined)
-  const [selectBubble, setSelectBubble] = useState<boolean>(true)
+  const [selectedBubble, setSelectedBubble] = useState<string>(DOT.BIKES)
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -134,19 +128,18 @@ const Search = () => {
 
   return (
     <>
-      <MenuIcon modalOpen={modalOpen}>
-        {modalOpen
-           ? <Image src="/burgerClose.png" alt="bike" width={55} height={50} onClick={() => setModalOpen(false)}/>
-          : <Image src="/burger.png" alt="bike" width={60} height={45} onClick={() => setModalOpen(true)}/>
-        }
-      </MenuIcon>
+      <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Container
         ref={views}
         modalOpen={modalOpen}
         onScroll={e => {
           const ele = e.target as HTMLInputElement
-          setSelectBubble(ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4)
+          if (ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4) {
+            setSelectedBubble(DOT.BIKES)
+          } else {
+            setSelectedBubble(DOT.BEATS)
+          }
         }}
       >
         <View id={DOT.BIKES}>
@@ -173,10 +166,10 @@ const Search = () => {
       <Button modalOpen={modalOpen}>
         <div>
           <Link href={`#${DOT.BIKES}`}>
-            <Bubble selected={selectBubble} />
+            <Bubble selected={selectedBubble === DOT.BIKES}/>
           </Link>
           <Link href={`#${DOT.BEATS}`}>
-            <Bubble selected={!selectBubble} />
+            <Bubble selected={selectedBubble === DOT.BEATS} />
           </Link>
         </div>
         <Link
@@ -203,9 +196,6 @@ const Search = () => {
 export default Search
 
 /**
- * Click prediction - make start location => fetch lat/lon
- * Suggest 1 location (random)
-
  * ERROR HANDLING => think of the flow
  * TYPES
  * polish styling (mobile + web)
