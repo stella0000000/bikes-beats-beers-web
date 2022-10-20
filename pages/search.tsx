@@ -178,7 +178,8 @@ const Search = () => {
               query: {
                 radius: userData.radius,
                 coords: userData.coords,
-                mood: userData.mood
+                mood: userData.mood,
+                transitTime: userData.transitTime
               }
             }}>
           <button
@@ -197,7 +198,6 @@ export default Search
 /**
  * polish styling (mobile + web)
  * debounce
- * distance, time, weather
  * journey loading
 
  * useswr

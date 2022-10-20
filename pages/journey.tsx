@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import Modal from '@components/modal'
 import BurgerMenu from '@components/burgerMenu'
 
-import { Client } from '@googlemaps/google-maps-services-js'
+import { Client, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
 
 enum BUBBLES {
@@ -19,6 +19,8 @@ enum BUBBLES {
 type JourneyProps = {
   destination: any
   playlist: any
+  transitTime: any
+  coords: any
 }
 
 const Container = styled.div<{modalOpen?: boolean}>`
@@ -55,7 +57,7 @@ const View = styled.div`
   }
 `
 
-const Title = styled.div`
+const Header = styled.div`
   font-size: 40px;
   padding-bottom: 20px;
 `
@@ -91,6 +93,29 @@ const Journey = (props: JourneyProps) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
+  const fetchDistance = async () => {
+    try {
+      const response = await client.distancematrix({
+        params: {
+          origins: [props.coords[0], props.coords[1]],
+          destinations: props.destination.geometry?.location,
+          // mode: TravelMode.bicycling,
+          // units: UnitSystem.metric,
+          // avoid: [TravelRestriction.highways],
+          key: process.env.GOOGLE_KEY!
+        },
+        timeout: 1000
+      })
+      console.log(response)
+    } catch(err) {
+      return console.log('distance', err)
+    }
+  }
+
+  useEffect(() => {
+    fetchDistance()
+  }, [])
+
   return (
     <>
       <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
@@ -111,14 +136,13 @@ const Journey = (props: JourneyProps) => {
       >
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
-          <Title>YOUR BIKE RIDE</Title>
+          <Header>YOUR BIKE RIDE</Header>
           X kilometers<br></br>
-          Y minutes<br></br>
-          Grab a jacket, it&apos;s Z°
+          {props.transitTime} minutes
         </View>
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
-          <Title>YOUR BEATS</Title>
+          <Header>YOUR BEATS</Header>
           <Image src={`${props.playlist[3]}`} alt="playlist image" width={150} height={150} />
           <Link href={`${props.playlist[1]}`}>
             {props.playlist[0]}
@@ -127,9 +151,9 @@ const Journey = (props: JourneyProps) => {
         </View>
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
-          <Title>YOUR BEERS</Title>
-          {props.destination[0].name}<br></br>
-          {props.destination[0].vicinity}
+          <Header>YOUR BEERS</Header>
+          {props.destination.name}<br></br>
+          {props.destination.vicinity}
         </View>
       </Container>
 
@@ -159,7 +183,7 @@ export default Journey
 export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promise<
   GetServerSidePropsResult<JourneyProps>
 > => {
-  const { radius, coords, mood } = ctx.query
+  const { radius, coords, mood, transitTime } = ctx.query
 
   if (!radius || !coords || !mood) {
     return {
@@ -183,11 +207,28 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
         },
         timeout: 1000,
       })
-      return response.data.results
+      // console.log(response.data.results[0].geometry?.location)
+      return response.data.results[0]
     } catch(err) {
       return console.log('beer', err)
     }
   }
+
+  // const fetchDistance = async () => {
+  //   try {
+  //     const response = await client.distancematrix({
+  //       params: {
+  //         origins: [coords[0], coords[1]],
+  //         // destinations: destination.geometry?.location,
+  //         // avoid: ,
+  //         key: process.env.GOOGLE_KEY!
+  //       },
+  //       timeout: 1000
+  //     })
+  //   } catch(err) {
+  //     return console.log('distance', err)
+  //   }
+  // }
 
   const fetchPlaylist = async () => {
     const getAccessToken = async () => {
@@ -233,7 +274,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
   return {
     props: {
       destination,
-      playlist
+      playlist,
+      transitTime,
+      coords
     }
   }
 
