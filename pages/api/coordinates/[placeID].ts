@@ -19,6 +19,7 @@ export default async function coordinates(
         timeout: 1000,
       })
       
+      console.log(response.data.result)
       res.status(200).json({
         coords: response.data.result.geometry?.location,
         address: response.data.result.formatted_address

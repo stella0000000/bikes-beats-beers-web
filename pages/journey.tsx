@@ -93,8 +93,6 @@ const Journey = (props: JourneyProps) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
-  console.log(props.destination)
-
   return (
     <>
       <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
@@ -134,8 +132,10 @@ const Journey = (props: JourneyProps) => {
           <Header>YOUR BEERS</Header>
           {props.destination.name}<br></br>
           {props.destination.vicinity}<br></br>
+          {("$").repeat(props.destination.price_level)}<br></br><br></br>
           ✰ {props.destination.rating} ✰<br></br>
-          {("$").repeat(props.destination.price_level)}<br></br>
+          "yuck!" - stranger on internet<br></br>
+          Closes at: time<br></br>
         </View>
       </Container>
 
