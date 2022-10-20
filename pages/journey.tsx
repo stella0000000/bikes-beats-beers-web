@@ -114,9 +114,9 @@ const Journey = (props: JourneyProps) => {
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Header>YOUR BIKE RIDE</Header>
-          {props.bikeRide.distance}<br></br>
-          {props.bikeRide.duration} - string int coordinate issue<br></br>
-          desired transit time: {props.transitTime} minutes
+          distance: {props.bikeRide.distance}<br></br>
+          estimated: {props.bikeRide.duration}<br></br>
+          desired: {props.transitTime} mins
         </View>
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
@@ -161,7 +161,7 @@ export default Journey
 export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promise<
   GetServerSidePropsResult<JourneyProps>
 > => {
-  const { radius, lat, lng, mood, transitTime, address } = ctx.query
+  const { radius, lat, lng, mood, transitTime } = ctx.query
 
   if (!radius || !lat || !lng || !mood) {
     return {
@@ -198,7 +198,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
       //   timeout: 1000
       // })
       
-      return response.data.results[0]
+      return response.data.results[Math.floor(Math.random()*response.data.results.length)]
     } catch(err) {
       return `beer, ${err}`
     }
@@ -229,7 +229,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
         }
       }).then(r => r.json())
 
-      const data = response.playlists.items[0]
+      const data = response.playlists.items[Math.floor(Math.random()*response.playlists.items.length)]
 
       const results = [
         data.name,
@@ -250,7 +250,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
       if (typeof destination !== 'string') {
         const distance = await client.distancematrix({
           params: {
-            origins: [[parseInt(lat.toString()), parseInt(lng.toString())]],  //fix string, int weird
+            origins: [[parseFloat(lat.toString()), parseFloat(lng.toString())]],
             destinations: [destination.vicinity!],
             mode: TravelMode.bicycling,
             units: UnitSystem.metric,
@@ -258,12 +258,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
           },
           timeout: 1000
         })
-        console.log(distance.data)
         // console.log(distance.data.rows[0].elements[0].distance)
         // console.log(distance.data.rows[0].elements[0].duration)
         return {
           distance: distance.data.rows[0].elements[0].distance.text,
-          duration: distance.data.rows[0].elements[0].duration.text,
+          duration: distance.data.rows[0].elements[0].duration.text
         }
         // return distance
     }
@@ -283,6 +282,4 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
       bikeRide
     }
   }
-
-  // url shareable
 }
