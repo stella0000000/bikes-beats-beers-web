@@ -66,8 +66,6 @@ const Predictions: React.FC<Props> = ({
 }) => {
   if (!predictions || located) return null;
 
-  console.log(predictions)
-
   return (
       <PredictionList>
           {predictions.map((prediction: Prediction) =>

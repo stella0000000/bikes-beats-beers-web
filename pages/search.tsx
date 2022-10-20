@@ -70,54 +70,56 @@ const Bubble = styled.span<{selected?: boolean}>`
 `
 
 const Search = () => {
-  // rename states .. locationValue, apiLocation.. etc
-  // nest user input states into object
-  // const [userData, setUserData] = useState<{}>({})
-  // const setMood = (mood) => { setUserData(prevData => ({ ...prevData, mood })) }
-  // for booleans => single state "state" => string "editing", "located"..
-
   const views = useRef(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [locationInput, setLocationInput] = useState<string>('')
+  const [userData, setUserData] = useState<{
+    locationInput?: string,
+    placeID?: string,
+    coords?: number[],
+    transitTime?: number,
+    mood?: string,
+    radius?: number}>({})
+  const setLocationInput = (locationInput?: string) => { setUserData(prevData => ({ ...prevData, locationInput }))}
+  const setPlaceID = (placeID: string) => { setUserData(prevData => ({ ...prevData, placeID }))}
+  const setCoords = (coords?: number[]) => { setUserData(prevData => ({ ...prevData, coords }))}
+  const setTransitTime = (transitTime?: number) => { setUserData(prevData => ({ ...prevData, transitTime }))}
+  const setMood = (mood?: string) => { setUserData(prevData => ({ ...prevData, mood }))}
+  const setRadius = (radius?: number) => { setUserData(prevData => ({ ...prevData, radius }))}
+
   const [predictions, setPredictions] = useState<Prediction[] | undefined>(undefined)
   const [located, setLocated] = useState<boolean>(false)
-  const [placeID, setPlaceID] = useState<string | undefined>(undefined)
-  const [coords, setCoords] = useState<number[] | undefined>(undefined)
-  const [transitTime, setTransitTime] = useState<number | undefined>(undefined)
-  const [mood, setMood] = useState<string | undefined>(undefined)
-  const [radius, setRadius] = useState<number | undefined>(undefined)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchPredictions = async () => {
-      const response = await fetch(`/api/predictions/${locationInput}`)
+      const response = await fetch(`/api/predictions/${userData.locationInput}`)
       const data = await response.json()
       setPredictions(data)
     }
 
-    if (locationInput && !located) fetchPredictions();
-  }, [locationInput, located])
+    if (userData.locationInput && !located) fetchPredictions();
+  }, [userData.locationInput, located])
 
   useEffect(() => {
     const fetchCoordinates = async () => {
-      const response = await fetch(`/api/coordinates/${placeID}`)
+      const response = await fetch(`/api/coordinates/${userData.placeID}`)
       const data = await response.json()
       setCoords([data.lat, data.lng])
     }
 
-    if (placeID) fetchCoordinates()
-  }, [placeID])
+    if (userData.placeID) fetchCoordinates()
+  }, [userData.placeID])
 
   useEffect(() => {
     setButtonDisabled(
-      !locationInput ||
-      !coords ||
-      !mood ||
-      !transitTime ||
-      !radius
+      !userData.locationInput ||
+      !userData.coords ||
+      !userData.mood ||
+      !userData.transitTime ||
+      !userData.radius
     )
-  }, [locationInput, mood, coords, transitTime, radius])
+  }, [userData.locationInput, userData.mood, userData.coords, userData.transitTime, userData.radius])
 
   // const updateLocation = (e: any )=> {
   //     setLocation(e?.target?.value)
@@ -148,15 +150,15 @@ const Search = () => {
             setPlaceID={setPlaceID}
             located={located}
             setLocated={setLocated}
-            locationInput={locationInput}
+            locationInput={userData.locationInput}
             setLocationInput={setLocationInput}
           />
         </View>
         <View id={BUBBLES.BEATS}>
           <BeatSearch
-            mood={mood}
+            mood={userData.mood}
             setMood={setMood}
-            transitTime={transitTime}
+            transitTime={userData.transitTime}
             setRadius={setRadius}
           />
         </View>
@@ -175,9 +177,9 @@ const Search = () => {
             {
               pathname: '/journey',
               query: {
-                radius,
-                coords,
-                mood
+                radius: userData.radius,
+                coords: userData.coords,
+                mood: userData.mood
               }
             }}>
           <button
@@ -196,9 +198,9 @@ export default Search
 /**
  * ERROR HANDLING => think of the flow
  * polish styling (mobile + web)
+ * debounce
  * distance, time, weather
 
- * refactor components
  * useswr
  * map moods w/ genres? for better, randomized playlist
 

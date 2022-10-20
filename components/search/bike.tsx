@@ -59,10 +59,9 @@ interface Props {
   setPlaceID: (placeId: string) => void
   located: boolean
   setLocated: (located: boolean) => void
-  locationInput: string
+  locationInput?: string
   setLocationInput: (locationInput: string) => void
 }
-
 
 const BikeSearch: React.FC<Props> = ({
   setTransitTime,
@@ -84,7 +83,7 @@ const BikeSearch: React.FC<Props> = ({
             setLocated(false)
             e.target.value==='' ? setPredictions(undefined) : null
         }}
-        value={locationInput}
+        value={locationInput || ''}
     />
     <Predictions
         predictions={predictions && Array.isArray(predictions) ? predictions : undefined}

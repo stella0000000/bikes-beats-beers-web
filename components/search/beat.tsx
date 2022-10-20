@@ -79,7 +79,7 @@ const BeatSearch: React.FC<Props> = ({
 
     setMood(mood)
     if (speed && transitTime) interpolateRadius(speed)
-  }, [setMood, mood, speed, setRadius, transitTime])
+  }, [mood, speed, transitTime])
 
   return (
     <>

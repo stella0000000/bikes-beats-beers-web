@@ -161,7 +161,7 @@ export const getServerSideProps = async (ctx: any)=> {
       const response = await client.placesNearby({
         params: {
             location: [parseFloat(coords[0].toString()), parseFloat(coords[1].toString())],
-            radius: parseFloat(radius.toString()!),    // metres
+            radius: parseFloat(radius.toString()!), // metres
             keyword: 'bar',
             opennow: true,
             key: process.env.GOOGLE_KEY!
