@@ -93,6 +93,8 @@ const Journey = (props: JourneyProps) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
+  console.log(props.destination)
+
   return (
     <>
       <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
@@ -131,7 +133,9 @@ const Journey = (props: JourneyProps) => {
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Header>YOUR BEERS</Header>
           {props.destination.name}<br></br>
-          {props.destination.vicinity}
+          {props.destination.vicinity}<br></br>
+          ✰ {props.destination.rating} ✰<br></br>
+          {("$").repeat(props.destination.price_level)}<br></br>
         </View>
       </Container>
 
@@ -158,12 +162,12 @@ const Journey = (props: JourneyProps) => {
 export default Journey
 
 // fix type - async return
-export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promise<
-  GetServerSidePropsResult<JourneyProps>
+export const getServerSideProps = async (ctx: GetServerSidePropsContext):
+  Promise<GetServerSidePropsResult<JourneyProps>
 > => {
   const { radius, lat, lng, mood, transitTime } = ctx.query
 
-  if (!radius || !lat || !lng || !mood) {
+  if (!radius || !lat || !lng || !mood || !transitTime) {
     return {
       redirect: {
         destination: '/search',
@@ -186,18 +190,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
         timeout: 1000,
       })
 
-      // const distance = await client.distancematrix({
-      //   params: {
-      //     origins: [coords[0], coords[1]],
-      //     destinations: [response.data.results[0].geometry?.location!],
-      //     mode: TravelMode.bicycling,
-      //     units: UnitSystem.metric,
-      //     avoid: [TravelRestriction.highways],
-      //     key: process.env.GOOGLE_KEY!
-      //   },
-      //   timeout: 1000
-      // })
-      
       return response.data.results[Math.floor(Math.random()*response.data.results.length)]
     } catch(err) {
       return `beer, ${err}`
@@ -253,6 +245,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
             origins: [[parseFloat(lat.toString()), parseFloat(lng.toString())]],
             destinations: [destination.vicinity!],
             mode: TravelMode.bicycling,
+            avoid: [TravelRestriction.tolls, TravelRestriction.highways, TravelRestriction.ferries],
             units: UnitSystem.metric,
             key: process.env.GOOGLE_KEY!
           },
@@ -265,8 +258,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext): Promis
           duration: distance.data.rows[0].elements[0].duration.text
         }
         // return distance
-    }
-      return 'hi'
+      }
     } catch(err) {
       return console.log('distance', err)
     }
