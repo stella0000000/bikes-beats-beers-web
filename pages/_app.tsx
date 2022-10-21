@@ -4,8 +4,10 @@ import Head from 'next/head'
 import { useState } from 'react'
 import BurgerMenu from '@components/burgerMenu'
 import Modal from '@components/modal'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
   const [modalOpen, setModalOpen] = useState<boolean>(false)
 
   return (
@@ -16,8 +18,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {router.pathname !== "/" ?
+        (
+          <>
+            <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
+            <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+          </>
+        )
+        : null
+      }
+      
       <Component {...pageProps} modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </>
   )
