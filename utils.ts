@@ -4,9 +4,11 @@ export enum BUBBLES {
     BEERS = 'BEERS',
 }
 
+// import google maps api
 import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
 
+/* ---------- FETCH DESTINATION ---------- */
 export const fetchBeer = async (lat: string | string[], lng: string | string[], radius: string | string[]): Promise<Partial<PlaceData> | string> => {
   console.log(lat, lng, radius)
   try {
@@ -27,7 +29,24 @@ export const fetchBeer = async (lat: string | string[], lng: string | string[], 
   }
 }
 
+const mapMoodToPlaylistKeyword = (mood: string | string[]) => {
+  const relaxing = ['chill indie', 'chill hip hop', 'indie', 'k-indie', 'clouds']
+  const sweating = ['french hip hop', 'techno', 'kpop', 'workout', 'party']
+  const whatevering = ['love', 'boyfriend', 'girlfriend', 'paris', 'justin bieber']
+
+  if (mood === 'RELAX') {
+    return relaxing[Math.floor(Math.random()*relaxing.length)]
+  } else if (mood === 'SWEAT') {
+    return sweating [Math.floor(Math.random()*sweating.length)]
+  } else if (mood === 'WHATEVER') {
+    return  whatevering[Math.floor(Math.random()*whatevering.length)]
+  }
+}
+
+/* ---------- FETCH PLAYLIST ---------- */
 export const fetchPlaylist = async (mood: string | string[]) => {
+  const keyword = mapMoodToPlaylistKeyword(mood)
+
   const getAccessToken = async () => {
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
@@ -45,8 +64,7 @@ export const fetchPlaylist = async (mood: string | string[]) => {
 
   try {
     const accessToken = await getAccessToken()
-
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${mood}&type=playlist&limit=5`, {
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${keyword}&type=playlist&limit=10`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -67,6 +85,7 @@ export const fetchPlaylist = async (mood: string | string[]) => {
 }
 
 // fix type
+/* ---------- FETCH BIKE RIDE DETAILS ---------- */
 export const fetchBikeRide = async (destination: any, lat: string | string[], lng: string | string[]) => {
   try {
     if (typeof destination !== 'string') {
@@ -94,6 +113,7 @@ export const fetchBikeRide = async (destination: any, lat: string | string[], ln
   }
 }
 
+/* ---------- FETCH DESTINATION DETAILS ---------- */
 export const fetchDetails = async (destination: any) => {
   if (typeof destination !== 'string') {
     try {
@@ -116,6 +136,7 @@ export const fetchDetails = async (destination: any) => {
   }
 }
 
+/* ---------- FETCH WEATHER ---------- */
 export const fetchWeather = async (lat: string | string[], lng: string | string[]) => {
   try {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.WEATHER_KEY}`)
