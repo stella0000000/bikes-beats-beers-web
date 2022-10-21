@@ -7,10 +7,7 @@ import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import Bubble from '@components/bubble'
 import Nav from '@components/nav'
-import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist } from 'utils'
-
-import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
-const client = new Client({})
+import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
 
 const Header = styled.div`
   font-size: 40px;
@@ -30,6 +27,7 @@ type ServerSideProps = {
   transitTime: string | string[]
   bikeRide: any
   details: any
+  weather: any
 }
 
 type JourneyProps = {
@@ -37,7 +35,7 @@ type JourneyProps = {
 }
 
 const Journey = ({
-  destination, playlist, transitTime, bikeRide, details, modalOpen
+  destination, playlist, transitTime, bikeRide, details, weather, modalOpen
 }: ServerSideProps & JourneyProps) => {
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
@@ -56,7 +54,9 @@ const Journey = ({
           <Header>YOUR BIKE RIDE</Header>
           distance: {bikeRide.distance}<br></br>
           estimated: {bikeRide.duration}<br></br>
-          desired: {transitTime} mins
+          desired: {transitTime} mins<br></br><br></br>
+
+          {parseInt(weather.temp)}°, {weather.description}
         </View>
 
         <View id={BUBBLES.BEATS}>
@@ -113,12 +113,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
   const [destination, playlist] = await Promise.all([fetchBeer(lat, lng, radius), fetchPlaylist(mood)])
   const bikeRide = await fetchBikeRide(destination, lat, lng)
   const details = await fetchDetails(destination)
-
-  console.log(details)
-
-  const fetchWeather = async () => {
-    // https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-  }
+  const weather = await fetchWeather(lat, lng)
 
   return {
     props: {
@@ -126,7 +121,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
       playlist,
       transitTime,
       bikeRide,
-      details
+      details,
+      weather
     }
   }
 }
