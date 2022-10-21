@@ -9,9 +9,14 @@ import Bubble from '@components/bubble'
 import Nav from '@components/nav'
 import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
 
+const Header = styled.div`
+  font-size: 40px;
+  padding-bottom: 20px;
+`
+
 const Review = styled.div`
-  width: 75vw;
-  font-size: 15px;
+  width: 55vw;
+  font-size: 14px;
   font-style: italic;
 `
 
@@ -34,7 +39,28 @@ const Journey = ({
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
-  console.log(details.hours)
+  const formatDay = (day: number) => {
+    if (day === 0) {
+      return 6
+    } else {
+      return day - 1
+    }
+  }
+  
+  const formatTime = (time: string) => {
+    return `${closingTime.slice(0,2)}:${closingTime.slice(2)}`
+  }
+
+  const formatReview = (review: string) => {
+    if (review.length > 300) {
+      return `${review.slice(0, 300)}...`
+    } else {
+      return review
+    }
+  }
+
+  const day = new Date().getDay()
+  const closingTime = details.hours.periods[formatDay(day)].close.time
 
   return (
     <>
@@ -45,6 +71,7 @@ const Journey = ({
       >
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
+          <Header>YOUR BIKE RIDE</Header>
           distance: {bikeRide.distance}<br></br>
           estimated: {bikeRide.duration}<br></br><br></br>
 
@@ -53,6 +80,7 @@ const Journey = ({
 
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
+          <Header>YOUR BEATS</Header>
           <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
           <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
           {playlist[2]}
@@ -60,12 +88,12 @@ const Journey = ({
 
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
+          <Header>YOUR BEERS</Header>
           <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
           {destination.vicinity}<br></br>
-          {("$").repeat(destination.price_level)}<br></br><br></br>
-          ✰ {destination.rating} ✰<br></br>
-          <Review>{details.review}</Review><br></br>
-          {/* Closes at: {details.hours}<br></br> */}
+          Open til {formatTime(closingTime)}<br></br>
+          ✰ {destination.rating} ✰ / {("$").repeat(destination.price_level)}<br></br><br></br>
+          <Review>&laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet</Review>
         </View>
       </Screen>
 
