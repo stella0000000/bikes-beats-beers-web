@@ -12,13 +12,8 @@ const Wrapper = styled.div`
   transform: none;
   width: 100%;
   left: 0;
-  font-size: 30px;
   color: black;
   text-align: center;
-
-  @media only screen and (min-width: 650px) {
-    font-size: 20px;
-  }
 `
 
 

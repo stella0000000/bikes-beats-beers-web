@@ -5,7 +5,12 @@ const Wrapper = styled.div<{modalOpen?: boolean}>`
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  padding-top: 40px;
   filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
+
+  @media only screen and (min-width: 700px) {
+    padding-top: 10px;
+  }
 `
 
 type Props = {

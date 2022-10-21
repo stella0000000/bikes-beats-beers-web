@@ -10,7 +10,21 @@ import Nav from '@components/nav'
 import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
 
 const Header = styled.div`
-  font-size: 40px;
+  font-size: 30px;
+  padding-bottom: 15px;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 40px;
+  }
+`
+
+const PlaylistLink = styled.div`
+  width: 85vw;
+  font-size: 20px;
+
+  @media only screen and (min-width: 700px) {
+    max-width: 60vw;
+  }
 `
 
 const Content = styled.div`
@@ -21,17 +35,21 @@ const Content = styled.div`
   font-size: 20px;
 
   @media only screen and (min-width: 700px) {
-    font-size: 25px;
+    font-size: 20px;
     padding: 0px;
     margin: 15px;
   }
 `
 
 const Details = styled.div`
-  width: 55vw;
+  width: 80vw;
   font-size: 15px;
   font-style: italic;
-  padding-top: 20px;
+  padding: 10px 0px;
+
+  @media only screen and (min-width: 700px) {
+    width: 55vw;
+  }
 `
 
 // fix type
@@ -53,6 +71,7 @@ const Journey = ({
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
+  console.log(details)
   const formatDay = (day: number) => {
     if (day === 0) {
       return 6
@@ -66,8 +85,8 @@ const Journey = ({
   }
 
   const formatReview = (review: string) => {
-    if (review.length > 300) {
-      return `${review.slice(0, 300)}...`
+    if (review.length > 200) {
+      return `${review.slice(0, 200)}...`
     } else {
       return review
     }
@@ -96,11 +115,13 @@ const Journey = ({
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Header>YOUR BEATS</Header>
-          <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
-          <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
+          <PlaylistLink>
+            <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
+          </PlaylistLink>
           <Details>
             {playlist[2]}
           </Details>
+          <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
         </View>
 
         <View id={BUBBLES.BEERS}>
@@ -110,7 +131,7 @@ const Journey = ({
             <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
             {destination.vicinity}<br></br>
             Open til {formatTime(closingTime)}<br></br>
-            {("$").repeat(destination.price_level)} / ✰ {destination.rating} ✰<br></br>
+            {("$").repeat(destination.price_level)} / ✰ {destination.rating} ✰<br></br><br></br>
             <Details>
               &laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet
             </Details>

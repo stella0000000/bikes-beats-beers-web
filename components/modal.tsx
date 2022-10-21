@@ -9,8 +9,8 @@ const About = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 19px;
-  padding: 50px;
+  font-size: 17px;
+  padding: 25px;
   color: black;
 
   @media only screen and (min-width: 800px) {

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PredictionList = styled.ul`
   position: absolute;
-  top: 280px;
+  top: 260px;
   z-index: 1000;
   padding: 0px 10px 7px 12px;
   background-color: #D3D3D3;
@@ -20,8 +20,9 @@ const Prediction = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding: 5px;
+  padding: 3px 5px;
   cursor: default;
+  text-align: left;
 
   &:not(:last-child) {
     border-bottom: 1px solid white;
