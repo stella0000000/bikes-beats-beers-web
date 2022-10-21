@@ -20,7 +20,6 @@ const Header = styled.div`
 
 const PlaylistLink = styled.div`
   width: 85vw;
-  font-size: 20px;
 
   @media only screen and (min-width: 700px) {
     max-width: 60vw;
@@ -32,7 +31,7 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 15px;
 
   @media only screen and (min-width: 700px) {
     font-size: 20px;
@@ -43,12 +42,13 @@ const Content = styled.div`
 
 const Details = styled.div`
   width: 80vw;
-  font-size: 15px;
+  font-size: 17px;
   font-style: italic;
   padding: 10px 0px;
 
   @media only screen and (min-width: 700px) {
     width: 55vw;
+    font-size: 17px;
   }
 `
 
@@ -85,8 +85,9 @@ const Journey = ({
   }
 
   const formatReview = (review: string) => {
-    if (review.length > 200) {
-      return `${review.slice(0, 200)}...`
+    const maxLength = 150
+    if (review.length > maxLength) {
+      return `${review.slice(0, maxLength)}...`
     } else {
       return review
     }
@@ -115,13 +116,15 @@ const Journey = ({
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Header>YOUR BEATS</Header>
-          <PlaylistLink>
-            <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
-          </PlaylistLink>
-          <Details>
-            {playlist[2]}
-          </Details>
-          <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
+          <Content>
+            <PlaylistLink>
+              <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
+            </PlaylistLink>
+            <Details>
+              {playlist[2]}
+            </Details>
+            <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
+          </Content>
         </View>
 
         <View id={BUBBLES.BEERS}>

@@ -20,7 +20,7 @@ const Prediction = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding: 3px 5px;
+  padding: 2px 5px;
   cursor: default;
   text-align: left;
 
