@@ -9,21 +9,13 @@ import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 
 import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
+import Bubble from '@components/bubble'
 const client = new Client({})
 
 enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
   BEERS = 'BEERS',
-}
-
-// fix type
-type JourneyProps = {
-  destination: any
-  playlist: any
-  transitTime: any
-  bikeRide: any
-  details: any
 }
 
 const Header = styled.div`
@@ -49,19 +41,14 @@ const Buttons = styled.div<{modalOpen?: boolean}>`
   }
 `
 
-const Bubble = styled.span<{selected?: boolean}>`
-  height: 27px;
-  width: 27px;
-  border: 2px solid #BDFF00;
-  background-color: ${props => props.selected ? '#BDFF00' : 'none'};
-  border-radius: 50%;
-  display: inline-block;
-  margin: 0px 0px 20px 0px;
-  
-  &:not(:last-child) {
-    margin-right: 25px;
-  }
-`
+// fix type
+type JourneyProps = {
+  destination: any
+  playlist: any
+  transitTime: any
+  bikeRide: any
+  details: any
+}
 
 const Journey = (props: JourneyProps) => {
   const views = useRef(null)
@@ -109,15 +96,9 @@ const Journey = (props: JourneyProps) => {
 
       <Buttons modalOpen={modalOpen}>
         <div>
-          <Link href={`#${BUBBLES.BIKES}`}>
-            <Bubble selected={selectedBubble === BUBBLES.BIKES} />
-          </Link>
-          <Link href={`#${BUBBLES.BEATS}`}>
-            <Bubble selected={selectedBubble === BUBBLES.BEATS} />
-          </Link>
-          <Link href={`#${BUBBLES.BEERS}`}>
-            <Bubble selected={selectedBubble === BUBBLES.BEERS} />
-          </Link>
+          <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
+          <Bubble bubble={BUBBLES.BEATS}  selected={selectedBubble === BUBBLES.BEATS} />
+          <Bubble bubble={BUBBLES.BEERS} selected={selectedBubble === BUBBLES.BEERS}/>
         </div>
         <Link href='/search'>
           <button>↻ NEW JOURNEY</button>

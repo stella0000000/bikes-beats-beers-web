@@ -9,26 +9,12 @@ import View from '@components/screen/view'
 import BikeSearch from '@components/search/bike'
 import BeatSearch from '@components/search/beat'
 import { Prediction } from '@components/search/predictions'
+import Bubble from '@components/bubble'
 
 enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
 }
-
-const Container = styled.div<{modalOpen?: boolean}>`
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  display: flex;
-  -webkit-overflow-scrolling: touch;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  min-height: 65vh;
-  filter: ${props => props.modalOpen ? 'blur(40px)' : 'none'};
-
-  @media only screen and (min-width: 650px) {
-    min-height: 71vh;
-  }
-`
 
 const Buttons = styled.div<{modalOpen?: boolean}>`
   display: flex;
@@ -39,20 +25,6 @@ const Buttons = styled.div<{modalOpen?: boolean}>`
 
   @media only screen and (min-width: 650px) {
     font-size: 40px;
-  }
-`
-
-const Bubble = styled.span<{selected?: boolean}>`
-  height: 27px;
-  width: 27px;
-  border: 2px solid #BDFF00;
-  background-color: ${props => props.selected ? '#BDFF00' : 'none'};
-  border-radius: 50%;
-  display: inline-block;
-  margin: 0px 0px 20px 0px;
-  
-  &:not(:last-child) {
-    margin-right: 25px;
   }
 `
 
@@ -147,12 +119,8 @@ const Search = () => {
       </Screen>
       <Buttons modalOpen={modalOpen}>
         <div>
-          <Link href={`#${BUBBLES.BIKES}`}>
-            <Bubble selected={selectedBubble === BUBBLES.BIKES}/>
-          </Link>
-          <Link href={`#${BUBBLES.BEATS}`}>
-            <Bubble selected={selectedBubble === BUBBLES.BEATS} />
-          </Link>
+          <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
+          <Bubble bubble={BUBBLES.BEATS}  selected={selectedBubble === BUBBLES.BEATS} />
         </div>
         <Link
           href={
