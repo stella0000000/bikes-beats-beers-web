@@ -7,11 +7,10 @@ import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import Bubble from '@components/bubble'
 import Nav from '@components/nav'
-import { BUBBLES } from 'utils'
+import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist } from 'pages/utils'
 
 import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
-
 
 const Header = styled.div`
   font-size: 40px;
@@ -59,6 +58,7 @@ const Journey = ({
           estimated: {bikeRide.duration}<br></br>
           desired: {transitTime} mins
         </View>
+
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Header>YOUR BEATS</Header>
@@ -68,6 +68,7 @@ const Journey = ({
           </Link>
           {playlist[2]}
         </View>
+
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Header>YOUR BEERS</Header>
@@ -111,119 +112,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
     }
   }
 
-  // move to separate files
-  const fetchBeer = async (): Promise<Partial<PlaceData> | string> => {
-    try {
-      const response = await client.placesNearby({
-        params: {
-            location: [parseFloat(lat.toString()), parseFloat(lng.toString())],
-            radius: parseFloat(radius.toString()!), // metres
-            keyword: 'bar',
-            opennow: true,
-            key: process.env.GOOGLE_KEY!
-        },
-        timeout: 1000,
-      })
-
-      return response.data.results[Math.floor(Math.random()*response.data.results.length)]
-    } catch(err) {
-      return `beer, ${err}`
-    }
-  }
-
-  const fetchPlaylist = async () => {
-    const getAccessToken = async () => {
-      const response = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        headers: {
-          'Authorization': 'Basic ' + (new Buffer(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
-        },
-        body: new URLSearchParams({
-          grant_type: "client_credentials"
-        }),
-      })
-
-      const auth = await response.json()
-      return auth.access_token
-    };
-
-    try {
-      const accessToken = await getAccessToken()
-
-      const response = await fetch(`https://api.spotify.com/v1/search?q=${mood}&type=playlist&limit=5`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      }).then(r => r.json())
-
-      const data = response.playlists.items[Math.floor(Math.random()*response.playlists.items.length)]
-
-      const results = [
-        data.name,
-        data.external_urls.spotify,
-        data.description,
-        data.images[0].url
-        ]
-      return results
-    } catch(err) {
-      return console.log('fetch playlist', err)
-    }
-  }
-
-  const [destination, playlist] = await Promise.all([fetchBeer(), fetchPlaylist()])
-
-  const fetchBikeRide = async () => {
-    try {
-      if (typeof destination !== 'string') {
-        const distance = await client.distancematrix({
-          params: {
-            origins: [[parseFloat(lat.toString()), parseFloat(lng.toString())]],
-            destinations: [destination.vicinity!],
-            mode: TravelMode.bicycling,
-            avoid: [TravelRestriction.tolls, TravelRestriction.highways, TravelRestriction.ferries],
-            units: UnitSystem.metric,
-            key: process.env.GOOGLE_KEY!
-          },
-          timeout: 1000
-        })
-        // console.log(distance.data.rows[0].elements[0].distance)
-        // console.log(distance.data.rows[0].elements[0].duration)
-        return {
-          distance: distance.data.rows[0].elements[0].distance.text,
-          duration: distance.data.rows[0].elements[0].duration.text
-        }
-        // return distance
-      }
-    } catch(err) {
-      return console.log('distance', err)
-    }
-  }
-
-  const bikeRide = await fetchBikeRide()
-
-  const fetchDetails = async () => {
-    if (typeof destination !== 'string') {
-      try {
-        const response = await client.placeDetails({
-          params: {
-            place_id: destination.place_id!,
-            key: process.env.GOOGLE_KEY!
-          },
-          timeout: 1000,
-        })
-
-        return {
-          hours: response.data.result.opening_hours,
-          url: response.data.result.url,
-          review: response.data.result.reviews![Math.floor(Math.random()*response.data.result.reviews!.length)].text
-        }
-      } catch(err) {
-        return console.log('details', err)
-      }
-    }
-  }
-
-  const details = await fetchDetails()
+  const [destination, playlist] = await Promise.all([fetchBeer(lat, lng, radius), fetchPlaylist(mood)])
+  const bikeRide = await fetchBikeRide(destination, lat, lng)
+  const details = await fetchDetails(destination)
 
   console.log(details)
 
