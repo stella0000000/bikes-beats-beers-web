@@ -7,9 +7,10 @@ import BurgerMenu from '@components/burgerMenu'
 import Modal from '@components/modal'
 import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
+import Bubble from '@components/bubble'
+import Nav from '@components/nav'
 
 import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
-import Bubble from '@components/bubble'
 const client = new Client({})
 
 enum BUBBLES {
@@ -29,23 +30,11 @@ const Review = styled.div`
   font-style: italic;
 `
 
-const Buttons = styled.div<{modalOpen?: boolean}>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
-
-  @media only screen and (min-width: 650px) {
-    font-size: 40px;
-  }
-`
-
 // fix type
 type JourneyProps = {
   destination: any
   playlist: any
-  transitTime: any
+  transitTime: string | string[]
   bikeRide: any
   details: any
 }
@@ -94,16 +83,16 @@ const Journey = (props: JourneyProps) => {
         </View>
       </Screen>
 
-      <Buttons modalOpen={modalOpen}>
+      <Nav modalOpen={modalOpen}>
         <div>
           <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
-          <Bubble bubble={BUBBLES.BEATS}  selected={selectedBubble === BUBBLES.BEATS} />
+          <Bubble bubble={BUBBLES.BEATS} selected={selectedBubble === BUBBLES.BEATS} />
           <Bubble bubble={BUBBLES.BEERS} selected={selectedBubble === BUBBLES.BEERS}/>
         </div>
         <Link href='/search'>
           <button>↻ NEW JOURNEY</button>
         </Link>
-      </Buttons>
+      </Nav>
     </>
   )
 }

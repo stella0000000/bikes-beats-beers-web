@@ -10,23 +10,12 @@ import BikeSearch from '@components/search/bike'
 import BeatSearch from '@components/search/beat'
 import { Prediction } from '@components/search/predictions'
 import Bubble from '@components/bubble'
+import Nav from '@components/nav'
 
 enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
 }
-
-const Buttons = styled.div<{modalOpen?: boolean}>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
-
-  @media only screen and (min-width: 650px) {
-    font-size: 40px;
-  }
-`
 
 const Search = () => {
   const views = useRef(null)
@@ -117,10 +106,10 @@ const Search = () => {
           />
         </View>
       </Screen>
-      <Buttons modalOpen={modalOpen}>
+      <Nav modalOpen={modalOpen}>
         <div>
           <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
-          <Bubble bubble={BUBBLES.BEATS}  selected={selectedBubble === BUBBLES.BEATS} />
+          <Bubble bubble={BUBBLES.BEATS} selected={selectedBubble === BUBBLES.BEATS} />
         </div>
         <Link
           href={
@@ -140,7 +129,7 @@ const Search = () => {
           >FIND BEATS AND BEERS
           </button>
         </Link>
-      </Buttons>
+      </Nav>
     </>
   )
 }
