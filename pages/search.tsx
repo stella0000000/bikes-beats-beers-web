@@ -1,9 +1,6 @@
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import debounce from 'lodash.debounce'
-import styled from 'styled-components'
-import BurgerMenu from '@components/burgerMenu'
-import Modal from '@components/modal'
 import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import BikeSearch from '@components/search/bike'
@@ -11,16 +8,14 @@ import BeatSearch from '@components/search/beat'
 import { Prediction } from '@components/search/predictions'
 import Bubble from '@components/bubble'
 import Nav from '@components/nav'
+import { BUBBLES } from 'utils'
 
-enum BUBBLES {
-  BIKES = 'BIKES',
-  BEATS = 'BEATS',
+type Props = {
+  modalOpen: boolean
 }
 
-const Search = () => {
+const Search = ({ modalOpen }: Props) => {
   const views = useRef(null)
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
-
   // custom hook => can return context
   const [userData, setUserData] = useState<{
     locationInput?: string,
@@ -77,8 +72,6 @@ const Search = () => {
 
   return (
     <>
-      <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Screen
         views={views}
         modalOpen={modalOpen}

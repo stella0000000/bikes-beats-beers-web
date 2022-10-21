@@ -1,23 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import styled from 'styled-components'
-import BurgerMenu from '@components/burgerMenu'
-import Modal from '@components/modal'
 import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import Bubble from '@components/bubble'
 import Nav from '@components/nav'
+import { BUBBLES } from 'utils'
 
 import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
 
-enum BUBBLES {
-  BIKES = 'BIKES',
-  BEATS = 'BEATS',
-  BEERS = 'BEERS',
-}
 
 const Header = styled.div`
   font-size: 40px;
@@ -31,7 +25,7 @@ const Review = styled.div`
 `
 
 // fix type
-type JourneyProps = {
+type ServerSideProps = {
   destination: any
   playlist: any
   transitTime: string | string[]
@@ -39,17 +33,20 @@ type JourneyProps = {
   details: any
 }
 
-const Journey = (props: JourneyProps) => {
+type JourneyProps = {
+  modalOpen: boolean
+}
+
+const Journey = ({
+  destination, playlist, transitTime, bikeRide, details, modalOpen
+}: ServerSideProps & JourneyProps) => {
   const views = useRef(null)
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
-  console.log(props.details.hours)
+  console.log(details.hours)
 
   return (
     <>
-      <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Screen
         views={views}
         modalOpen={modalOpen}
@@ -58,28 +55,28 @@ const Journey = (props: JourneyProps) => {
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Header>YOUR BIKE RIDE</Header>
-          distance: {props.bikeRide.distance}<br></br>
-          estimated: {props.bikeRide.duration}<br></br>
-          desired: {props.transitTime} mins
+          distance: {bikeRide.distance}<br></br>
+          estimated: {bikeRide.duration}<br></br>
+          desired: {transitTime} mins
         </View>
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Header>YOUR BEATS</Header>
-          <Image src={`${props.playlist[3]}`} alt="playlist image" width={150} height={150} />
-          <Link href={`${props.playlist[1]}`}>
-            {props.playlist[0]}
+          <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
+          <Link href={`${playlist[1]}`}>
+            {playlist[0]}
           </Link>
-          {props.playlist[2]}
+          {playlist[2]}
         </View>
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Header>YOUR BEERS</Header>
-          {props.destination.name}<br></br>
-          {props.destination.vicinity}<br></br>
-          {("$").repeat(props.destination.price_level)}<br></br><br></br>
-          ✰ {props.destination.rating} ✰<br></br>
-          <Review>{props.details.review}</Review><br></br>
-          {/* Closes at: {props.details.hours}<br></br> */}
+          {destination.name}<br></br>
+          {destination.vicinity}<br></br>
+          {("$").repeat(destination.price_level)}<br></br><br></br>
+          ✰ {destination.rating} ✰<br></br>
+          <Review>{details.review}</Review><br></br>
+          {/* Closes at: {details.hours}<br></br> */}
         </View>
       </Screen>
 
@@ -101,7 +98,7 @@ export default Journey
 
 // fix type - async return
 export const getServerSideProps = async (ctx: GetServerSidePropsContext):
-  Promise<GetServerSidePropsResult<JourneyProps>
+  Promise<GetServerSidePropsResult<ServerSideProps>
 > => {
   const { radius, lat, lng, mood, transitTime } = ctx.query
 
