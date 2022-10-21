@@ -77,6 +77,7 @@ const BeatSearch: React.FC<BeatSearchProps> = ({
 
     setUserData('mood', mood)
     if (speed && transitTime) interpolateRadius(speed)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mood, speed, transitTime])
 
   return (

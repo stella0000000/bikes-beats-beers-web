@@ -7,7 +7,7 @@ import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import Bubble from '@components/bubble'
 import Nav from '@components/nav'
-import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist } from 'pages/utils'
+import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist } from 'utils'
 
 import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
@@ -63,16 +63,14 @@ const Journey = ({
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Header>YOUR BEATS</Header>
           <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
-          <Link href={`${playlist[1]}`}>
-            {playlist[0]}
-          </Link>
+          <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
           {playlist[2]}
         </View>
 
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Header>YOUR BEERS</Header>
-          {destination.name}<br></br>
+          <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
           {destination.vicinity}<br></br>
           {("$").repeat(destination.price_level)}<br></br><br></br>
           ✰ {destination.rating} ✰<br></br>
@@ -101,7 +99,7 @@ export default Journey
 export const getServerSideProps = async (ctx: GetServerSidePropsContext):
   Promise<GetServerSidePropsResult<ServerSideProps>
 > => {
-  const { radius, lat, lng, mood, transitTime } = ctx.query
+  let { radius, lat, lng, mood, transitTime } = ctx.query
 
   if (!radius || !lat || !lng || !mood || !transitTime) {
     return {
