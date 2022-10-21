@@ -4,6 +4,8 @@ import debounce from 'lodash.debounce'
 import styled from 'styled-components'
 import BurgerMenu from '@components/burgerMenu'
 import Modal from '@components/modal'
+import Screen from '@components/screen/screen'
+import View from '@components/screen/view'
 import BikeSearch from '@components/search/bike'
 import BeatSearch from '@components/search/beat'
 import { Prediction } from '@components/search/predictions'
@@ -11,7 +13,6 @@ import { Prediction } from '@components/search/predictions'
 enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
-  BEERS = 'BEERS'
 }
 
 const Container = styled.div<{modalOpen?: boolean}>`
@@ -27,20 +28,6 @@ const Container = styled.div<{modalOpen?: boolean}>`
   @media only screen and (min-width: 650px) {
     min-height: 71vh;
   }
-`
-
-const View = styled.div`
-  min-width: 100vw;
-  position: relative;
-  scroll-snap-align: start;
-  scroll-behavior: smooth;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 70px;
-  transform: none;
-  width: 100%;
-  left: 0;
 `
 
 const Buttons = styled.div<{modalOpen?: boolean}>`
@@ -131,17 +118,10 @@ const Search = () => {
     <>
       <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <Container
-        ref={views}
+      <Screen
+        views={views}
         modalOpen={modalOpen}
-        onScroll={e => {
-          const ele = e.target as HTMLInputElement
-          if (ele.scrollLeft < ele.scrollWidth/2 - ele.scrollWidth/4) {
-            setSelectedBubble(BUBBLES.BIKES)
-          } else {
-            setSelectedBubble(BUBBLES.BEATS)
-          }
-        }}
+        setSelectedBubble={setSelectedBubble}
       >
         <View id={BUBBLES.BIKES}>
           <BikeSearch
@@ -164,7 +144,7 @@ const Search = () => {
             }
           />
         </View>
-      </Container>
+      </Screen>
       <Buttons modalOpen={modalOpen}>
         <div>
           <Link href={`#${BUBBLES.BIKES}`}>
@@ -205,6 +185,7 @@ export default Search
  * journey loading
 
  * useswr
+ * userData custom hook
  * refactor components
  * ERROR HANDLING => think of the flow
  * landing page animation - types

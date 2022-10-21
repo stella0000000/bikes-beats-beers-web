@@ -3,8 +3,10 @@ import Link from 'next/link'
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import Modal from '@components/modal'
 import BurgerMenu from '@components/burgerMenu'
+import Modal from '@components/modal'
+import Screen from '@components/screen/screen'
+import View from '@components/screen/view'
 
 import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
@@ -12,7 +14,7 @@ const client = new Client({})
 enum BUBBLES {
   BIKES = 'BIKES',
   BEATS = 'BEATS',
-  BEERS = 'BEERS'
+  BEERS = 'BEERS',
 }
 
 // fix type
@@ -23,40 +25,6 @@ type JourneyProps = {
   bikeRide: any
   details: any
 }
-
-const Container = styled.div<{modalOpen?: boolean}>`
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  display: flex;
-  -webkit-overflow-scrolling: touch;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  min-height: 65vh;
-  filter: ${props => props.modalOpen ? 'blur(40px)' : 'none'};
-
-  @media only screen and (min-width: 650px) {
-    min-height: 75vh;
-  }
-`
-
-const View = styled.div`
-  min-width: 100vw;
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 100px;
-  transform: none;
-  width: 100%;
-  left: 0;
-  font-size: 30px;
-  color: black;
-  text-align: center;
-
-  @media only screen and (min-width: 650px) {
-    font-size: 20px;
-  }
-`
 
 const Header = styled.div`
   font-size: 40px;
@@ -106,19 +74,10 @@ const Journey = (props: JourneyProps) => {
     <>
       <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <Container
-        ref={views}
+      <Screen
+        views={views}
         modalOpen={modalOpen}
-        onScroll={e => {
-          const ele = e.target as HTMLInputElement
-          if (ele.scrollLeft < ele.scrollWidth/3 - ele.scrollWidth/6) {
-            setSelectedBubble(BUBBLES.BIKES)
-          } else if (ele.scrollLeft > ele.scrollWidth/3) { // fix for center
-            setSelectedBubble(BUBBLES.BEERS)
-          } else {
-            setSelectedBubble(BUBBLES.BEATS)
-          }
-        }}
+        setSelectedBubble={setSelectedBubble}
       >
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
@@ -146,7 +105,7 @@ const Journey = (props: JourneyProps) => {
           <Review>{props.details.review}</Review><br></br>
           {/* Closes at: {props.details.hours}<br></br> */}
         </View>
-      </Container>
+      </Screen>
 
       <Buttons modalOpen={modalOpen}>
         <div>
