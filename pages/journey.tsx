@@ -14,9 +14,9 @@ const Header = styled.div`
   padding-bottom: 20px;
 `
 
-const Review = styled.div`
+const Details = styled.div`
   width: 55vw;
-  font-size: 14px;
+  font-size: 15px;
   font-style: italic;
 `
 
@@ -83,7 +83,9 @@ const Journey = ({
           <Header>YOUR BEATS</Header>
           <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
           <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
-          {playlist[2]}
+          <Details>
+            {playlist[2]}
+          </Details>
         </View>
 
         <View id={BUBBLES.BEERS}>
@@ -92,8 +94,10 @@ const Journey = ({
           <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
           {destination.vicinity}<br></br>
           Open til {formatTime(closingTime)}<br></br>
-          ✰ {destination.rating} ✰ / {("$").repeat(destination.price_level)}<br></br><br></br>
-          <Review>&laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet</Review>
+          {("$").repeat(destination.price_level)} / ✰ {destination.rating} ✰<br></br><br></br>
+          <Details>
+            &laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet
+          </Details>
         </View>
       </Screen>
 
