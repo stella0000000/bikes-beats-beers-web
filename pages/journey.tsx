@@ -9,11 +9,6 @@ import Bubble from '@components/bubble'
 import Nav from '@components/nav'
 import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
 
-const Header = styled.div`
-  font-size: 40px;
-  padding-bottom: 20px;
-`
-
 const Review = styled.div`
   width: 75vw;
   font-size: 15px;
@@ -24,7 +19,6 @@ const Review = styled.div`
 type ServerSideProps = {
   destination: any
   playlist: any
-  transitTime: string | string[]
   bikeRide: any
   details: any
   weather: any
@@ -35,7 +29,7 @@ type JourneyProps = {
 }
 
 const Journey = ({
-  destination, playlist, transitTime, bikeRide, details, weather, modalOpen
+  destination, playlist, bikeRide, details, weather, modalOpen
 }: ServerSideProps & JourneyProps) => {
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
@@ -51,17 +45,14 @@ const Journey = ({
       >
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
-          <Header>YOUR BIKE RIDE</Header>
           distance: {bikeRide.distance}<br></br>
-          estimated: {bikeRide.duration}<br></br>
-          desired: {transitTime} mins<br></br><br></br>
+          estimated: {bikeRide.duration}<br></br><br></br>
 
           {parseInt(weather.temp)}°, {weather.description}
         </View>
 
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
-          <Header>YOUR BEATS</Header>
           <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
           <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
           {playlist[2]}
@@ -69,7 +60,6 @@ const Journey = ({
 
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
-          <Header>YOUR BEERS</Header>
           <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
           {destination.vicinity}<br></br>
           {("$").repeat(destination.price_level)}<br></br><br></br>
@@ -95,13 +85,13 @@ const Journey = ({
 
 export default Journey
 
-// fix type - async return
+// fix type
 export const getServerSideProps = async (ctx: GetServerSidePropsContext):
   Promise<GetServerSidePropsResult<ServerSideProps>
 > => {
-  let { radius, lat, lng, mood, transitTime } = ctx.query
+  let { radius, lat, lng, mood } = ctx.query
 
-  if (!radius || !lat || !lng || !mood || !transitTime) {
+  if (!radius || !lat || !lng || !mood ) {
     return {
       redirect: {
         destination: '/search',
@@ -119,7 +109,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
     props: {
       destination,
       playlist,
-      transitTime,
       bikeRide,
       details,
       weather

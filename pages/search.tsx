@@ -43,8 +43,7 @@ const Search = ({ modalOpen }: Props) => {
     const fetchCoordinates = async () => {
       const response = await fetch(`/api/coordinates/${userData.placeID}`)
       const data = await response.json()
-
-      setUserData(prevData => ({ ...prevData, coords: [data.coords.lat, data.coords.lng] }))
+      setUserData(prevData => ({ ...prevData, coords: [data.lat, data.lng] }))
     }
 
     if (userData.placeID) fetchCoordinates()
@@ -112,7 +111,6 @@ const Search = ({ modalOpen }: Props) => {
                 lat: userData.coords?.[0],
                 lng: userData.coords?.[1],
                 mood: userData.mood,
-                transitTime: userData.transitTime,
               }
             }
           }>
