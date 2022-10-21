@@ -5,12 +5,11 @@ export enum BUBBLES {
 }
 
 // import google maps api
-import { Client, PlaceData, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
+import { Client, PlaceData, PlacesNearbyRanking, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
 const client = new Client({})
 
 /* ---------- FETCH DESTINATION ---------- */
 export const fetchBeer = async (lat: string | string[], lng: string | string[], radius: string | string[]): Promise<Partial<PlaceData> | string> => {
-  console.log(lat, lng, radius)
   try {
     const response = await client.placesNearby({
       params: {
@@ -31,7 +30,7 @@ export const fetchBeer = async (lat: string | string[], lng: string | string[], 
 
 const mapMoodToPlaylistKeyword = (mood: string | string[]) => {
   const relaxing = ['chill indie', 'chill hip hop', 'indie', 'k-indie', 'clouds']
-  const sweating = ['french hip hop', 'techno', 'kpop', 'workout', 'party']
+  const sweating = ['french hip hop', 'techno', 'kpop', 'festive', 'party']
   const whatevering = ['love', 'boyfriend', 'girlfriend', 'paris', 'justin bieber']
 
   if (mood === 'RELAX') {
@@ -64,7 +63,7 @@ export const fetchPlaylist = async (mood: string | string[]) => {
 
   try {
     const accessToken = await getAccessToken()
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${keyword}&type=playlist&limit=10`, {
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${keyword}&type=playlist&limit=20`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }

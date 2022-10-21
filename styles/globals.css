@@ -11,6 +11,7 @@ body {
 a {
   color: #FF5EBE;
   text-decoration: none;
+  font-size: 30px;
 }
 
 a:hover {
@@ -82,12 +83,12 @@ input::placeholder {
 button {
   font-family: 'Space Mono', monospace;
   font-size: 20px;
-  /* color: #BDFF00; */
-  color: black;
-  padding: 7px 15px;
+  color: #BDFF00;
+  /* color: black; */
+  padding: 5px 12px;
   border: none;
   background: #FF5EBE;
-  background-size: 150% 150%;
+
 }
 
 button:disabled {
@@ -96,6 +97,7 @@ button:disabled {
 
 button:hover:not([disabled]) {
   background: #BDFF00;
+  color: #FF5EBE;
 }
 
 ul, li {

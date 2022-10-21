@@ -11,13 +11,27 @@ import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWe
 
 const Header = styled.div`
   font-size: 40px;
-  padding-bottom: 20px;
+`
+
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 20px;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 25px;
+    padding: 0px;
+    margin: 15px;
+  }
 `
 
 const Details = styled.div`
   width: 55vw;
   font-size: 15px;
   font-style: italic;
+  padding-top: 20px;
 `
 
 // fix type
@@ -48,7 +62,7 @@ const Journey = ({
   }
   
   const formatTime = (time: string) => {
-    return `${closingTime.slice(0,2)}:${closingTime.slice(2)}`
+    return `${closingTime?.slice(0,2)}:${closingTime?.slice(2)}`
   }
 
   const formatReview = (review: string) => {
@@ -60,7 +74,7 @@ const Journey = ({
   }
 
   const day = new Date().getDay()
-  const closingTime = details.hours.periods[formatDay(day)].close.time
+  const closingTime = details.hours.periods[formatDay(day)]?.close.time
 
   return (
     <>
@@ -72,17 +86,18 @@ const Journey = ({
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
           <Header>YOUR BIKE RIDE</Header>
-          distance: {bikeRide.distance}<br></br>
-          estimated: {bikeRide.duration}<br></br><br></br>
-
-          {parseInt(weather.temp)}°, {weather.description}
+          <Content>
+            distance: {bikeRide.distance}<br></br>
+            estimated: {bikeRide.duration}<br></br><br></br>
+            {parseInt(weather.temp)}°, {weather.description}
+          </Content>
         </View>
 
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
           <Header>YOUR BEATS</Header>
-          <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
           <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
+          <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
           <Details>
             {playlist[2]}
           </Details>
@@ -91,13 +106,15 @@ const Journey = ({
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
           <Header>YOUR BEERS</Header>
-          <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
-          {destination.vicinity}<br></br>
-          Open til {formatTime(closingTime)}<br></br>
-          {("$").repeat(destination.price_level)} / ✰ {destination.rating} ✰<br></br><br></br>
-          <Details>
-            &laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet
-          </Details>
+          <Content>
+            <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
+            {destination.vicinity}<br></br>
+            Open til {formatTime(closingTime)}<br></br>
+            {("$").repeat(destination.price_level)} / ✰ {destination.rating} ✰<br></br>
+            <Details>
+              &laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet
+            </Details>
+          </Content>
         </View>
       </Screen>
 

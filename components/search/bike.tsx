@@ -94,9 +94,8 @@ const BikeSearch: React.FC<BikeSearchProps> = ({
           <Transit
               type="number"
               placeholder="00"
-              onChange={e => 
-                setUserData('transitTime', (parseInt(e.target.value)))
-              }
+              onChange={e => setUserData('transitTime', (parseInt(e.target.value)))}
+              onWheel={(e) => e.currentTarget.blur()}
           /> <Min>minutes</Min>
       </TransitTime>
     </Container>

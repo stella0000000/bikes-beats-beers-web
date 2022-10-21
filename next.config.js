@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['*'],
+    domains: ['i.scdn.co', 'mosaic.scdn.co'],
   },
 }
 

@@ -23,11 +23,11 @@ const Icons = styled.div`
 `
 const Start = styled.button`
   font-size: 20px;
-  margin-top: 120px;
+  margin-top: 175px;
   cursor: default;
 
   @media only screen and (min-width: 750px) {
-    font-size: 50px;
+    font-size: 45px;
   }
 `
 
@@ -65,9 +65,9 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <Icons>
-          <Image src="/bike.png" alt="bike" width={200} height={110} />
-          <Image src="/beat.png" alt="beat" width={140} height={110} />
-          <Image src="/beer.png" alt="beer" width={125} height={110} />
+          <Image src="/bike.png" alt="bike" width={160} height={90} />
+          <Image src="/beat.png" alt="beat" width={120} height={90} />
+          <Image src="/beer.png" alt="beer" width={100} height={90} />
         </Icons>
         <About>
           ✿.｡ explore your neighborhood ｡.✿
