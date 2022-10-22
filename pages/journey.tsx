@@ -38,7 +38,7 @@ const Details = styled.div`
 
   @media only screen and (min-width: 700px) {
     width: 55vw;
-    font-size: 15px;
+    font-size: 17px;
   }
 `
 
@@ -60,21 +60,7 @@ const Journey = ({
 }: ServerSideProps & JourneyProps) => {
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
-
-  console.log(details)
   
-  const formatDay = (day: number) => {
-    if (day === 0) {
-      return 6
-    } else {
-      return day - 1
-    }
-  }
-  
-  const formatTime = (time: string) => {
-    return `${closingTime?.slice(0,2)}:${closingTime?.slice(2)}`
-  }
-
   const formatPriceAndRating = (price: number, rating: string) => {
     if (price && rating) {
       return ("$").repeat(destination.price_level) + ` / ` + `✰ ${destination.rating} ✰`
@@ -93,9 +79,6 @@ const Journey = ({
       return review
     }
   }
-
-  const day = new Date().getDay()
-  const closingTime = details.hours.periods[formatDay(day)]?.close.time
 
   return (
     <>
@@ -131,7 +114,7 @@ const Journey = ({
           <Content>
             <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
             {destination.vicinity}<br></br>
-            Open til {formatTime(closingTime)}<br></br>
+            {/* Open til {formatTime(closingTime)}<br></br> */}
             {formatPriceAndRating(destination.price_level, destination.rating)}<br></br><br></br>
             <Details>
               &laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet

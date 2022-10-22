@@ -129,13 +129,11 @@ export default Search
 
 /**
  * debounce
- * useswr
+ * ERROR HANDLING
  * userData custom hook
  * 
- * 
+ * useswr
  * refactor components, functinos
- * ERROR HANDLING => think of the flow
- * 
  * 
  * landing page animation
  * 
