@@ -12,10 +12,12 @@ const About = styled.div`
   font-size: 17px;
   padding: 25px;
   color: black;
+  margin-top: -20px;
 
   @media only screen and (min-width: 800px) {
     padding: 200px;
-    font-size: 30px;
+    font-size: 25px;
+    margin-top: 0px;
   }
 `
 
