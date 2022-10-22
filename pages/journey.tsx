@@ -9,20 +9,11 @@ import Bubble from '@components/bubble'
 import Nav from '@components/nav'
 import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
 
-const Header = styled.div`
-  font-size: 30px;
-  padding-bottom: 15px;
-
-  @media only screen and (min-width: 700px) {
-    font-size: 40px;
-  }
-`
-
 const PlaylistLink = styled.div`
   width: 85vw;
 
   @media only screen and (min-width: 700px) {
-    max-width: 60vw;
+    max-width: 50vw;
   }
 `
 
@@ -115,7 +106,7 @@ const Journey = ({
       >
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
-          <Header>YOUR BIKE RIDE</Header>
+          {/* <Header>YOUR BIKE RIDE</Header> */}
           <Content>
             distance: {bikeRide.distance}<br></br>
             estimated: {bikeRide.duration}<br></br><br></br>
@@ -125,7 +116,7 @@ const Journey = ({
 
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
-          <Header>YOUR BEATS</Header>
+          {/* <Header>YOUR BEATS</Header> */}
           <Content>
             <PlaylistLink>
               <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
@@ -139,7 +130,7 @@ const Journey = ({
 
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
-          <Header>YOUR BEERS</Header>
+          {/* <Header>YOUR BEERS</Header> */}
           <Content>
             <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
             {destination.vicinity}<br></br>
