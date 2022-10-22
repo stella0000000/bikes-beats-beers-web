@@ -8,12 +8,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 70px;
+  padding-top: 50px;
   transform: none;
   width: 100%;
   left: 0;
   color: black;
   text-align: center;
+
+  @media only screen and (min-width: 700px) {
+    padding-top: 100px;
+  }
 `
 
 

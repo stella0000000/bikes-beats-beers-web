@@ -23,11 +23,11 @@ const Content = styled.div`
   justify-content: center;
   flex-direction: column;
   font-size: 15px;
+  height: 70%;
 
   @media only screen and (min-width: 700px) {
     font-size: 20px;
     padding: 0px;
-    margin: 15px;
   }
 `
 
@@ -106,17 +106,15 @@ const Journey = ({
       >
         <View id={BUBBLES.BIKES}>
           <Image src="/bike.png" alt="bike" width={180} height={95} />
-          {/* <Header>YOUR BIKE RIDE</Header> */}
           <Content>
-            distance: {bikeRide.distance}<br></br>
-            estimated: {bikeRide.duration}<br></br><br></br>
+            {bikeRide.distance}<br></br>
+            {bikeRide.duration}<br></br><br></br>
             {parseInt(weather.temp)}°, {weather.description}
           </Content>
         </View>
 
         <View id={BUBBLES.BEATS}>
           <Image src="/beat.png" alt="bike" width={110} height={90} />
-          {/* <Header>YOUR BEATS</Header> */}
           <Content>
             <PlaylistLink>
               <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
@@ -130,7 +128,6 @@ const Journey = ({
 
         <View id={BUBBLES.BEERS}>
           <Image src="/beer.png" alt="beer" width={100} height={90} />
-          {/* <Header>YOUR BEERS</Header> */}
           <Content>
             <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
             {destination.vicinity}<br></br>
