@@ -42,13 +42,12 @@ const Content = styled.div`
 
 const Details = styled.div`
   width: 80vw;
-  font-size: 17px;
+  font-size: 15px;
   font-style: italic;
   padding: 10px 0px;
 
   @media only screen and (min-width: 700px) {
     width: 55vw;
-    font-size: 17px;
   }
 `
 
@@ -72,6 +71,7 @@ const Journey = ({
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
 
   console.log(details)
+  
   const formatDay = (day: number) => {
     if (day === 0) {
       return 6
@@ -82,6 +82,16 @@ const Journey = ({
   
   const formatTime = (time: string) => {
     return `${closingTime?.slice(0,2)}:${closingTime?.slice(2)}`
+  }
+
+  const formatPriceAndRating = (price: number, rating: string) => {
+    if (price && rating) {
+      return ("$").repeat(destination.price_level) + ` / ` + `✰ ${destination.rating} ✰`
+    } else if (price) {
+      return ("$").repeat(destination.price_level)
+    } else {
+      return `✰ ${destination.rating} ✰`
+    }
   }
 
   const formatReview = (review: string) => {
@@ -134,7 +144,7 @@ const Journey = ({
             <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
             {destination.vicinity}<br></br>
             Open til {formatTime(closingTime)}<br></br>
-            {("$").repeat(destination.price_level)} / ✰ {destination.rating} ✰<br></br><br></br>
+            {formatPriceAndRating(destination.price_level, destination.rating)}<br></br><br></br>
             <Details>
               &laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet
             </Details>
