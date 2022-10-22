@@ -128,16 +128,15 @@ const Search = ({ modalOpen }: Props) => {
 export default Search
 
 /**
- * polish styling (mobile + web)
  * debounce
- * journey loading
-
  * useswr
  * userData custom hook
- * refactor components
+ * 
+ * 
+ * refactor components, functinos
  * ERROR HANDLING => think of the flow
- * landing page animation - types
-
- * adjust speeds
- * map moods for playlist keywords
+ * 
+ * 
+ * landing page animation
+ * 
  */

@@ -27,18 +27,18 @@ const Content = styled.div`
 
   @media only screen and (min-width: 700px) {
     font-size: 20px;
-    padding: 0px;
   }
 `
 
 const Details = styled.div`
   width: 80vw;
-  font-size: 15px;
+  font-size: 14px;
   font-style: italic;
-  padding: 10px 0px;
+  padding: 20px 0px 7px 0px;
 
   @media only screen and (min-width: 700px) {
     width: 55vw;
+    font-size: 15px;
   }
 `
 

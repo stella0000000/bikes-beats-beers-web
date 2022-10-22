@@ -14,7 +14,7 @@ const Container = styled.div<{modalOpen?: boolean}>`
     -webkit-overflow-scrolling: touch;
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 65vh;
+    height: 60vh;
     filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
 
     @media only screen and (min-width: 650px) {
