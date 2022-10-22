@@ -14,11 +14,11 @@ const Container = styled.div<{modalOpen?: boolean}>`
     -webkit-overflow-scrolling: touch;
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 63vh;
+    height: 65vh;
     filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
 
     @media only screen and (min-width: 650px) {
-        height: 71vh;
+        height: 75vh;
     }
 `
 

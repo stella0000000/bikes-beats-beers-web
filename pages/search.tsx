@@ -130,10 +130,14 @@ export default Search
 /**
  * debounce
  * ERROR HANDLING
+ * useswr
+ * Tailwind
+ * 
  * userData custom hook
  * 
- * useswr
- * refactor components, functinos
+ * search styling - desktop
+ * search styling - mobile checkboxes
+ * refactor components, functions
  * 
  * landing page animation
  * 

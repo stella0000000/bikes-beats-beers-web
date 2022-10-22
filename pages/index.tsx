@@ -70,7 +70,7 @@ const Home: NextPage = () => {
           <Image src="/beer.png" alt="beer" width={100} height={90} />
         </Icons>
         <About>
-          ✿.｡ explore your neighborhood ｡.✿
+          ✿.｡ discover your neighborhood ｡.✿
         </About>
         <Link href="/search">
           <Start>START YOUR JOURNEY</Start>

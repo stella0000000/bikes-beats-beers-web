@@ -5,7 +5,6 @@ const Wrapper = styled.div<{modalOpen?: boolean}>`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  padding-top: 10px;
   
   filter: ${props => props.modalOpen ? 'blur(30px)' : 'none'};
 `

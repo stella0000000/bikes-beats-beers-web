@@ -10,7 +10,7 @@ const PredictionList = styled.ul`
 
   @media only screen and (min-width: 650px) {
     width: 61vw;
-    top: 280px;
+    top: 310px;
     margin: 0px;
   }
 `
