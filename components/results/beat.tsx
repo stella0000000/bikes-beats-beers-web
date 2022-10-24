@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const PlaylistLink = styled.div`
   width: 85vw;
+  padding-bottom: 10px;
 
   @media only screen and (min-width: 700px) {
     max-width: 50vw;

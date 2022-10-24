@@ -1,22 +1,22 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { useState, useRef } from 'react'
-import styled from 'styled-components'
-import Screen from '@components/screen/screen'
-import View from '@components/screen/view'
-import Bubble from '@components/bubble'
-import Nav from '@components/screen/nav'
+import type {
+  GetServerSidePropsContext,
+  GetServerSidePropsResult } from 'next'
+import { useRef, useState } from 'react'
+import { BUBBLES } from '@utils/constants'
 import {
   fetchBeer,
   fetchBikeRide,
   fetchDetails } from '@utils/map'
 import { fetchPlaylist } from '@utils/playlist'
 import { fetchWeather } from '@utils/weather'
-import { BUBBLES } from '../utils/constants'
-import BikeResult from '@components/results/bike'
+import Bubble from '@components/bubble'
 import BeatResult from '@components/results/beat'
 import BeerResult from '@components/results/beer'
+import BikeResult from '@components/results/bike'
+import Nav from '@components/screen/nav'
+import Screen from '@components/screen/screen'
+import View from '@components/screen/view'
 
 // fix type
 type ServerSideProps = {
@@ -32,7 +32,12 @@ type JourneyProps = {
 }
 
 const Journey = ({
-  destination, playlist, bikeRide, details, weather, modalOpen
+  destination,
+  playlist,
+  bikeRide,
+  details,
+  weather,
+  modalOpen
 }: ServerSideProps & JourneyProps) => {
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
