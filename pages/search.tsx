@@ -8,7 +8,7 @@ import BeatSearch from '@components/search/beat'
 import { Prediction } from '@components/predictions/predictions'
 import Bubble from '@components/bubble'
 import Nav from '@components/screen/nav'
-import { BUBBLES } from '../constants'
+import { BUBBLES } from '../utils/constants'
 import styled from 'styled-components'
 
 type Props = {
@@ -138,7 +138,6 @@ export default Search
  * 
  * mobile container shifting
  * search styling - mobile checkboxes
- * refactor journey components
  * 
  * landing page animation
  * 

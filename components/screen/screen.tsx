@@ -1,6 +1,6 @@
 import React, { MutableRefObject } from "react"
 import styled from "styled-components"
-import { BUBBLES } from "../../constants"
+import { BUBBLES } from "../../utils/constants"
 
 const Container = styled.div<{modalOpen?: boolean}>`
     scroll-snap-type: x mandatory;

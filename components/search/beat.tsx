@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
+import { MOOD, SPEED } from '../../utils/constants'
 
 const Moods = styled.div`
   display: flex;
@@ -33,23 +34,6 @@ const Selection = styled.div`
     line-height: 30px;
   }
 `
-
-// fix - move 2 util
-const randomSpeed = (min: number, max: number) => {
-  return Math.random() * (max - min) + min
-}
-
-enum MOOD {
-  SWEAT = 'SWEAT',
-  RELAX = 'RELAX',
-  RANDOM = 'RANDOM'
-}
-
-enum SPEED {
-  SWEAT = 32,
-  RELAX = 17,
-  RANDOM = randomSpeed(15, 35)
-}
 
 type BeatSearchProps = {
   mood?: string
