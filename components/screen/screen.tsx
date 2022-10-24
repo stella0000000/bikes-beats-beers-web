@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { BUBBLES } from "../../constants"
 
 const Container = styled.div<{modalOpen?: boolean}>`
-    position: relative;
+    padding-bottom: 0 !important;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     display: flex;

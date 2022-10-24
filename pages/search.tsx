@@ -5,9 +5,9 @@ import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import BikeSearch from '@components/search/bike'
 import BeatSearch from '@components/search/beat'
-import { Prediction } from '@components/search/predictions'
+import { Prediction } from '@components/predictions/predictions'
 import Bubble from '@components/bubble'
-import Nav from '@components/nav'
+import Nav from '@components/screen/nav'
 import { BUBBLES } from '../constants'
 
 type Props = {
@@ -135,9 +135,9 @@ export default Search
  * 
  * userData custom hook
  * 
- * search styling - desktop
+ * mobile container shifting
  * search styling - mobile checkboxes
- * refactor components, functions
+ * refactor journey components
  * 
  * landing page animation
  * 

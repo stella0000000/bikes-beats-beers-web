@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import Bubble from '@components/bubble'
-import Nav from '@components/nav'
+import Nav from '@components/screen/nav'
 import { fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
 import { BUBBLES } from '../constants'
 
