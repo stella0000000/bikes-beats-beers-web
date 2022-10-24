@@ -14,8 +14,9 @@ const Wrapper = styled.div`
   left: 0;
   color: black;
   text-align: center;
-  top: 0px;
-  border: 1px solid red;
+
+  max-height: 100%;
+  justify: start
 
   @media only screen and (min-width: 700px) {
     padding-top: 100px;
