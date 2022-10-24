@@ -11,11 +11,6 @@ import Nav from '@components/screen/nav'
 import { BUBBLES } from '../constants'
 import styled from 'styled-components'
 
-const SearchWrapper = styled.div`
-  top: 0px;
-  border: 1px solid red;
-`
-
 type Props = {
   modalOpen: boolean
 }
@@ -76,7 +71,7 @@ const Search = ({ modalOpen }: Props) => {
   // const debouncedLocation = debounce(e => updateLocation(e), 200);
 
   return (
-    <SearchWrapper>
+    <>
       <Screen
         views={views}
         modalOpen={modalOpen}
@@ -127,7 +122,7 @@ const Search = ({ modalOpen }: Props) => {
           </button>
         </Link>
       </Nav>
-    </SearchWrapper>
+    </>
   )
 }
 
