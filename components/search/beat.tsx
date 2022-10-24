@@ -42,13 +42,13 @@ const randomSpeed = (min: number, max: number) => {
 enum MOOD {
   SWEAT = 'SWEAT',
   RELAX = 'RELAX',
-  WHATEVER = 'WHATEVER'
+  RANDOM = 'RANDOM'
 }
 
 enum SPEED {
   SWEAT = 32,
   RELAX = 17,
-  WHATEVER = randomSpeed(15, 35)
+  RANDOM = randomSpeed(15, 35)
 }
 
 type BeatSearchProps = {
@@ -100,13 +100,13 @@ const BeatSearch: React.FC<BeatSearchProps> = ({
           />
           <Selection>{`${MOOD.RELAX}`}</Selection>
         </Label>
-        <Label checked={mood === MOOD.WHATEVER}>
+        <Label checked={mood === MOOD.RANDOM}>
           <input
             type="checkbox"
-            checked={mood === MOOD.WHATEVER}
-            onChange={() => checkMood(MOOD.WHATEVER, SPEED.WHATEVER)}
+            checked={mood === MOOD.RANDOM}
+            onChange={() => checkMood(MOOD.RANDOM, SPEED.RANDOM)}
           />
-          <Selection>{`${MOOD.WHATEVER}`}</Selection>
+          <Selection>{`${MOOD.RANDOM}`}</Selection>
         </Label>
       </Moods>
     </>

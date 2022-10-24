@@ -1,20 +1,14 @@
-export enum BUBBLES {
-    BIKES = 'BIKES',
-    BEATS = 'BEATS',
-    BEERS = 'BEERS',
-}
-
-// import google maps api
 import { Client, PlaceData, PlacesNearbyRanking, TravelMode, TravelRestriction, UnitSystem } from '@googlemaps/google-maps-services-js'
-const client = new Client({})
 
-/* ---------- FETCH DESTINATION ---------- */
+const googleMaps = new Client({})
+
+// Fetch destination for a beer
 export const fetchBeer = async (lat: string | string[], lng: string | string[], radius: string | string[]): Promise<Partial<PlaceData> | string> => {
   try {
-    const response = await client.placesNearby({
+    const response = await googleMaps.placesNearby({
       params: {
           location: [parseFloat(lat.toString()), parseFloat(lng.toString())],
-          radius: parseFloat(radius.toString()!), // metres
+          radius: parseFloat(radius.toString()!), // meters
           keyword: 'bar',
           opennow: true,
           key: process.env.GOOGLE_KEY!
@@ -28,21 +22,22 @@ export const fetchBeer = async (lat: string | string[], lng: string | string[], 
   }
 }
 
+// map user's mood to playlist keyword to prevent same results
 const mapMoodToPlaylistKeyword = (mood: string | string[]) => {
   const relaxing = ['chill indie', 'chill hip hop', 'indie', 'k-indie', 'clouds']
   const sweating = ['french hip hop', 'techno', 'kpop', 'festive', 'party']
-  const whatevering = ['love', 'boyfriend', 'girlfriend', 'paris', 'justin bieber']
+  const randoming = ['love', 'boyfriend', 'girlfriend', 'paris', 'justin bieber']
 
   if (mood === 'RELAX') {
     return relaxing[Math.floor(Math.random()*relaxing.length)]
   } else if (mood === 'SWEAT') {
     return sweating [Math.floor(Math.random()*sweating.length)]
-  } else if (mood === 'WHATEVER') {
-    return  whatevering[Math.floor(Math.random()*whatevering.length)]
+  } else if (mood === `BOTH`) {
+    return  randoming[Math.floor(Math.random()*randoming.length)]
   }
 }
 
-/* ---------- FETCH PLAYLIST ---------- */
+// Fetch playlist
 export const fetchPlaylist = async (mood: string | string[]) => {
   const keyword = mapMoodToPlaylistKeyword(mood)
 
@@ -84,11 +79,11 @@ export const fetchPlaylist = async (mood: string | string[]) => {
 }
 
 // fix type
-/* ---------- FETCH BIKE RIDE DETAILS ---------- */
+// Fetch bike ride details
 export const fetchBikeRide = async (destination: any, lat: string | string[], lng: string | string[]) => {
   try {
     if (typeof destination !== 'string') {
-      const distance = await client.distancematrix({
+      const distance = await googleMaps.distancematrix({
         params: {
           origins: [[parseFloat(lat.toString()), parseFloat(lng.toString())]],
           destinations: [destination.vicinity!],
@@ -112,11 +107,11 @@ export const fetchBikeRide = async (destination: any, lat: string | string[], ln
   }
 }
 
-/* ---------- FETCH DESTINATION DETAILS ---------- */
+// Fetch destination details
 export const fetchDetails = async (destination: any) => {
   if (typeof destination !== 'string') {
     try {
-      const response = await client.placeDetails({
+      const response = await googleMaps.placeDetails({
         params: {
           place_id: destination.place_id!,
           key: process.env.GOOGLE_KEY!
@@ -135,10 +130,10 @@ export const fetchDetails = async (destination: any) => {
   }
 }
 
-/* ---------- FETCH WEATHER ---------- */
+// Fetch weather
 export const fetchWeather = async (lat: string | string[], lng: string | string[]) => {
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.WEATHER_KEY}`)
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.OPEN_WEATHER_MAP_KEY}`)
     const data = await response.json()
     return {
       temp: data.main.temp - 273.15,

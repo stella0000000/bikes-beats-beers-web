@@ -19,7 +19,6 @@ const Icons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-left: 10px;
 `
 const Start = styled.button`
   font-size: 20px;

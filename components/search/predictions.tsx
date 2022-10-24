@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 const PredictionList = styled.ul`
   position: absolute;
-  top: 260px;
+  top: 270px;
   z-index: 1000;
   padding: 0px 10px 7px 12px;
-  background-color: #D3D3D3;
+  background-color: #c6c6c6;
   width: 85vw;
 
   @media only screen and (min-width: 650px) {

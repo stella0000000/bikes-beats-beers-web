@@ -55,7 +55,7 @@ input[type=checkbox]:before {
    width: 30px;
    height: 30px;
    border: 2px solid #000;
-   background-color: #D3D3D3;
+   background-color: #c6c6c6;
    box-shadow: -4px 4px #BDFF00;
 }
 
@@ -127,7 +127,7 @@ ul, li {
   }
   body {
     color: #777777;
-    background: #D3D3D3;
+    background: #c6c6c6;
     position: relative;
   }
 }

@@ -1,11 +1,6 @@
 import React, { MutableRefObject } from "react"
 import styled from "styled-components"
-
-enum BUBBLES {
-    BIKES = 'BIKES',
-    BEATS = 'BEATS',
-    BEERS = 'BEERS',
-}
+import { BUBBLES } from "../../constants"
 
 const Container = styled.div<{modalOpen?: boolean}>`
     scroll-snap-type: x mandatory;

@@ -7,7 +7,8 @@ import Screen from '@components/screen/screen'
 import View from '@components/screen/view'
 import Bubble from '@components/bubble'
 import Nav from '@components/nav'
-import { BUBBLES, fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
+import { fetchBeer, fetchBikeRide, fetchDetails, fetchPlaylist, fetchWeather } from 'utils'
+import { BUBBLES } from '../constants'
 
 const PlaylistLink = styled.div`
   width: 85vw;

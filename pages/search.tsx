@@ -8,7 +8,7 @@ import BeatSearch from '@components/search/beat'
 import { Prediction } from '@components/search/predictions'
 import Bubble from '@components/bubble'
 import Nav from '@components/nav'
-import { BUBBLES } from 'utils'
+import { BUBBLES } from '../constants'
 
 type Props = {
   modalOpen: boolean

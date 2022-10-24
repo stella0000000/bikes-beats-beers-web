@@ -37,7 +37,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <About>
       <span>Let&apos;s keep ourselves and the atmosphere healthy. Explore your neighborhood by biking to a beer (just one) while listening to beats.</span><br></br><br></br>
-      <span>Share your location, desired transit time, and cycling mood. We&apos;ll suggest a playlist that suits your mood and surprise you with a destination to meet your friend 😘. Please direct any <s>complaints</s> praise to stella.choi@hyperisland.se.</span><br></br><br></br>
+      <span>Share your location, desired transit time, and cycling mood. We&apos;ll suggest a playlist that suits your mood and surprise you with a destination to meet a friend. Report <s>bugs</s> praise to stella.choi@hyperisland.se.</span><br></br><br></br>
       Use responsibly.
     </About>
   )
