@@ -126,19 +126,18 @@ const Search = ({ modalOpen }: Props) => {
   )
 }
 
+// check onfocus - check scroll Y offset
+// or on click.. and then on blur => return to original position
+
 export default Search
 
 /**
  * debounce
  * ERROR HANDLING
- * useswr
- * Tailwind
  * 
  * userData custom hook
  * 
  * mobile container shifting
- * search styling - mobile checkboxes
- * 
- * landing page animation
+ * mobile checkboxes
  * 
  */
