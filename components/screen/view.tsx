@@ -20,18 +20,18 @@ const Wrapper = styled.div`
   }
 `
 
-
 type Props = {
   id: string,
   children: JSX.Element | JSX.Element[]
 }
 
-const View = ({ id, children}: Props) => {
+export const View = ({
+  id,
+  children
+}: Props) => {
   return (
     <Wrapper id={id}>
       {children}
     </Wrapper>
   )
 }
-
-export default View

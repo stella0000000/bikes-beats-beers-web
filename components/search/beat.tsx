@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { MOOD, SPEED } from '../../utils/constants'
+import { MOOD, SPEED } from '@utils/constants'
 
 const Moods = styled.div`
   display: flex;
@@ -12,6 +12,8 @@ const Moods = styled.div`
 const Label = styled.label<{checked?: boolean}>`
   margin: 10px;
   font-size: 30px;
+  display: flex;
+  align-items: center;
   color: ${props => props.checked ? '#000' : 'inherit'};
   display: flex;
 
@@ -27,11 +29,11 @@ const Label = styled.label<{checked?: boolean}>`
 `
 
 const Selection = styled.div`
-  margin-left: 40px;
-  line-height: 40px;
+  margin-left: 20px;
+  line-height: 30px;
 
   @media only screen and (min-width: 700px) {
-    line-height: 30px;
+    line-height: 40px;
   }
 `
 
@@ -41,10 +43,10 @@ type BeatSearchProps = {
   setUserData: (key: string, data?: string | number) => void
 }
 
-const BeatSearch: React.FC<BeatSearchProps> = ({
+export const BeatSearch: React.FC<BeatSearchProps> = ({
   mood,
-  setUserData,
   transitTime,
+  setUserData,
 }) => {
   const [speed, setSpeed] = useState<number | undefined>(undefined)
 
@@ -54,7 +56,7 @@ const BeatSearch: React.FC<BeatSearchProps> = ({
   }
 
   useEffect(() => {
-    const interpolateRadius = (speed: number | undefined) => {
+    const interpolateRadius = (speed: number) => {
       if (speed && transitTime) setUserData('radius', (speed * transitTime / 60 * 1000))
       // mood kmh - transitTime min - radius meter
     }
@@ -96,5 +98,3 @@ const BeatSearch: React.FC<BeatSearchProps> = ({
     </>
   )
 }
-
-export default BeatSearch

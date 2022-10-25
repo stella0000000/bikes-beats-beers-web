@@ -13,28 +13,26 @@ type BurgerMenuProps = {
     setModalOpen: (modalOpen: boolean) => void
   }
 
-const BurgerMenu: React.FC<BurgerMenuProps> = ({
-    modalOpen,
-    setModalOpen
-  }) => (
-    <MenuIcon modalOpen={modalOpen}>
-        {modalOpen
-            ? <Image
-                src="/burgerClose.png"
-                alt="bike"
-                width={55}
-                height={50}
-                onClick={() => setModalOpen(false)}
-            />
-            : <Image
-                src="/burger.png"
-                alt="bike"
-                width={60}
-                height={45}
-                onClick={() => setModalOpen(true)}
-            />
-        }
-      </MenuIcon>
-  )
-
-export default BurgerMenu
+export const BurgerMenu: React.FC<BurgerMenuProps> = ({
+  modalOpen,
+  setModalOpen
+}) => (
+  <MenuIcon modalOpen={modalOpen}>
+      {modalOpen
+          ? <Image
+              src="/burgerClose.png"
+              alt="bike"
+              width={55}
+              height={50}
+              onClick={() => setModalOpen(false)}
+          />
+          : <Image
+              src="/burger.png"
+              alt="bike"
+              width={60}
+              height={45}
+              onClick={() => setModalOpen(true)}
+          />
+      }
+    </MenuIcon>
+)

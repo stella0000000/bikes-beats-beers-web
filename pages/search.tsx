@@ -1,15 +1,14 @@
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import debounce from 'lodash.debounce'
-import Screen from '@components/screen/screen'
-import View from '@components/screen/view'
-import BikeSearch from '@components/search/bike'
-import BeatSearch from '@components/search/beat'
+import { Screen } from '@components/screen/screen'
+import { View } from '@components/screen/view'
+import { Bubble } from '@components/bubble'
+import { Nav } from '@components/screen/nav'
+import { BikeSearch } from '@components/search/bike'
 import { Prediction } from '@components/predictions/predictions'
-import Bubble from '@components/bubble'
-import Nav from '@components/screen/nav'
-import { BUBBLES } from '../utils/constants'
-import styled from 'styled-components'
+import { BeatSearch } from '@components/search/beat'
+import { BUBBLES } from '@utils/constants'
 
 type Props = {
   modalOpen: boolean
@@ -126,18 +125,15 @@ const Search = ({ modalOpen }: Props) => {
   )
 }
 
-// check onfocus - check scroll Y offset
-// or on click.. and then on blur => return to original position
-
 export default Search
 
 /**
- * debounce
  * ERROR HANDLING
+ * check types
  * 
+ * debounce
  * userData custom hook
  * 
  * mobile container shifting
- * mobile checkboxes
  * 
  */

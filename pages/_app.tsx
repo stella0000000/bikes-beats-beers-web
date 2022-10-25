@@ -1,10 +1,10 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { useState } from 'react'
-import BurgerMenu from '@components/burgerMenu'
-import Modal from '@components/modal'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import '@styles/globals.css'
+import { BurgerMenu } from '@components/burgerMenu'
+import { Modal } from '@components/modal'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()

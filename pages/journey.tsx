@@ -10,13 +10,13 @@ import {
   fetchDetails } from '@utils/map'
 import { fetchPlaylist } from '@utils/playlist'
 import { fetchWeather } from '@utils/weather'
-import Bubble from '@components/bubble'
-import BeatResult from '@components/results/beat'
-import BeerResult from '@components/results/beer'
-import BikeResult from '@components/results/bike'
-import Nav from '@components/screen/nav'
-import Screen from '@components/screen/screen'
-import View from '@components/screen/view'
+import { Bubble } from '@components/bubble'
+import { BeatResult } from '@components/results/beat'
+import { BeerResult } from '@components/results/beer'
+import { BikeResult } from '@components/results/bike'
+import { Nav } from '@components/screen/nav'
+import { Screen } from '@components/screen/screen'
+import { View } from '@components/screen/view'
 
 // fix type
 type ServerSideProps = {

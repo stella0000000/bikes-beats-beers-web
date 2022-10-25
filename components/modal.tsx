@@ -27,7 +27,7 @@ type ModalProps = {
   setModalOpen: (modalOpen: boolean) => void
 }
 
-const Modal: React.FC<ModalProps> = ({
+export const Modal: React.FC<ModalProps> = ({
   modalOpen,
   setModalOpen
 }) => {
@@ -42,5 +42,3 @@ const Modal: React.FC<ModalProps> = ({
     </About>
   )
 }
-
-export default Modal

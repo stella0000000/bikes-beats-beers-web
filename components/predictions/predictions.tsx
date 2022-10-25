@@ -56,7 +56,7 @@ type PredictionsProps = {
   setLocated: (located: boolean) => void
 }
 
-const Predictions: React.FC<PredictionsProps> = ({
+export const Predictions: React.FC<PredictionsProps> = ({
   predictions,
   setUserData,
   setPredictions,
@@ -83,5 +83,3 @@ const Predictions: React.FC<PredictionsProps> = ({
       </PredictionList>
   )
 }
-
-export default Predictions

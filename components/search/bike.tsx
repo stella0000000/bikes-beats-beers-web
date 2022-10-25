@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styled from 'styled-components'
-import Predictions, { Prediction } from '@components/predictions/predictions'
+import { Predictions, Prediction } from '@components/predictions/predictions'
 
 const Location = styled.input`
   width: 80vw;
@@ -62,7 +62,7 @@ type BikeSearchProps = {
   setUserData: (key: string, data: string | number) => void
 }
 
-const BikeSearch: React.FC<BikeSearchProps> = ({
+export const BikeSearch: React.FC<BikeSearchProps> = ({
   predictions,
   setPredictions,
   located,
@@ -102,5 +102,3 @@ const BikeSearch: React.FC<BikeSearchProps> = ({
     </Container>
   </>
 )
-
-export default BikeSearch

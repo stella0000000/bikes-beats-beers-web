@@ -20,12 +20,10 @@ type Props = {
     selected: boolean
 }
 
-const Bubble = ({ bubble, selected }: Props) => {
+export const Bubble = ({ bubble, selected }: Props) => {
     return (
         <Link href={`#${bubble}`}>
             <Circle isSelected={selected} />
         </Link>
     )
 }
-
-export default Bubble

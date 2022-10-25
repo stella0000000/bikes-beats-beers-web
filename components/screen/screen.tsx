@@ -24,7 +24,11 @@ type Props = {
     setSelectedBubble: (bubble: string) => void
 }
 
-const Screen = ({ children, modalOpen, views, setSelectedBubble
+export const Screen = ({
+    children,
+    modalOpen,
+    views,
+    setSelectedBubble
 }: Props) => {
     const numChildren = children.length
 
@@ -57,5 +61,3 @@ const Screen = ({ children, modalOpen, views, setSelectedBubble
         </Container>
     )
 }
-
-export default Screen

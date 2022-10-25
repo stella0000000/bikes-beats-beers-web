@@ -23,7 +23,7 @@ const Content = styled.div`
 `
 
 // fix type
-const BeatResult = ({ playlist }: any) => {
+export const BeatResult = ({ playlist }: any) => {
     return (
         <>
         <Image src="/beat.png" alt="bike" width={110} height={90} />
@@ -37,5 +37,3 @@ const BeatResult = ({ playlist }: any) => {
     )
     
 }
-
-export default BeatResult

@@ -14,12 +14,10 @@ type Props = {
     modalOpen: boolean
 }
 
-const Nav = ({ children, modalOpen }: Props) => {
+export const Nav = ({ children, modalOpen }: Props) => {
     return (
         <Wrapper modalOpen={modalOpen}>
             {children}
         </Wrapper>
     )
 }
-
-export default Nav

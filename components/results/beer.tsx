@@ -27,7 +27,10 @@ const Details = styled.div`
 `
 
 // fix type
-const BeerResult = ({ destination, details }: any) => {
+export const BeerResult = ({
+  destination,
+  details
+}: any) => {
     const formatPriceAndRating = (price: number, rating: string) => {
         if (price && rating) {
           return ("$").repeat(destination.price_level) + ` / ` + `✰ ${destination.rating} ✰`
@@ -62,5 +65,3 @@ const BeerResult = ({ destination, details }: any) => {
         </>
     )
 }
-
-export default BeerResult

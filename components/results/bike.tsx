@@ -15,7 +15,7 @@ const Content = styled.div`
 `
 
 // fix type
-const BikeResult = ({ bikeRide, weather }: any) => {
+export const BikeResult = ({ bikeRide, weather }: any) => {
     return (
         <>
             <Image src="/bike.png" alt="bike" width={180} height={95} />
@@ -27,5 +27,3 @@ const BikeResult = ({ bikeRide, weather }: any) => {
         </>
     )
 }
-
-export default BikeResult
