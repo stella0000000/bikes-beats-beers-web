@@ -100,8 +100,8 @@ const Search = ({ modalOpen }: Props) => {
       </Screen>
       <Nav modalOpen={modalOpen}>
         <div>
-          <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble===BUBBLES.BIKES}/>
-          <Bubble bubble={BUBBLES.BEATS} selected={selectedBubble===BUBBLES.BEATS} />
+          <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
+          <Bubble bubble={BUBBLES.BEATS} selected={selectedBubble === BUBBLES.BEATS} />
         </div>
         <Link
           href={
