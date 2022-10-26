@@ -1,6 +1,6 @@
 ## Let's keep ourselves and the atmosphere healthy.
 Explore your neighborhood by biking to a beer (just one) while listening to beats.<br><br>
-Share your location, desired transit time, and cycling mood. We'll suggest a playlist that suits your mood and surprise you with a destination to meet a friend.
+Share your location, desired transit time, and cycling mood. You'll be surprised with a playlist that suits your mood and a destination to meet a friend.
 
 ## Optimizations and considerations
 - `useSWR`
