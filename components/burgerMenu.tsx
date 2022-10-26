@@ -22,15 +22,15 @@ export const BurgerMenu: React.FC<BurgerMenuProps> = ({
           ? <Image
               src="/burgerClose.png"
               alt="bike"
-              width={55}
-              height={50}
+              width={45}
+              height={40}
               onClick={() => setModalOpen(false)}
           />
           : <Image
               src="/burger.png"
               alt="bike"
-              width={60}
-              height={45}
+              width={50}
+              height={35}
               onClick={() => setModalOpen(true)}
           />
       }

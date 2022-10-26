@@ -1,6 +1,11 @@
 import Image from "next/image"
 import styled from "styled-components"
 
+const Logo = styled.div`
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+`
+
 const Content = styled.div`
   display: flex;
   align-items: center;
@@ -8,6 +13,7 @@ const Content = styled.div`
   flex-direction: column;
   font-size: 15px;
   height: 70%;
+  color: #d0d0d0;
 
   @media only screen and (min-width: 700px) {
     font-size: 20px;
@@ -52,16 +58,20 @@ export const BeerResult = ({
       
     return (
         <>
+          <Logo>
             <Image src="/beer.png" alt="beer" width={100} height={90} />
-            <Content>
-                <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
-                {destination.vicinity}<br></br>
-                {/* Open til {formatTime(closingTime)}<br></br> */}
-                {formatPriceAndRating(destination.price_level, destination.rating)}<br></br><br></br>
-                <Details>
-                    &laquo; {formatReview(details.review)} &raquo; - l&apos;étranger sur internet
-                </Details>
-            </Content>
+          </Logo>
+          <Content>
+              <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
+              {destination.vicinity}<br></br>
+              {/* Open til {formatTime(closingTime)}<br></br> */}
+              {formatPriceAndRating(destination.price_level, destination.rating)}<br></br><br></br>
+              <Details>
+                  &laquo; {formatReview(details.review)} &raquo; - random reviewer
+              </Details>
+          </Content>
         </>
     )
 }
+
+// make clear i did not write the review

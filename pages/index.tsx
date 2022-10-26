@@ -19,6 +19,8 @@ const Icons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  -webkit-filter: invert(100%); /* Safari/Chrome */
+  filter: invert(100%);
 `
 const Start = styled.button`
   font-size: 20px;

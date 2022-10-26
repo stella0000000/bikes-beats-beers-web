@@ -1,6 +1,11 @@
 import Image from "next/image"
 import styled from "styled-components"
 
+const Logo = styled.div`
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+`
+
 const Content = styled.div`
   display: flex;
   align-items: center;
@@ -8,6 +13,7 @@ const Content = styled.div`
   flex-direction: column;
   font-size: 15px;
   height: 70%;
+  color: #d0d0d0;
 
   @media only screen and (min-width: 700px) {
     font-size: 20px;
@@ -18,12 +24,14 @@ const Content = styled.div`
 export const BikeResult = ({ bikeRide, weather }: any) => {
     return (
         <>
-            <Image src="/bike.png" alt="bike" width={180} height={95} />
-            <Content>
-                {bikeRide.distance}<br></br>
-                {bikeRide.duration}<br></br><br></br>
-                {parseInt(weather.temp)}°, {weather.description}
-            </Content>
+        <Logo>
+          <Image src="/bike.png" alt="bike" width={180} height={95} />
+        </Logo>
+          <Content>
+              {bikeRide.distance}<br></br>
+              {bikeRide.duration}<br></br><br></br>
+              {parseInt(weather.temp)}°, {weather.description}
+          </Content>
         </>
     )
 }

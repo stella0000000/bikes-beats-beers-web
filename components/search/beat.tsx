@@ -3,6 +3,11 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import { MOOD, SPEED } from '@utils/constants'
 
+const Logo = styled.div`
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+`
+
 const Moods = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,11 +19,11 @@ const Label = styled.label<{checked?: boolean}>`
   font-size: 30px;
   display: flex;
   align-items: center;
-  color: ${props => props.checked ? '#000' : 'inherit'};
+  color: ${props => props.checked ? '#ffa0d7' : '#c9c9c9'};
   display: flex;
 
   &:hover {
-    color: black;
+    color: #ffa0d7;
   }
 
   @media only screen and (min-width: 700px) {
@@ -68,7 +73,9 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
 
   return (
     <>
-      <Image src="/beat.png" alt="bike" width={110} height={90} />
+      <Logo>
+        <Image src="/beat.png" alt="bike" width={110} height={90} />
+      </Logo>
       <Moods>
         <Label checked={mood === MOOD.SWEAT}>
           <input

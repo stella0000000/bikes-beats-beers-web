@@ -4,7 +4,7 @@
  * @returns keyword to fetch playlist
  */
  const mapMoodToPlaylistKeyword = (mood: string | string[]) => {
-    const relaxing = ['chill indie', 'chill hip hop', 'indie', 'k-indie', 'clouds']
+    const relaxing = ['chill indie', 'chill hip hop', 'indie', 'k-indie', 'ethereal']
     const sweating = ['french hip hop', 'techno', 'kpop', 'festive', 'party']
     const randoming = ['love', 'boyfriend', 'girlfriend', 'paris', 'justin bieber']
   

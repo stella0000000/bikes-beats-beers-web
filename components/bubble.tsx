@@ -4,8 +4,8 @@ import styled from "styled-components";
 const Circle = styled.span<{isSelected?: boolean}>`
   height: 27px;
   width: 27px;
-  border: 2px solid #BDFF00;
-  background-color: ${props => props.isSelected ? '#BDFF00' : 'none'};
+  border: 2px solid #B5A642;
+  background-color: ${props => props.isSelected ? '#B5A642' : 'none'};
   border-radius: 50%;
   display: inline-block;
   margin: 0px 0px 20px 0px;

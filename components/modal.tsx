@@ -12,7 +12,7 @@ const About = styled.div`
   flex-direction: column;
   font-size: 17px;
   padding: 25px;
-  color: black;
+  color: white;
   margin-top: -30px;
 
   @media only screen and (min-width: 800px) {

@@ -2,6 +2,11 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import { Predictions, Prediction } from '@components/predictions/predictions'
 
+const Logo = styled.div`
+  -webkit-filter: invert(100%); /* Safari/Chrome */
+  filter: invert(100%);
+`
+
 const Location = styled.input`
   width: 80vw;
   margin-top: 12vw;
@@ -25,6 +30,7 @@ const Text = styled.div`
   margin: 7vw 0vw 0.5vw 0vw;
   font-size: 20px;
   text-align: left;
+  color: #d0d0d0;
   
   @media only screen and (min-width: 650px) {
     font-size: 40px;
@@ -45,7 +51,7 @@ const TransitTime = styled.div`
 `
 
 const Min = styled.span`
-  color: #000;
+  color: #d0d0d0;
   font-size: 20px;
   
   @media only screen and (min-width: 650px) {
@@ -71,7 +77,9 @@ export const BikeSearch: React.FC<BikeSearchProps> = ({
   setUserData
 }) => (
   <>
-    <Image src="/bike.png" alt="bike" width={180} height={95} />
+    <Logo>
+      <Image src="/bike.png" alt="bike" width={180} height={95} />
+    </Logo>
     <Location
         type="text"
         placeholder="Start location"

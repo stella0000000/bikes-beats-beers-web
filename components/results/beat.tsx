@@ -1,6 +1,11 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+const Logo = styled.div`
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+`
+
 const PlaylistLink = styled.div`
   width: 85vw;
   padding-bottom: 10px;
@@ -26,7 +31,9 @@ const Content = styled.div`
 export const BeatResult = ({ playlist }: any) => {
     return (
         <>
-        <Image src="/beat.png" alt="bike" width={110} height={90} />
+        <Logo>
+          <Image src="/beat.png" alt="bike" width={110} height={90} />
+        </Logo>
           <Content>
             <PlaylistLink>
               <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>

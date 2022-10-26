@@ -2,15 +2,16 @@ import styled from "styled-components";
 
 const PredictionList = styled.ul`
   position: absolute;
-  top: 270px;
+  top: 260px;
   z-index: 1000;
   padding: 0px 10px 7px 12px;
-  background-color: #c6c6c6;
+  background-color: #000;
   width: 85vw;
+  color: #c9c9c9;
 
   @media only screen and (min-width: 650px) {
     width: 61vw;
-    top: 310px;
+    top: 300px;
     margin: 0px;
   }
 `
@@ -29,7 +30,7 @@ const Prediction = styled.div`
   }
 
   &:hover {
-    color: #FF5EBE;
+    color: #ffa0d7;
   }
 
   @media only screen and (min-width: 650px) {

@@ -1,15 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,200;1,200&display=swap');
+
+* {
+  font-family: 'IBM Plex Mono', monospace;
+}
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Space Mono', monospace;
   overflow-y: hidden;
 }
 
 a {
-  color: #FF5EBE;
+  color: #ffa0d7;
   text-decoration: none;
 }
 
@@ -18,17 +21,16 @@ a:hover {
 }
 
 input {
-  font-family: 'Space Mono', monospace;
-  border: 2px solid #000;
-  box-shadow: -4px 4px #BDFF00;
+  border: 2px solid rgb(190, 190, 190);
+  /* box-shadow: -4px 4px #B5A642; */
   background: transparent;
   padding: 7px 10px;
   font-size: 20px;
-  color: black;
+  color: #fff;
 }
 
 textarea:focus, input:focus{
-  border: 2px solid #BDFF00;
+  border: 2px solid #B5A642;
   outline: none;
 }
 
@@ -51,21 +53,12 @@ input[type=checkbox] {
    appearance: none;
 }
 
-/* input[type=checkbox]:before {
-   content: "";
-   display: block;
-   width: 25px;
-   height: 25px;
-   border: 2px solid #000;
-   background-color: #c6c6c6;
-} */
-
 input[type=checkbox]:checked:after {
    content: "";
    display: block;
    width: 7px;
    height: 20px;
-   border: solid black;
+   border: solid #B5A642;
    border-width: 0 2px 2px 0;
    -webkit-transform: rotate(45deg);
    -ms-transform: rotate(45deg);
@@ -81,14 +74,11 @@ input::placeholder {
 }
 
 button {
-  font-family: 'Space Mono', monospace;
   font-size: 20px;
-  color: #BDFF00;
-  /* color: black; */
   padding: 5px 12px;
-  border: none;
-  background: #FF5EBE;
-
+  background: black;
+  color: #ffa0d7;
+  border: 2px solid #b4b4b4;
 }
 
 button:disabled {
@@ -96,8 +86,9 @@ button:disabled {
 }
 
 button:hover:not([disabled]) {
-  background: #BDFF00;
-  color: #FF5EBE;
+  background: black;
+  color: #ffa0d7;
+  border: 2px solid #B5A642;
 }
 
 ul, li {
@@ -115,10 +106,10 @@ ul, li {
 }
 
 ::selection {
-  background: #BDFF00;
+  background: #B5A642;
 }
 ::-moz-selection {
-  background: #BDFF00;
+  background: #B5A642;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -127,8 +118,8 @@ ul, li {
     overflow: hidden;
   }
   body {
-    color: #777777;
-    background: #c6c6c6;
+    color: rgb(167, 167, 167);
+    background: #000;
     position: relative;
   }
 }
@@ -136,11 +127,10 @@ ul, li {
 @media only screen and (min-width: 650px) {
   input, button {
     font-size: 40px;
-    border-width: 3px;
   }
 
   textarea:focus, input:focus{
-    border: 3px solid #BDFF00;
+    border: 2px solid #B5A642;
     outline: none;
   }
 }
