@@ -1,25 +1,6 @@
-## Install packages:
-
-```
-yarn
-```
-
-## .env.local:
-
-```
-GOOGLE_KEY='blah'
-SPOTIFY_CLIENT_ID='blah'
-SPOTIFY_CLIENT_SECRET='blah'
-OPEN_WEATHER_MAP_KEY='blah'
-```
-
-## Run the dev server:
-
-```
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
+## Let's keep ourselves and the atmosphere healthy.
+Explore your neighborhood by biking to a beer (just one) while listening to beats.<br><br>
+Share your location, desired transit time, and cycling mood. We'll suggest a playlist that suits your mood and surprise you with a destination to meet a friend.
 
 ## Optimizations and considerations
 - `useSWR`
