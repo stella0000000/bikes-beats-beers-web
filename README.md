@@ -1,4 +1,4 @@
-## Let's keep ourselves and the atmosphere healthy.
+## The app
 Explore your neighborhood by biking to a beer (just one) while listening to beats.<br><br>
 Share your location, desired transit time, and cycling mood. You'll be surprised with a playlist that suits your mood and a destination to meet a friend.
 
