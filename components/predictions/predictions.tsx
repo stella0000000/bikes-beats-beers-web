@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PredictionList = styled.ul`
   position: absolute;
-  top: 265px;
+  top: 270px;
   z-index: 1000;
   padding: 0px 10px 7px 12px;
   background-color: #000;

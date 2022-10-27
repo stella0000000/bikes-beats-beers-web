@@ -10,7 +10,7 @@ const Container = styled.div<{modalOpen?: boolean}>`
     overflow-x: scroll;
     overflow-y: hidden;
     height: 65vh;
-    filter: ${props => props.modalOpen ? 'blur(25px)' : 'none'};
+    filter: ${props => props.modalOpen ? 'blur(20px)' : 'none'};
 
     @media only screen and (min-width: 650px) {
         height: 75vh;

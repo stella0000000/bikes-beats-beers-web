@@ -6,7 +6,7 @@ const Wrapper = styled.div<{modalOpen?: boolean}>`
   align-items: center;
   height: 100vh;
   
-  filter: ${props => props.modalOpen ? 'blur(25px)' : 'none'};
+  filter: ${props => props.modalOpen ? 'blur(20px)' : 'none'};
 `
 
 type Props = {
