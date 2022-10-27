@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>bikes, beats, and beers</title>
         <meta name="description" content="bike to beers while listening to beats" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/favicon.ico" />
       </Head>
 
       {router.pathname !== "/" ?
