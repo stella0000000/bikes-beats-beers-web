@@ -138,6 +138,4 @@ export default Search
  * debounce
  * userData custom hook
  * 
- * mobile container shifting
- * 
  */
