@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import debounce from 'lodash.debounce'
+import styled from 'styled-components'
 import { Screen } from '@components/screen/screen'
 import { View } from '@components/screen/view'
 import { Bubble } from '@components/bubble'
@@ -10,6 +11,9 @@ import { Prediction } from '@components/predictions/predictions'
 import { BeatSearch } from '@components/search/beat'
 import { BUBBLES } from '@utils/constants'
 
+const SearchWrapper = styled.div`
+  height: 100%;
+`
 type Props = {
   modalOpen: boolean
 }
@@ -70,7 +74,7 @@ const Search = ({ modalOpen }: Props) => {
   // const debouncedLocation = debounce(e => updateLocation(e), 200);
 
   return (
-    <>
+    <SearchWrapper>
       <Screen
         views={views}
         modalOpen={modalOpen}
@@ -121,7 +125,7 @@ const Search = ({ modalOpen }: Props) => {
           </button>
         </Link>
       </Nav>
-    </>
+    </SearchWrapper>
   )
 }
 
