@@ -13,6 +13,7 @@ import { BUBBLES } from '@utils/constants'
 
 const SearchWrapper = styled.div`
   height: 100%;
+  overflow-x: hidden;
 `
 type Props = {
   modalOpen: boolean
