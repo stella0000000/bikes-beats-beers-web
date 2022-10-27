@@ -62,7 +62,7 @@ export const BeerResult = ({
             <Image src="/beer.png" alt="beer" width={100} height={90} />
           </Logo>
           <Content>
-              <a href={details.url} target="_blank" rel="noreferrer">{destination.name}</a>
+              <a href={details.url} target="_blank" rel="noreferrer">{destination.name} ↗</a>
               {destination.vicinity}<br></br>
               {/* Open til {formatTime(closingTime)}<br></br> */}
               {formatPriceAndRating(destination.price_level, destination.rating)}<br></br><br></br>

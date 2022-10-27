@@ -36,9 +36,9 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <About>
-      <span>Let&apos;s keep ourselves and the atmosphere healthy. Explore your neighborhood by biking to a beer (just one) while listening to beats.</span><br></br><br></br>
-      <span>Share your location, desired transit time, and cycling mood. We&apos;ll suggest a playlist that suits your mood and surprise you with a destination to meet a friend. Report <s>bugs</s> praise to stella.choi@hyperisland.se.</span><br></br><br></br>
-      Use responsibly.
+      <span>Let&apos;s keep ourselves and the atmosphere healthy. Explore your neighborhood by biking to a beer while listening to beats.</span><br></br><br></br>
+      <span>Share your location, desired transit time, and cycling mood. You&apos;ll be surprised with a playlist that suits your mood and a destination to meet your friend. Report <s>bugs</s> praise to <a href="stella.choi@hyperisland.se">Stella ↗</a>. (That was a joke. Let me know if you notice bugs.)</span><br></br><br></br>
+      Use responsibly. Have fun.
     </About>
   )
 }

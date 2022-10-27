@@ -36,7 +36,7 @@ export const BeatResult = ({ playlist }: any) => {
         </Logo>
           <Content>
             <PlaylistLink>
-              <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]}</a>
+              <a href={`${playlist[1]}`} target="_blank" rel="noreferrer">{playlist[0]} ↗</a>
             </PlaylistLink>
             <Image src={`${playlist[3]}`} alt="playlist image" width={150} height={150} />
           </Content>

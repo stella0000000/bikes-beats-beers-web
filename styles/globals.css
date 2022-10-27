@@ -14,16 +14,19 @@ body {
 
 a {
   color: #ffa0d7;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #B5A642;
 }
 
 a:hover {
   cursor: default;
+  background-color: #ffa0d7;
+  color: black;
 }
 
 input {
   border: 2px solid rgb(190, 190, 190);
-  /* box-shadow: -4px 4px #B5A642; */
   background: transparent;
   padding: 7px 10px;
   font-size: 20px;
