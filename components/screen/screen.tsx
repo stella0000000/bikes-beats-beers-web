@@ -8,7 +8,7 @@ const Container = styled.div<{modalOpen?: boolean}>`
     display: flex;
     -webkit-overflow-scrolling: touch;
     overflow-x: scroll;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     height: 65vh;
     filter: ${props => props.modalOpen ? 'blur(25px)' : 'none'};
 
