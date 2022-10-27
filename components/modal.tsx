@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const About = styled.div`
-  position: absolute;
+  /* position: absolute; */
   width: 100vw;
   height: 100vh;
   text-align: center;

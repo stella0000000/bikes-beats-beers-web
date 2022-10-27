@@ -63,7 +63,7 @@ input[type=checkbox]:checked:after {
    -webkit-transform: rotate(45deg);
    -ms-transform: rotate(45deg);
    transform: rotate(45deg);
-   position: absolute;
+   /* position: absolute; */
    top: -2px;
    left: 6px;
 }
