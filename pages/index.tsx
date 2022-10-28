@@ -23,12 +23,11 @@ const Icons = styled.div`
   filter: invert(100%);
 `
 const Start = styled.button`
-  font-size: 20px;
-  margin-top: 175px;
+  margin-top: 250px;
   cursor: default;
 
   @media only screen and (min-width: 750px) {
-    font-size: 45px;
+    font-size: 40px;
   }
 `
 
