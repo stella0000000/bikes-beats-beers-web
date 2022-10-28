@@ -12,7 +12,7 @@
       return relaxing[Math.floor(Math.random()*relaxing.length)]
     } else if (mood === 'SWEAT') {
       return sweating [Math.floor(Math.random()*sweating.length)]
-    } else if (mood === `BOTH`) {
+    } else if (mood === `RANDOM`) {
       return  randoming[Math.floor(Math.random()*randoming.length)]
     }
   }
