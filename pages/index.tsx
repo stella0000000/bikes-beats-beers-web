@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 import styles from '@styles/Home.module.css'
+import { getBrew } from '@utils/getBrew'
+import { BREW } from '@utils/constants';
 
 const About = styled.div`
   padding-top: 5px;
@@ -22,6 +24,7 @@ const Icons = styled.div`
   -webkit-filter: invert(100%); /* Safari/Chrome */
   filter: invert(100%);
 `
+
 const Start = styled.button`
   margin-top: 200px;
   cursor: default;
@@ -33,11 +36,12 @@ const Start = styled.button`
 
 const Home: NextPage = () => {
   const [idx, setIdx] = useState(0)
-  const images = [
-    <Image key={0} src="/bike.png" alt="bike" width={210} height={110} />,
-    <Image key={1} src="/beat.png" alt="bike" width={145} height={110} />,
-    <Image key={2} src="/beer.png" alt="bike" width={125} height={110} />
-  ]
+  const bike = <Image key={0} src="/bike.png" alt="bike" width={210} height={110} />
+  const beat = <Image key={1} src="/beat.png" alt="beat" width={145} height={110} />
+  const beer = <Image key={1} src="/beer.png" alt="beer" width={125} height={110} />
+  const coffee = <Image key={1} src="/coffee.png" alt="coffee" width={145} height={110} />
+  const brew = getBrew() === BREW.COFFEE ? coffee : beer
+  const images = [bike, beat, brew]
 
   useEffect(() => {
     const interval = setInterval(() => {

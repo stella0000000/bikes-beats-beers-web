@@ -122,7 +122,7 @@ const Search = ({ modalOpen }: Props) => {
           <button
             disabled={buttonDisabled}
             onClick={() => setButtonDisabled(true)}
-          >FIND BEATS AND BEERS
+          >MY BEATS AND BREWS
           </button>
         </Link>
       </Nav>
