@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import debounce from 'lodash.debounce'
 import styled from 'styled-components'
 import { Screen } from '@components/screen/screen'
@@ -10,6 +10,7 @@ import { BikeSearch } from '@components/search/bike'
 import { Prediction } from '@components/predictions/predictions'
 import { BeatSearch } from '@components/search/beat'
 import { BUBBLES } from '@utils/constants'
+import { Ctx } from '@utils/context'
 
 const SearchWrapper = styled.div`
   height: 100%;
@@ -20,6 +21,8 @@ type Props = {
 }
 
 const Search = ({ modalOpen }: Props) => {
+  // console.log(useContext(Ctx))
+
   const views = useRef(null)
   // custom hook => can return context
   const [userData, setUserData] = useState<{
@@ -140,3 +143,6 @@ export default Search
  * userData custom hook
  * 
  */
+
+// can't find bike routes
+// how about a car route --> like bali, no designated bike lanes

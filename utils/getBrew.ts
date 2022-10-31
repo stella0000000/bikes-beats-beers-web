@@ -1,9 +1,6 @@
 import { BREW } from './constants'
 
-const now = new Date()
-const hour = now.getHours()
-
-export const getBrew = () => {
+export const getBrew = (hour: number) => {
   // between 5:00 - 15:00 coffee
   if (5 < hour && hour < 15) {
     return BREW.COFFEE

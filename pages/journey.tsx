@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult } from 'next'
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { BUBBLES } from '@utils/constants'
 import {
   fetchBeer,
@@ -17,6 +17,7 @@ import { BikeResult } from '@components/results/bike'
 import { Nav } from '@components/screen/nav'
 import { Screen } from '@components/screen/screen'
 import { View } from '@components/screen/view'
+import { Ctx } from '@utils/context'
 
 // fix type
 type ServerSideProps = {
@@ -41,7 +42,8 @@ const Journey = ({
 }: ServerSideProps & JourneyProps) => {
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
-
+  console.log(useContext(Ctx))
+  
   return (
     <>
       <Screen
