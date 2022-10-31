@@ -30,7 +30,6 @@ const Text = styled.div`
   margin: 7vw 0vw 0.5vw 0vw;
   font-size: 20px;
   text-align: left;
-  color: #d0d0d0;
   
   @media only screen and (min-width: 650px) {
     font-size: 40px;
@@ -51,7 +50,6 @@ const TransitTime = styled.div`
 `
 
 const Min = styled.span`
-  color: #d0d0d0;
   font-size: 20px;
   
   @media only screen and (min-width: 650px) {

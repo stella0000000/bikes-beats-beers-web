@@ -4,6 +4,7 @@ import {
   TravelMode,
   TravelRestriction,
   UnitSystem } from '@googlemaps/google-maps-services-js'
+import { BREW } from '@utils/constants'
 
 const googleMaps = new Client({})
 
@@ -12,16 +13,18 @@ const googleMaps = new Client({})
  * @param lat 
  * @param lng 
  * @param radius 
- * @returns beer destination
+ * @returns destination
  */
 
-export const fetchBeer = async (lat: string | string[], lng: string | string[], radius: string | string[]): Promise<Partial<PlaceData> | string> => {
+export const fetchBrew = async (brew: string | string[] | undefined, lat: string | string[], lng: string | string[], radius: string | string[]): Promise<Partial<PlaceData> | string> => {
+  const keyword = brew === BREW.COFFEE ? 'coffee' : 'bar'
+
   try {
     const response = await googleMaps.placesNearby({
       params: {
           location: [parseFloat(lat.toString()), parseFloat(lng.toString())],
           radius: parseFloat(radius.toString()!), // meters
-          keyword: 'bar',
+          keyword,
           opennow: true,
           key: process.env.GOOGLE_KEY!
       },
@@ -30,7 +33,7 @@ export const fetchBeer = async (lat: string | string[], lng: string | string[], 
 
     return response.data.results[Math.floor(Math.random()*response.data.results.length)]
   } catch(err) {
-    return `beer, ${err}`
+    return `brew, ${err}`
   }
 }
 

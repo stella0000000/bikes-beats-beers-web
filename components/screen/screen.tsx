@@ -1,8 +1,9 @@
-import React, { MutableRefObject } from "react"
+import { Ctx } from "@utils/context"
+import React, { MutableRefObject, useContext } from "react"
 import styled from "styled-components"
-import { BUBBLES } from "../../utils/constants"
+import { BREW, BUBBLES } from "../../utils/constants"
 
-const Container = styled.div<{modalOpen?: boolean}>`
+const Container = styled.div<{modalOpen?: boolean, brew?: string}>`
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     display: flex;
@@ -10,6 +11,8 @@ const Container = styled.div<{modalOpen?: boolean}>`
     overflow-x: scroll;
     overflow-y: hidden;
     height: 65vh;
+    color: ${props => props.brew === BREW.COFFEE ? 'black' : '#d0d0d0;'};
+    background: ${props => props.brew === BREW.COFFEE ? '#C9C6BD' : 'black'};
     filter: ${props => props.modalOpen ? 'blur(20px)' : 'none'};
 
     @media only screen and (min-width: 650px) {
@@ -30,6 +33,7 @@ export const Screen = ({
     views,
     setSelectedBubble
 }: Props) => {
+    const brew = useContext(Ctx)
     const numChildren = children.length
 
     const handleScroll = (e: any) => {
@@ -55,6 +59,7 @@ export const Screen = ({
         <Container
             ref={views}
             modalOpen={modalOpen}
+            brew={brew}
             onScroll={e => handleScroll(e)}
         >
             {children}

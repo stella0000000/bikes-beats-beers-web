@@ -20,25 +20,26 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <Ctx.Provider value={brew.current}>
+    <>
       <Head>
         <title>bikes, beats, and brews</title>
         <meta name="description" content="bike to brews while listening to beats" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-
-      {router.pathname !== "/" ?
-        (
-          <>
-            <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
-            <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-          </>
-        )
-        : null
-      }
-      
-      <Component {...pageProps} modalOpen={modalOpen} setModalOpen={setModalOpen} />
-    </Ctx.Provider>
+      <Ctx.Provider value={brew.current}>
+        {router.pathname !== "/" ?
+          (
+            <>
+              <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
+              <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+            </>
+          )
+          : null
+        }
+        
+        <Component {...pageProps} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      </Ctx.Provider>
+    </>
   )
 }
 

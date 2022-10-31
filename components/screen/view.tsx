@@ -1,3 +1,4 @@
+import { BREW } from "@utils/constants"
 import styled from "styled-components"
 
 const Wrapper = styled.div`
@@ -12,7 +13,6 @@ const Wrapper = styled.div`
   transform: none;
   width: 100%;
   left: 0;
-  color: black;
   text-align: center;
 
   @media only screen and (min-width: 700px) {
@@ -29,6 +29,7 @@ export const View = ({
   id,
   children
 }: Props) => {
+  
   return (
     <Wrapper id={id}>
       {children}

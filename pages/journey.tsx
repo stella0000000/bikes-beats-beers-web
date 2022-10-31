@@ -5,7 +5,7 @@ import type {
 import { useContext, useRef, useState } from 'react'
 import { BUBBLES } from '@utils/constants'
 import {
-  fetchBeer,
+  fetchBrew,
   fetchBikeRide,
   fetchDetails } from '@utils/map'
 import { fetchPlaylist } from '@utils/playlist'
@@ -42,7 +42,6 @@ const Journey = ({
 }: ServerSideProps & JourneyProps) => {
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
-  console.log(useContext(Ctx))
   
   return (
     <>
@@ -82,7 +81,7 @@ export default Journey
 export const getServerSideProps = async (ctx: GetServerSidePropsContext):
   Promise<GetServerSidePropsResult<ServerSideProps>
 > => {
-  let { radius, lat, lng, mood } = ctx.query
+  let { radius, lat, lng, mood, brew } = ctx.query
 
   if (!radius || !lat || !lng || !mood ) {
     return {
@@ -93,7 +92,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
     }
   }
 
-  const [destination, playlist] = await Promise.all([fetchBeer(lat, lng, radius), fetchPlaylist(mood)])
+  const [destination, playlist] = await Promise.all([fetchBrew(brew, lat, lng, radius), fetchPlaylist(mood)])
   const bikeRide = await fetchBikeRide(destination, lat, lng)
   const details = await fetchDetails(destination)
   const weather = await fetchWeather(lat, lng)

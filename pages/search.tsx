@@ -21,8 +21,7 @@ type Props = {
 }
 
 const Search = ({ modalOpen }: Props) => {
-  // console.log(useContext(Ctx))
-
+  const brew = useContext(Ctx)
   const views = useRef(null)
   // custom hook => can return context
   const [userData, setUserData] = useState<{
@@ -115,6 +114,7 @@ const Search = ({ modalOpen }: Props) => {
           href={
             { pathname: '/journey',
               query: {
+                brew: brew,
                 radius: userData.radius,
                 lat: userData.coords?.[0],
                 lng: userData.coords?.[1],
