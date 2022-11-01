@@ -4,7 +4,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 import styles from '@styles/Home.module.css'
+import { BREW } from '@utils/constants'
 import { Ctx } from '@utils/context';
+
+const Wrapper = styled.div<{brew?: string}>`
+  background: ${props => props.brew === BREW.COFFEE ? '#C9C6BD' : 'black'};
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 const About = styled.div`
   padding-top: 5px;
@@ -16,17 +27,20 @@ const About = styled.div`
   }
 `
 
-const Icons = styled.div`
+const Icons = styled.div<{brew?: string}>`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
+  -webkit-filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
+  filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
 `
 
-const Start = styled.button`
+const Start = styled.button<{brew?: string}>`
   margin-top: 200px;
   cursor: default;
+  background: ${props => props.brew === BREW.COFFEE ? '#C9C6BD' : 'black'};
+  color: ${props => props.brew === BREW.COFFEE ? 'black' : '#ffa0d7'};
+  border: 2px solid #b4b4b4;
 
   @media only screen and (min-width: 750px) {
     font-size: 40px;
@@ -50,17 +64,17 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
-        <Icons>
+      <Wrapper brew={brew}>
+        <Icons brew={brew}>
           {images[idx]}
         </Icons>
         <About>
           ✿.｡ discover your neighborhood ｡.✿
         </About>
         <Link href="/search">
-          <Start>START YOUR JOURNEY</Start>
+          <Start brew={brew}>START YOUR JOURNEY</Start>
         </Link>
-      </main>
+      </Wrapper>
     </div>
   )
 }

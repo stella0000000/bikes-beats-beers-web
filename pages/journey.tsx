@@ -3,7 +3,8 @@ import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult } from 'next'
 import { useRef, useState } from 'react'
-import { BUBBLES } from '@utils/constants'
+import styled from 'styled-components'
+import { BREW, BUBBLES } from '@utils/constants'
 import {
   fetchBrew,
   fetchBikeRide,
@@ -17,6 +18,13 @@ import { View } from '@components/screen/view'
 import { BeatResult } from '@components/results/beat'
 import { BrewResult } from '@components/results/brew'
 import { BikeResult } from '@components/results/bike'
+
+const NewJourneyButton = styled.button<{brew?: string}>`
+  cursor: default;
+  background: ${props => props.brew === BREW.COFFEE ? '#C9C6BD' : 'black'};
+  color: ${props => props.brew === BREW.COFFEE ? 'black' : '#ffa0d7'};
+  border: 2px solid #b4b4b4;
+`
 
 // fix type
 type ServerSideProps = {
@@ -67,7 +75,7 @@ const Journey = ({
           <Bubble bubble={BUBBLES.BREWS} selected={selectedBubble === BUBBLES.BREWS}/>
         </div>
         <Link href='/search'>
-          <button>↻ NEW JOURNEY</button>
+          <NewJourneyButton>↻ NEW JOURNEY</NewJourneyButton>
         </Link>
       </Nav>
     </>

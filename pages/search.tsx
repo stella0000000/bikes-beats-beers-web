@@ -9,13 +9,21 @@ import { Nav } from '@components/screen/nav'
 import { BrewSearch } from '@components/search/brew'
 import { Prediction } from '@components/predictions/predictions'
 import { BeatSearch } from '@components/search/beat'
-import { BUBBLES } from '@utils/constants'
+import { BREW, BUBBLES } from '@utils/constants'
 import { Ctx } from '@utils/context'
 
 const SearchWrapper = styled.div`
   height: 100%;
   overflow-x: hidden;
 `
+
+const SearchButton = styled.button<{brew?: string}>`
+  cursor: default;
+  background: ${props => props.brew === BREW.COFFEE ? '#C9C6BD' : 'black'};
+  color: ${props => props.brew === BREW.COFFEE ? 'black' : '#ffa0d7'};
+  border: 2px solid #b4b4b4;
+`
+
 type Props = {
   modalOpen: boolean
 }
@@ -122,11 +130,11 @@ const Search = ({ modalOpen }: Props) => {
               }
             }
           }>
-          <button
+          <SearchButton
             disabled={buttonDisabled}
             onClick={() => setButtonDisabled(true)}
           >MY BEATS AND BREWS
-          </button>
+          </SearchButton>
         </Link>
       </Nav>
     </SearchWrapper>

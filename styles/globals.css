@@ -80,9 +80,6 @@ input::placeholder {
 button {
   font-size: 20px;
   padding: 5px 12px;
-  background: black;
-  color: #ffa0d7;
-  border: 2px solid #b4b4b4;
 }
 
 button:disabled {
