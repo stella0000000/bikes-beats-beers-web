@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult } from 'next'
-import { useContext, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { BUBBLES } from '@utils/constants'
 import {
   fetchBrew,
@@ -11,13 +11,12 @@ import {
 import { fetchPlaylist } from '@utils/playlist'
 import { fetchWeather } from '@utils/weather'
 import { Bubble } from '@components/bubble'
-import { BeatResult } from '@components/results/beat'
-import { BeerResult } from '@components/results/beer'
-import { BikeResult } from '@components/results/bike'
 import { Nav } from '@components/screen/nav'
 import { Screen } from '@components/screen/screen'
 import { View } from '@components/screen/view'
-import { Ctx } from '@utils/context'
+import { BeatResult } from '@components/results/beat'
+import { BrewResult } from '@components/results/brew'
+import { BikeResult } from '@components/results/bike'
 
 // fix type
 type ServerSideProps = {
@@ -56,8 +55,8 @@ const Journey = ({
         <View id={BUBBLES.BEATS}>
           <BeatResult playlist={playlist} />
         </View>
-        <View id={BUBBLES.BEERS}>
-          <BeerResult destination={destination} details={details} />
+        <View id={BUBBLES.BREWS}>
+          <BrewResult destination={destination} details={details} />
         </View>
       </Screen>
 
@@ -65,7 +64,7 @@ const Journey = ({
         <div>
           <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
           <Bubble bubble={BUBBLES.BEATS} selected={selectedBubble === BUBBLES.BEATS} />
-          <Bubble bubble={BUBBLES.BEERS} selected={selectedBubble === BUBBLES.BEERS}/>
+          <Bubble bubble={BUBBLES.BREWS} selected={selectedBubble === BUBBLES.BREWS}/>
         </div>
         <Link href='/search'>
           <button>↻ NEW JOURNEY</button>

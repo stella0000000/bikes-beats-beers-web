@@ -6,7 +6,7 @@ import { Screen } from '@components/screen/screen'
 import { View } from '@components/screen/view'
 import { Bubble } from '@components/bubble'
 import { Nav } from '@components/screen/nav'
-import { BikeSearch } from '@components/search/bike'
+import { BrewSearch } from '@components/search/brew'
 import { Prediction } from '@components/predictions/predictions'
 import { BeatSearch } from '@components/search/beat'
 import { BUBBLES } from '@utils/constants'
@@ -84,7 +84,7 @@ const Search = ({ modalOpen }: Props) => {
         setSelectedBubble={setSelectedBubble}
       >
         <View id={BUBBLES.BIKES}>
-          <BikeSearch
+          <BrewSearch
             predictions={predictions}
             setPredictions={setPredictions}
             located={located}

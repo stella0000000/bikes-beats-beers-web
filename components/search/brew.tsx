@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Predictions, Prediction } from '@components/predictions/predictions'
 
 const Logo = styled.div`
-  -webkit-filter: invert(100%); /* Safari/Chrome */
+  -webkit-filter: invert(100%);
   filter: invert(100%);
 `
 
@@ -57,7 +57,7 @@ const Min = styled.span`
   }
 `
 
-type BikeSearchProps = {
+type BrewSearchProps = {
   predictions?: Prediction[]
   setPredictions: (predictions?: Prediction[]) => void
   located: boolean
@@ -66,7 +66,7 @@ type BikeSearchProps = {
   setUserData: (key: string, data: string | number) => void
 }
 
-export const BikeSearch: React.FC<BikeSearchProps> = ({
+export const BrewSearch: React.FC<BrewSearchProps> = ({
   predictions,
   setPredictions,
   located,

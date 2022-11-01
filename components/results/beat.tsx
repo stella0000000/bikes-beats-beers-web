@@ -28,7 +28,7 @@ const Content = styled.div`
 `
 
 // fix type
-export const BeatResult = ({ playlist }: any) => {
+export const BeatResult = ({ playlist }: any) => {  
     return (
         <>
         <Logo>

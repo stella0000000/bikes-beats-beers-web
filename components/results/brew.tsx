@@ -1,4 +1,6 @@
+import { Ctx } from "@utils/context"
 import Image from "next/image"
+import { useContext } from "react"
 import styled from "styled-components"
 
 const Logo = styled.div`
@@ -32,33 +34,35 @@ const Details = styled.div`
 `
 
 // fix type
-export const BeerResult = ({
+export const BrewResult = ({
   destination,
   details
 }: any) => {
-    const formatPriceAndRating = (price: number, rating: string) => {
-        if (price && rating) {
-          return ("$").repeat(destination.price_level) + ` / ` + `✰ ${destination.rating} ✰`
-        } else if (price) {
-          return ("$").repeat(destination.price_level)
-        } else {
-          return `✰ ${destination.rating} ✰`
-        }
-      }
+  const brew = useContext(Ctx)
+  
+  const formatPriceAndRating = (price: number, rating: string) => {
+    if (price && rating) {
+      return ("$").repeat(destination.price_level) + ` / ` + `✰ ${destination.rating} ✰`
+    } else if (price) {
+      return ("$").repeat(destination.price_level)
+    } else {
+      return `✰ ${destination.rating} ✰`
+    }
+  }
+  
+  const formatReview = (review: string) => {
+    const maxLength = 150
+    if (review.length > maxLength) {
+      return `${review.slice(0, maxLength)}...`
+    } else {
+      return review
+    }
+  }
     
-      const formatReview = (review: string) => {
-        const maxLength = 150
-        if (review.length > maxLength) {
-          return `${review.slice(0, maxLength)}...`
-        } else {
-          return review
-        }
-      }
-      
     return (
         <>
           <Logo>
-            <Image src="/beer.png" alt="beer" width={100} height={90} />
+            <Image src={`/${brew?.toLowerCase()}.png`} alt="brew" width={100} height={90} />
           </Logo>
           <Content>
               <a href={details.url} target="_blank" rel="noreferrer">{destination.name} ↗</a>

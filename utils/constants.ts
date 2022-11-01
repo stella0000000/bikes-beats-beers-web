@@ -6,7 +6,7 @@ export enum BREW {
 export enum BUBBLES {
     BIKES = 'BIKES',
     BEATS = 'BEATS',
-    BEERS = 'BEERS',
+    BREWS = 'BREWS',
 }
 
 export enum MOOD {

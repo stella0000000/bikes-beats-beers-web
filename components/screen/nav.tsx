@@ -1,7 +1,7 @@
-import { BREW } from "@utils/constants";
-import { Ctx } from "@utils/context";
 import { useContext } from "react";
 import styled from "styled-components";
+import { BREW } from "@utils/constants";
+import { Ctx } from "@utils/context";
 
 const Wrapper = styled.div<{modalOpen?: boolean, brew?: string}>`
   display: flex;
@@ -20,7 +20,6 @@ type Props = {
 export const Nav = ({ children, modalOpen }: Props) => {
     const brew = useContext(Ctx)
 
-    console.log(brew)
     return (
         <Wrapper modalOpen={modalOpen} brew={brew}>
             {children}

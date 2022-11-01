@@ -3,7 +3,7 @@ import { Client, PlaceData } from '@googlemaps/google-maps-services-js'
 
 const client = new Client({})
 
-export default async function beers(
+export default async function brews(
   req: NextApiRequest,
   res: NextApiResponse<Partial<PlaceData>[] | string>
 ) {
@@ -20,7 +20,7 @@ export default async function beers(
     })
     res.status(200).json(response.data.results)
   } catch(err) {
-    res.status(500).json('Uh oh - beers failed')
+    res.status(500).json('Uh oh - brews failed')
     // res.status(500).json(response.data.error_message)
   }
 }
