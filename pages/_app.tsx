@@ -22,7 +22,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <html data-theme='COFFEE' />
         <title>bikes, beats, and brews</title>
         <meta name="description" content="bike to brews while listening to beats" />
         <link rel="icon" href="/images/favicon.ico" />
