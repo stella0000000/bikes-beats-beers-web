@@ -1,3 +1,6 @@
+import { BREW } from "@utils/constants";
+import { BrewContext } from "@utils/context";
+import { useContext } from "react";
 import styled from "styled-components";
 
 const PredictionList = styled.ul`
@@ -11,7 +14,7 @@ const PredictionList = styled.ul`
   }
 `
 
-const Prediction = styled.div`
+const Prediction = styled.div<{brew?: string}>`
   font-size: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -24,7 +27,7 @@ const Prediction = styled.div`
   }
 
   &:hover {
-    color: #ffa0d7;
+    color: ${props => props.brew === BREW.COFFEE ? '#ff0095' : '#ffa0d7'};
   }
 
   @media only screen and (min-width: 650px) {
@@ -58,19 +61,21 @@ export const Predictions: React.FC<PredictionsProps> = ({
   setLocated,
   located
 }) => {
-  if (!predictions || located) return null;
+  const brew = useContext(BrewContext)
 
+  if (!predictions || located) return null;
   return (
       <PredictionList>
           {predictions.map((prediction: Prediction) =>
               <Prediction
-                  key={predictions.indexOf(prediction)}
-                  onClick={() => {
-                    setUserData('locationInput', prediction.description)
-                    setUserData('placeID', prediction.place_id)
-                    setPredictions(undefined)
-                    setLocated(true)
-                  }}
+                brew={brew}
+                key={predictions.indexOf(prediction)}
+                onClick={() => {
+                  setUserData('locationInput', prediction.description)
+                  setUserData('placeID', prediction.place_id)
+                  setPredictions(undefined)
+                  setLocated(true)
+                }}
               >
                   {prediction.description}
               </Prediction>

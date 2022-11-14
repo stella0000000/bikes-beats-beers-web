@@ -12,6 +12,7 @@
   --border-color: #b4b4b4;
   --border-active: #B5A642;
   --placeholder-color: #bebebe;
+  --highlight-color: #b5a64w;
 }
 
 *[data-theme='COFFEE'] {
@@ -23,6 +24,7 @@
   --border-color: #bbff00;
   --border-active: #62795e;
   --placeholder-color: #636363;
+  --highlight-color: #ff0095;
 }
 
 html,
@@ -140,10 +142,10 @@ ul, li {
 }
 
 ::selection {
-  background: #B5A642;
+  background: var(--highlight-color);
 }
 ::-moz-selection {
-  background: #B5A642;
+  background: var(--highlight-color);
 }
 
 /* @media (prefers-color-scheme: dark) {
