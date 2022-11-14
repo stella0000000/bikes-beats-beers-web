@@ -1,7 +1,12 @@
+export enum BREW {
+    COFFEE = 'COFFEE',
+    BEER = 'BEER'
+}
+
 export enum BUBBLES {
     BIKES = 'BIKES',
     BEATS = 'BEATS',
-    BEERS = 'BEERS',
+    BREWS = 'BREWS',
 }
 
 export enum MOOD {

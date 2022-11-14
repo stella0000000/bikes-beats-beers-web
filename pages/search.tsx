@@ -1,25 +1,28 @@
 import Link from 'next/link'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import debounce from 'lodash.debounce'
 import styled from 'styled-components'
 import { Screen } from '@components/screen/screen'
 import { View } from '@components/screen/view'
 import { Bubble } from '@components/bubble'
 import { Nav } from '@components/screen/nav'
-import { BikeSearch } from '@components/search/bike'
+import { BrewSearch } from '@components/search/brew'
 import { Prediction } from '@components/predictions/predictions'
 import { BeatSearch } from '@components/search/beat'
 import { BUBBLES } from '@utils/constants'
+import { BrewContext } from '@utils/context'
 
 const SearchWrapper = styled.div`
   height: 100%;
   overflow-x: hidden;
 `
+
 type Props = {
   modalOpen: boolean
 }
 
 const Search = ({ modalOpen }: Props) => {
+  const brew = useContext(BrewContext)
   const views = useRef(null)
   // custom hook => can return context
   const [userData, setUserData] = useState<{
@@ -82,7 +85,7 @@ const Search = ({ modalOpen }: Props) => {
         setSelectedBubble={setSelectedBubble}
       >
         <View id={BUBBLES.BIKES}>
-          <BikeSearch
+          <BrewSearch
             predictions={predictions}
             setPredictions={setPredictions}
             located={located}
@@ -112,6 +115,7 @@ const Search = ({ modalOpen }: Props) => {
           href={
             { pathname: '/journey',
               query: {
+                brew: brew,
                 radius: userData.radius,
                 lat: userData.coords?.[0],
                 lng: userData.coords?.[1],
@@ -122,7 +126,7 @@ const Search = ({ modalOpen }: Props) => {
           <button
             disabled={buttonDisabled}
             onClick={() => setButtonDisabled(true)}
-          >FIND BEATS AND BEERS
+          >MY BEATS AND BREWS
           </button>
         </Link>
       </Nav>
@@ -140,3 +144,6 @@ export default Search
  * userData custom hook
  * 
  */
+
+// can't find bike routes
+// how about a car route --> like bali, no designated bike lanes

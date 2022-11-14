@@ -1,8 +1,9 @@
-import React, { MutableRefObject } from "react"
+import { BrewContext } from "@utils/context"
+import React, { MutableRefObject, useContext } from "react"
 import styled from "styled-components"
-import { BUBBLES } from "../../utils/constants"
+import { BREW, BUBBLES } from "../../utils/constants"
 
-const Container = styled.div<{modalOpen?: boolean}>`
+const Container = styled.div<{modalOpen?: boolean, brew?: string}>`
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     display: flex;
@@ -30,6 +31,7 @@ export const Screen = ({
     views,
     setSelectedBubble
 }: Props) => {
+    const brew = useContext(BrewContext)
     const numChildren = children.length
 
     const handleScroll = (e: any) => {
@@ -40,11 +42,11 @@ export const Screen = ({
             } else {
                 setSelectedBubble(BUBBLES.BEATS)
             }
-        } else if (numChildren ===3) {
+        } else if (numChildren === 3) {
             if (ele.scrollLeft < ele.scrollWidth/3 - ele.scrollWidth/6) {
                 setSelectedBubble(BUBBLES.BIKES)
             } else if (ele.scrollLeft > ele.scrollWidth/3) { // fix for center
-                setSelectedBubble(BUBBLES.BEERS)
+                setSelectedBubble(BUBBLES.BREWS)
             } else {
                 setSelectedBubble(BUBBLES.BEATS)
             }
@@ -55,6 +57,7 @@ export const Screen = ({
         <Container
             ref={views}
             modalOpen={modalOpen}
+            brew={brew}
             onScroll={e => handleScroll(e)}
         >
             {children}

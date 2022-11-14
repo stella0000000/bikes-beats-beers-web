@@ -1,9 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 import styles from '@styles/Home.module.css'
+import { BREW } from '@utils/constants'
+import { BrewContext } from '@utils/context';
+
+const Wrapper = styled.div<{brew?: string}>`
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 const About = styled.div`
   padding-top: 5px;
@@ -15,13 +26,14 @@ const About = styled.div`
   }
 `
 
-const Icons = styled.div`
+const Icons = styled.div<{brew?: string}>`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  -webkit-filter: invert(100%); /* Safari/Chrome */
-  filter: invert(100%);
+  -webkit-filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
+  filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
 `
+
 const Start = styled.button`
   margin-top: 200px;
   cursor: default;
@@ -32,12 +44,17 @@ const Start = styled.button`
 `
 
 const Home: NextPage = () => {
+  const brew = useContext(BrewContext)
   const [idx, setIdx] = useState(0)
-  const images = [
-    <Image key={0} src="/bike.png" alt="bike" width={210} height={110} />,
-    <Image key={1} src="/beat.png" alt="bike" width={145} height={110} />,
-    <Image key={2} src="/beer.png" alt="bike" width={125} height={110} />
-  ]
+  const bike = <Image key={0} src="/bike.png" alt="bike" width={210} height={110} />
+  const beat = <Image key={1} src="/beat.png" alt="beat" width={145} height={110} />
+  const beverage = <Image
+                      key={1}
+                      src={`/${brew?.toLowerCase()}.png`}
+                      alt="brew"
+                      width={brew === BREW.BEER ? 125 : 110}
+                      height={110} />
+  const images = [bike, beat, beverage]
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,8 +65,8 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
-        <Icons>
+      <Wrapper brew={brew}>
+        <Icons brew={brew}>
           {images[idx]}
         </Icons>
         <About>
@@ -58,7 +75,7 @@ const Home: NextPage = () => {
         <Link href="/search">
           <Start>START YOUR JOURNEY</Start>
         </Link>
-      </main>
+      </Wrapper>
     </div>
   )
 }

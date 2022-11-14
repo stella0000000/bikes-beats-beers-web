@@ -13,7 +13,6 @@ const Content = styled.div`
   flex-direction: column;
   font-size: 15px;
   height: 70%;
-  color: #d0d0d0;
 
   @media only screen and (min-width: 700px) {
     font-size: 20px;

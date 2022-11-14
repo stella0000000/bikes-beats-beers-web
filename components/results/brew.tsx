@@ -1,4 +1,6 @@
+import { BrewContext } from "@utils/context"
 import Image from "next/image"
+import { useContext } from "react"
 import styled from "styled-components"
 
 const Logo = styled.div`
@@ -13,7 +15,6 @@ const Content = styled.div`
   flex-direction: column;
   font-size: 15px;
   height: 70%;
-  color: #d0d0d0;
 
   @media only screen and (min-width: 700px) {
     font-size: 20px;
@@ -33,33 +34,35 @@ const Details = styled.div`
 `
 
 // fix type
-export const BeerResult = ({
+export const BrewResult = ({
   destination,
   details
 }: any) => {
-    const formatPriceAndRating = (price: number, rating: string) => {
-        if (price && rating) {
-          return ("$").repeat(destination.price_level) + ` / ` + `✰ ${destination.rating} ✰`
-        } else if (price) {
-          return ("$").repeat(destination.price_level)
-        } else {
-          return `✰ ${destination.rating} ✰`
-        }
-      }
+  const brew = useContext(BrewContext)
+  
+  const formatPriceAndRating = (price: number, rating: string) => {
+    if (price && rating) {
+      return ("$").repeat(destination.price_level) + ` / ` + `✰ ${destination.rating} ✰`
+    } else if (price) {
+      return ("$").repeat(destination.price_level)
+    } else {
+      return `✰ ${destination.rating} ✰`
+    }
+  }
+  
+  const formatReview = (review: string) => {
+    const maxLength = 150
+    if (review.length > maxLength) {
+      return `${review.slice(0, maxLength)}...`
+    } else {
+      return review
+    }
+  }
     
-      const formatReview = (review: string) => {
-        const maxLength = 150
-        if (review.length > maxLength) {
-          return `${review.slice(0, maxLength)}...`
-        } else {
-          return review
-        }
-      }
-      
     return (
         <>
           <Logo>
-            <Image src="/beer.png" alt="beer" width={100} height={90} />
+            <Image src={`/${brew?.toLowerCase()}.png`} alt="brew" width={100} height={90} />
           </Logo>
           <Content>
               <a href={details.url} target="_blank" rel="noreferrer">{destination.name} ↗</a>
