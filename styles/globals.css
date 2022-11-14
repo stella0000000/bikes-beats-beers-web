@@ -18,6 +18,11 @@
   cursor: default;
   --bg-color: #C9C6BD;
   --text-color: black;
+  --link-color: #ff0095;
+  --subtext-color: #4d4d4d;
+  --border-color: #bbff00;
+  --border-active: #62795e;
+  --placeholder-color: #636363;
 }
 
 html,
