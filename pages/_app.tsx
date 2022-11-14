@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import '@styles/globals.css'
 import { BurgerMenu } from '@components/burgerMenu'
 import { Modal } from '@components/modal'
-import { Ctx } from '@utils/context'
+import { BrewContext } from '@utils/context'
 import { getBrew } from '@utils/getBrew'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -22,11 +22,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <html data-theme='BEER' />
         <title>bikes, beats, and brews</title>
         <meta name="description" content="bike to brews while listening to beats" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <Ctx.Provider value={brew.current}>
+      <BrewContext.Provider value={brew.current}>
         {router.pathname !== "/" ?
           (
             <>
@@ -38,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
         
         <Component {...pageProps} modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </Ctx.Provider>
+      </BrewContext.Provider>
     </>
   )
 }

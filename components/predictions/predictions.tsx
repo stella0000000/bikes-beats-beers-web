@@ -1,13 +1,8 @@
 import styled from "styled-components";
 
 const PredictionList = styled.ul`
-  position: absolute;
   top: 270px;
-  z-index: 1000;
-  padding: 0px 10px 7px 12px;
-  background-color: #000;
   width: 85vw;
-  color: #c9c9c9;
 
   @media only screen and (min-width: 650px) {
     width: 61vw;
@@ -22,7 +17,6 @@ const Prediction = styled.div`
   white-space: nowrap;
   overflow: hidden;
   padding: 2px 5px;
-  cursor: default;
   text-align: left;
 
   &:not(:last-child) {

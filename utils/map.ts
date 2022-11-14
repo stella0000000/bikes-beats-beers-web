@@ -19,22 +19,26 @@ const googleMaps = new Client({})
 export const fetchBrew = async (brew: string | string[] | undefined, lat: string | string[], lng: string | string[], radius: string | string[]): Promise<Partial<PlaceData> | string> => {
   const keyword = brew === BREW.COFFEE ? 'coffee' : 'bar'
 
-  try {
-    const response = await googleMaps.placesNearby({
-      params: {
-          location: [parseFloat(lat.toString()), parseFloat(lng.toString())],
-          radius: parseFloat(radius.toString()!), // meters
-          keyword,
-          opennow: true,
-          key: process.env.GOOGLE_KEY!
-      },
-      timeout: 1000,
-    })
-
-    return response.data.results[Math.floor(Math.random()*response.data.results.length)]
-  } catch(err) {
-    return `brew, ${err}`
+  return new Promise(async (res, rej) => {
+    try {
+      const response = await googleMaps.placesNearby({
+        params: {
+            location: [parseFloat(lat.toString()), parseFloat(lng.toString())],
+            radius: parseFloat(radius.toString()!), // meters
+            keyword,
+            opennow: true,
+            key: process.env.GOOGLE_KEY!
+            // key: '123'
+        },
+        timeout: 1000,
+      })
+  
+      res(response.data.results[Math.floor(Math.random()*response.data.results.length)])
+    } catch(err: any) {
+      rej(err.response.data.error_message)
+    }
   }
+  )
 }
 
 

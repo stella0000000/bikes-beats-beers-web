@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { Ctx } from '@utils/context'
+import { BrewContext } from '@utils/context'
 import { BREW } from '@utils/constants'
 
 const About = styled.div<{brew?: string}>`
@@ -33,7 +33,7 @@ export const Modal: React.FC<ModalProps> = ({
   modalOpen,
   setModalOpen
 }) => {
-  const brew = useContext(Ctx)
+  const brew = useContext(BrewContext)
 
   if (!modalOpen) return null
 

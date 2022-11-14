@@ -1,14 +1,13 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { BREW } from "@utils/constants";
-import { Ctx } from "@utils/context";
+import { BrewContext } from "@utils/context";
 
 const Wrapper = styled.div<{modalOpen?: boolean, brew?: string}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background: ${props => props.brew === BREW.COFFEE ? '#C9C6BD' : 'black'};
   filter: ${props => props.modalOpen ? 'blur(20px)' : 'none'};
 `
 
@@ -18,7 +17,7 @@ type Props = {
 }
 
 export const Nav = ({ children, modalOpen }: Props) => {
-    const brew = useContext(Ctx)
+    const brew = useContext(BrewContext)
 
     return (
         <Wrapper modalOpen={modalOpen} brew={brew}>

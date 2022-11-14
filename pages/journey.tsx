@@ -19,13 +19,6 @@ import { BeatResult } from '@components/results/beat'
 import { BrewResult } from '@components/results/brew'
 import { BikeResult } from '@components/results/bike'
 
-const NewJourneyButton = styled.button<{brew?: string}>`
-  cursor: default;
-  background: ${props => props.brew === BREW.COFFEE ? '#C9C6BD' : 'black'};
-  color: ${props => props.brew === BREW.COFFEE ? 'black' : '#ffa0d7'};
-  border: 2px solid #b4b4b4;
-`
-
 // fix type
 type ServerSideProps = {
   destination: any
@@ -75,7 +68,7 @@ const Journey = ({
           <Bubble bubble={BUBBLES.BREWS} selected={selectedBubble === BUBBLES.BREWS}/>
         </div>
         <Link href='/search'>
-          <NewJourneyButton>↻ NEW JOURNEY</NewJourneyButton>
+          <button>↻ NEW JOURNEY</button>
         </Link>
       </Nav>
     </>
@@ -91,26 +84,30 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
   let { radius, lat, lng, mood, brew } = ctx.query
 
   if (!radius || !lat || !lng || !mood ) {
-    return {
-      redirect: {
+    return Promise.resolve({
+        redirect: {
         destination: '/search',
         permanent: false
       }
-    }
+    })
   }
 
-  const [destination, playlist] = await Promise.all([fetchBrew(brew, lat, lng, radius), fetchPlaylist(mood)])
-  const bikeRide = await fetchBikeRide(destination, lat, lng)
-  const details = await fetchDetails(destination)
-  const weather = await fetchWeather(lat, lng)
+  return fetchBrew(brew, lat, lng, radius)
+    .then(async (destination) => {
+      const bikeRide = await fetchBikeRide(destination, lat!, lng!)
+      const details = await fetchDetails(destination)
+      const weather = await fetchWeather(lat!, lng!)
+      const playlist = await fetchPlaylist(mood!)
 
-  return {
-    props: {
-      destination,
-      playlist,
-      bikeRide,
-      details,
-      weather
-    }
-  }
+      return {
+        props: {
+          destination,
+          playlist,
+          bikeRide,
+          details,
+          weather
+        }
+      }
+    })
+
 }

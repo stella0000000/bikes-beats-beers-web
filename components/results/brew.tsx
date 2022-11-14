@@ -1,4 +1,4 @@
-import { Ctx } from "@utils/context"
+import { BrewContext } from "@utils/context"
 import Image from "next/image"
 import { useContext } from "react"
 import styled from "styled-components"
@@ -38,7 +38,7 @@ export const BrewResult = ({
   destination,
   details
 }: any) => {
-  const brew = useContext(Ctx)
+  const brew = useContext(BrewContext)
   
   const formatPriceAndRating = (price: number, rating: string) => {
     if (price && rating) {
