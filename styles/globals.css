@@ -12,7 +12,7 @@
   --border-color: #b4b4b4;
   --border-active: #B5A642;
   --placeholder-color: #bebebe;
-  --highlight-color: #b5a64w;
+  --highlight-color: #b5a642;
 }
 
 *[data-theme='COFFEE'] {
@@ -21,10 +21,10 @@
   --text-color: black;
   --link-color: #ff0095;
   --subtext-color: #4d4d4d;
-  --border-color: #bbff00;
-  --border-active: #62795e;
+  --border-color: #000;
+  --border-active: #bbff00;
   --placeholder-color: #636363;
-  --highlight-color: #ff0095;
+  --highlight-color: #bbff00;
 }
 
 html,
@@ -49,13 +49,17 @@ a {
   color: var(--link-color);
   text-decoration: underline;
   text-decoration-style: wavy;
-  text-decoration-color: #B5A642;
+  text-decoration-color: var(--highlight-color);
 }
 
 a:hover {
   cursor: default;
   background-color: var(--link-color);
   color: var(--bg-color);
+}
+
+label {
+  color: var(--text-color)
 }
 
 input {

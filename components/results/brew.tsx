@@ -1,11 +1,12 @@
+import { BREW } from "@utils/constants"
 import { BrewContext } from "@utils/context"
 import Image from "next/image"
 import { useContext } from "react"
 import styled from "styled-components"
 
-const Logo = styled.div`
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
+const Logo = styled.div<{brew?: string}>`
+  -webkit-filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
+  filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
 `
 
 const Content = styled.div`
@@ -61,7 +62,7 @@ export const BrewResult = ({
     
     return (
         <>
-          <Logo>
+          <Logo brew={brew}>
             <Image src={`/${brew?.toLowerCase()}.png`} alt="brew" width={100} height={90} />
           </Logo>
           <Content>
