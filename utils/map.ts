@@ -28,7 +28,6 @@ export const fetchBrew = async (brew: string | string[] | undefined, lat: string
             keyword,
             opennow: true,
             key: process.env.GOOGLE_KEY!
-            // key: '123'
         },
         timeout: 1000,
       })
