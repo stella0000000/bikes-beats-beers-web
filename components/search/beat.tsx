@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { MOOD, SPEED } from '@utils/constants'
+import { BREW, MOOD, SPEED } from '@utils/constants'
+import { BrewContext } from '@utils/context'
 
-const Logo = styled.div`
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
+const Logo = styled.div<{brew?: string}>`
+  -webkit-filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
+  filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
 `
 
 const Moods = styled.div`
@@ -14,16 +15,18 @@ const Moods = styled.div`
   margin-top: 30px;
 `
 
-const Label = styled.label<{checked?: boolean}>`
+const Label = styled.label<{checked?: boolean, brew?: string}>`
   margin: 10px;
   font-size: 30px;
   display: flex;
+  color: ${props => props.checked ? (props.brew === 'COFFEE' ? '#ff0095': '#ffa0d7') : (props.brew === 'COFFEE' ? '#000': '#fff')};
+
   align-items: center;
-  color: ${props => props.checked ? '#ffa0d7' : '#c9c9c9'};
   display: flex;
+  color: {}
 
   &:hover {
-    color: #ffa0d7;
+    color: ${props => props.brew === 'COFFEE' ? '#ff0095': '#ffa0d7'};
   }
 
   @media only screen and (min-width: 700px) {
@@ -53,6 +56,7 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
   transitTime,
   setUserData,
 }) => {
+  const brew = useContext(BrewContext)
   const [speed, setSpeed] = useState<number | undefined>(undefined)
 
   const checkMood = (mood: string, speed: number) => {
@@ -73,11 +77,11 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
 
   return (
     <>
-      <Logo>
+      <Logo brew={brew}>
         <Image src="/beat.png" alt="bike" width={110} height={90} />
       </Logo>
       <Moods>
-        <Label checked={mood === MOOD.SWEAT}>
+        <Label checked={mood === MOOD.SWEAT} brew={brew}>
           <input
             type="checkbox"
             checked={mood === MOOD.SWEAT}
@@ -85,7 +89,7 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
           />
           <Selection>{`${MOOD.SWEAT}`}</Selection>
         </Label>
-        <Label checked={mood === MOOD.RELAX}>
+        <Label checked={mood === MOOD.RELAX} brew={brew}>
           <input
             type="checkbox"
             checked={mood === MOOD.RELAX}
@@ -93,7 +97,7 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
           />
           <Selection>{`${MOOD.RELAX}`}</Selection>
         </Label>
-        <Label checked={mood === MOOD.RANDOM}>
+        <Label checked={mood === MOOD.RANDOM} brew={brew}>
           <input
             type="checkbox"
             checked={mood === MOOD.RANDOM}
