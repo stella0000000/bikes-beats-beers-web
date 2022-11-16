@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <html data-theme={brew.current}>
+    <>
       <Head>
         <title>bikes, beats, and brews</title>
         <meta name="description" content="bike to brews while listening to beats" />
@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         
         <Component {...pageProps} modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </BrewContext.Provider>
-    </html>
+    </>
   )
 }
 
