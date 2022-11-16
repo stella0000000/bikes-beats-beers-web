@@ -12,9 +12,9 @@ export default function Document() {
   }
 
   return (
-    <Html>
+    <Html data-theme={brew.current}>
       <Head />
-        <body data-theme={brew.current}>
+        <body>
           <Main />
           <NextScript />
         </body>
