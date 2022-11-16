@@ -10,6 +10,8 @@ export default function Document() {
     const hour = date.getHours()
     brew.current = getBrew(hour)
   }
+
+  console.log(brew.current)
   
   return (
     <Html data-theme={brew.current}>
