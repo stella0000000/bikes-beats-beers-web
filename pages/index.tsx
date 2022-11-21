@@ -52,7 +52,7 @@ const Home: NextPage = () => {
                       key={1}
                       src={`/${brew?.toLowerCase()}.png`}
                       alt="brew"
-                      width={brew === BREW.BEER ? 125 : 110}
+                      width={brew === BREW.BEER ? 115 : 105}
                       height={110} />
   const images = [bike, beat, beverage]
 
