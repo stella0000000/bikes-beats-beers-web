@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import '@styles/globals.css'
 import { BurgerMenu } from '@components/burgerMenu'
 import { Modal } from '@components/modal'
@@ -13,15 +13,24 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const brew = useRef<string>()
 
+  useEffect(() => {
+    const date = new Date()
+    const hour = date.getHours()
+    document.documentElement.dataset.theme = getBrew(hour)
+  }, [])
+
   if (!brew.current) {
     const date = new Date()
     const hour = date.getHours()
     brew.current = getBrew(hour)
   }
 
+  // console.log({ theme: brew.current })
+
   return (
-    <html data-theme={brew.current}>
+    <>
       <Head>
+        {/* <html data-theme={brew.current} /> */}
         <title>bikes, beats, and brews</title>
         <meta name="description" content="bike to brews while listening to beats" />
         <link rel="icon" href="/images/favicon.ico" />
@@ -39,7 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         
         <Component {...pageProps} modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </BrewContext.Provider>
-    </html>
+    </>
   )
 }
 
