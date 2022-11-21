@@ -54,7 +54,7 @@ a {
 
 a:hover {
   cursor: default;
-  background-color: var(--link-color);
+  /* background-color: var(--link-color); */
   color: var(--bg-color);
 }
 
@@ -137,6 +137,10 @@ ul, li {
   padding: 0;
 }
 
+span {
+  margin-right: 10px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -163,6 +167,12 @@ ul, li {
     position: relative;
   }
 } */
+
+@media not all and (min-resolution:.001dpcm) {
+  img[loading="lazy"] {
+    clip-path: inset(0.5px);
+  }
+}
 
 @media only screen and (min-width: 650px) {
   input, button {

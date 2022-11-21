@@ -46,14 +46,14 @@ const Start = styled.button`
 const Home: NextPage = () => {
   const brew = useContext(BrewContext)
   const [idx, setIdx] = useState(0)
-  const bike = <Image key={0} src="/bike.png" alt="bike" width={210} height={110} />
-  const beat = <Image key={1} src="/beat.png" alt="beat" width={145} height={110} />
+  const bike = <Image key={0} src="/bike.png" alt="bike" width={210} height={110} priority={true} />
+  const beat = <Image key={1} src="/beat.png" alt="beat" width={145} height={110} priority={true} />
   const beverage = <Image
                       key={1}
                       src={`/${brew?.toLowerCase()}.png`}
                       alt="brew"
                       width={brew === BREW.BEER ? 115 : 105}
-                      height={110} />
+                      height={110} priority={true} />
   const images = [bike, beat, beverage]
 
   useEffect(() => {

@@ -78,7 +78,7 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
   return (
     <>
       <Logo brew={brew}>
-        <Image src="/beat.png" alt="bike" width={110} height={90} />
+        <Image src="/beat.png" alt="bike" width={110} height={90} priority={true} />
       </Logo>
       <Moods>
         <Label checked={mood === MOOD.SWEAT} brew={brew}>

@@ -8,7 +8,7 @@ const Circle = styled.span<{isSelected?: boolean}>`
   background-color: ${props => props.isSelected ? '#B5A642' : 'none'};
   border-radius: 50%;
   display: inline-block;
-  margin: 0px 0px 20px 0px;
+  margin-bottom: 20px;
   
   &:not(:last-child) {
     margin-right: 25px;

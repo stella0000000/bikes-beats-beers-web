@@ -82,7 +82,7 @@ export const BrewSearch: React.FC<BrewSearchProps> = ({
   return (
     <>
       <Logo brew={brew}>
-        <Image src="/bike.png" alt="bike" width={180} height={95} />
+        <Image src="/bike.png" alt="bike" width={180} height={95} priority={true} />
       </Logo>
       <Location
           type="text"
