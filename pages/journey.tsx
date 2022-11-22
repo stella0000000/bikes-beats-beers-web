@@ -19,6 +19,10 @@ import { BeatResult } from '@components/results/beat'
 import { BrewResult } from '@components/results/brew'
 import { BikeResult } from '@components/results/bike'
 
+const BubbleWrap = styled.div`
+  display: flex;
+`
+
 // fix type
 type ServerSideProps = {
   destination: any
@@ -62,11 +66,11 @@ const Journey = ({
       </Screen>
 
       <Nav modalOpen={modalOpen}>
-        <div>
+        <BubbleWrap>
           <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
           <Bubble bubble={BUBBLES.BEATS} selected={selectedBubble === BUBBLES.BEATS} />
           <Bubble bubble={BUBBLES.BREWS} selected={selectedBubble === BUBBLES.BREWS}/>
-        </div>
+        </BubbleWrap>
         <Link href='/search'>
           <button>↻ NEW JOURNEY</button>
         </Link>

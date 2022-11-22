@@ -9,7 +9,9 @@ const Circle = styled.span<{isSelected?: boolean}>`
   border-radius: 50%;
   display: inline-block;
   margin-bottom: 20px;
-  
+`
+
+const BubbleWrap = styled.div`
   &:not(:last-child) {
     margin-right: 25px;
   }
@@ -22,8 +24,10 @@ type Props = {
 
 export const Bubble = ({ bubble, selected }: Props) => {
     return (
-        <Link href={`#${bubble}`}>
-            <Circle isSelected={selected} />
-        </Link>
+      <BubbleWrap>
+      <Link href={`#${bubble}`}>
+          <Circle isSelected={selected} />
+      </Link>
+      </BubbleWrap>
     )
 }

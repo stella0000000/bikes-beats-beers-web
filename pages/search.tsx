@@ -17,6 +17,10 @@ const SearchWrapper = styled.div`
   overflow-x: hidden;
 `
 
+const BubbleWrap = styled.div`
+  display: flex;
+`
+
 type Props = {
   modalOpen: boolean
 }
@@ -107,10 +111,10 @@ const Search = ({ modalOpen }: Props) => {
         </View>
       </Screen>
       <Nav modalOpen={modalOpen}>
-        <div>
+        <BubbleWrap>
           <Bubble bubble={BUBBLES.BIKES} selected={selectedBubble === BUBBLES.BIKES}/>
           <Bubble bubble={BUBBLES.BEATS} selected={selectedBubble === BUBBLES.BEATS} />
-        </div>
+        </BubbleWrap>
         <Link
           href={
             { pathname: '/journey',
