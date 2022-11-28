@@ -45,7 +45,7 @@ export const Screen = ({
         } else if (numChildren === 3) {
             if (ele.scrollLeft < ele.scrollWidth/3 - ele.scrollWidth/6) {
                 setSelectedBubble(BUBBLES.BIKES)
-            } else if (ele.scrollLeft > ele.scrollWidth/3) { // fix for center
+            } else if (ele.scrollLeft > ele.scrollWidth/3) {
                 setSelectedBubble(BUBBLES.BREWS)
             } else {
                 setSelectedBubble(BUBBLES.BEATS)

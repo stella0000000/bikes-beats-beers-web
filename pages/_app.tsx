@@ -25,8 +25,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     brew.current = getBrew(hour)
   }
 
-  // console.log({ theme: brew.current })
-
   return (
     <>
       <Head>

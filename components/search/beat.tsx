@@ -19,7 +19,10 @@ const Label = styled.label<{checked?: boolean, brew?: string}>`
   margin: 10px;
   font-size: 30px;
   display: flex;
-  color: ${props => props.checked ? (props.brew === 'COFFEE' ? '#ff0095': '#ffa0d7') : (props.brew === 'COFFEE' ? '#000': '#fff')};
+  color: ${props => props.checked
+            ? props.brew === 'COFFEE' ? '#ff0095': '#ffa0d7'
+            : props.brew === 'COFFEE' ? '#000': '#fff'
+          };
 
   align-items: center;
   display: flex;
@@ -67,7 +70,6 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
   useEffect(() => {
     const interpolateRadius = (speed: number) => {
       if (speed && transitTime) setUserData('radius', (speed * transitTime / 60 * 1000))
-      // mood kmh - transitTime min - radius meter
     }
 
     setUserData('mood', mood)

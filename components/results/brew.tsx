@@ -34,7 +34,6 @@ const Details = styled.div`
   }
 `
 
-// fix type
 export const BrewResult = ({
   destination,
   details
@@ -77,5 +76,3 @@ export const BrewResult = ({
         </>
     )
 }
-
-// make clear i did not write the review

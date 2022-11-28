@@ -1,5 +1,6 @@
 import {
   Client,
+  OpeningHours,
   PlaceData,
   TravelMode,
   TravelRestriction,
@@ -16,6 +17,10 @@ const googleMaps = new Client({})
  * @returns destination
  */
 
+export type Destination = {
+  destination: string | Partial<PlaceData>
+}
+
 export const fetchBrew = async (brew: string | string[] | undefined, lat: string | string[], lng: string | string[], radius: string | string[]): Promise<Partial<PlaceData> | string> => {
   const keyword = brew === BREW.COFFEE ? 'coffee' : 'bar'
 
@@ -31,8 +36,7 @@ export const fetchBrew = async (brew: string | string[] | undefined, lat: string
         },
         timeout: 1000,
       })
-  
-      res(response.data.results[Math.floor(Math.random()*response.data.results.length)])
+      return res(response.data.results[Math.floor(Math.random()*response.data.results.length)])  
     } catch(err: any) {
       rej(err.response.data.error_message)
     }
@@ -40,8 +44,6 @@ export const fetchBrew = async (brew: string | string[] | undefined, lat: string
   )
 }
 
-
-// fix type
 /**
  * 
  * @param destination 
@@ -49,6 +51,11 @@ export const fetchBrew = async (brew: string | string[] | undefined, lat: string
  * @param lng 
  * @returns bike ride distance, duration
  */
+
+export type BikeRide = {
+  distance: string
+  duration: string
+}
 
 export const fetchBikeRide = async (destination: any, lat: string | string[], lng: string | string[]) => {
   try {
@@ -64,13 +71,11 @@ export const fetchBikeRide = async (destination: any, lat: string | string[], ln
         },
         timeout: 1000
       })
-      // console.log(distance.data.rows[0].elements[0].distance)
-      // console.log(distance.data.rows[0].elements[0].duration)
-      return {
+      const googleDestination: BikeRide = {
         distance: distance.data.rows[0].elements[0].distance.text,
         duration: distance.data.rows[0].elements[0].duration.text
       }
-      // return distance
+      return googleDestination
     }
   } catch(err) {
     return console.log('distance', err)
@@ -84,6 +89,12 @@ export const fetchBikeRide = async (destination: any, lat: string | string[], ln
  * @returns hours, url, review
  */
 
+export type Detail = {
+  hours?: OpeningHours
+  url?: string
+  review: string
+}
+
 export const fetchDetails = async (destination: any) => {
   if (typeof destination !== 'string') {
     try {
@@ -95,11 +106,13 @@ export const fetchDetails = async (destination: any) => {
         timeout: 1000,
       })
 
-      return {
+      const detailsResult: Detail =  {
         hours: response.data.result.opening_hours,
         url: response.data.result.url,
         review: response.data.result.reviews![Math.floor(Math.random()*response.data.result.reviews!.length)].text
       }
+
+      return detailsResult
     } catch(err) {
       return console.log('details', err)
     }

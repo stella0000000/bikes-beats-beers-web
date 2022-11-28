@@ -30,10 +30,8 @@ const Content = styled.div`
   }
 `
 
-// fix type
 export const BeatResult = ({ playlist }: any) => {
   const brew = useContext(BrewContext)
-  
     return (
         <>
         <Logo brew={brew}>

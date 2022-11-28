@@ -1,8 +1,15 @@
 import { BREW } from "@utils/constants"
 import { BrewContext } from "@utils/context"
+import { BikeRide } from "@utils/map"
+import { WxData } from "@utils/weather"
 import Image from "next/image"
 import { useContext } from "react"
 import styled from "styled-components"
+
+type BikeResultProps = {
+  bikeRide: BikeRide
+  weather: WxData
+}
 
 const Logo = styled.div<{brew?: string}>`
   -webkit-filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
@@ -22,8 +29,10 @@ const Content = styled.div`
   }
 `
 
-// fix type
-export const BikeResult = ({ bikeRide, weather }: any) => {
+export const BikeResult = ({
+  bikeRide,
+  weather
+}: BikeResultProps) => {
   const brew = useContext(BrewContext)
   
     return (
@@ -34,7 +43,7 @@ export const BikeResult = ({ bikeRide, weather }: any) => {
           <Content>
               {bikeRide.distance}<br></br>
               {bikeRide.duration}<br></br><br></br>
-              {parseInt(weather.temp)}°, {weather.description}
+              {parseInt(weather.temp.toString())}°, {weather.description}
           </Content>
         </>
     )

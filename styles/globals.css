@@ -135,10 +135,6 @@ ul, li {
   padding: 0;
 }
 
-/* span {
-  margin-right: 10px;
-} */
-
 * {
   box-sizing: border-box;
 }
@@ -153,18 +149,6 @@ ul, li {
 ::-moz-selection {
   background: var(--highlight-color);
 }
-
-/* @media (prefers-color-scheme: dark) {
-  html, body {
-    color-scheme: dark;
-    overflow: hidden;
-  }
-  body {
-    color: rgb(167, 167, 167);
-    background: #000;
-    position: relative;
-  }
-} */
 
 @media not all and (min-resolution:.001dpcm) {
   img[loading="lazy"] {

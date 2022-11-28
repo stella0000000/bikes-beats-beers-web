@@ -23,7 +23,6 @@ const BubbleWrap = styled.div`
   display: flex;
 `
 
-// fix type
 type ServerSideProps = {
   destination: any
   playlist: any
@@ -81,7 +80,6 @@ const Journey = ({
 
 export default Journey
 
-// fix type
 export const getServerSideProps = async (ctx: GetServerSidePropsContext):
   Promise<GetServerSidePropsResult<ServerSideProps>
 > => {

@@ -28,7 +28,6 @@ type Props = {
 const Search = ({ modalOpen }: Props) => {
   const brew = useContext(BrewContext)
   const views = useRef(null)
-  // custom hook => can return context
   const [userData, setUserData] = useState<{
     locationInput?: string,
     placeID?: string,
@@ -139,15 +138,3 @@ const Search = ({ modalOpen }: Props) => {
 }
 
 export default Search
-
-/**
- * ERROR HANDLING
- * check types
- * 
- * debounce
- * userData custom hook
- * 
- */
-
-// can't find bike routes
-// how about a car route --> like bali, no designated bike lanes

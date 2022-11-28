@@ -1,3 +1,8 @@
+export type WxData = {
+  temp: number
+  description: string
+}
+
 /**
  * 
  * @param lat 
@@ -9,10 +14,12 @@
     try {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.OPEN_WEATHER_MAP_KEY}`)
       const data = await response.json()
-      return {
+      const result: WxData = {
         temp: data.main.temp - 273.15,
         description: data.weather[0].description,
       }
+
+      return result
     } catch(err) {
       return console.log('weather', err)
     }
