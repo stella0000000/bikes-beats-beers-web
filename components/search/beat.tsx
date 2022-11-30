@@ -15,21 +15,18 @@ const Moods = styled.div`
   margin-top: 30px;
 `
 
-const Label = styled.label<{checked?: boolean, brew?: string}>`
+const Label = styled.label<{checked?: boolean}>`
   margin: 10px;
   font-size: 30px;
   display: flex;
-  color: ${props => props.checked
-            ? props.brew === 'COFFEE' ? '#ff0095': '#ffa0d7'
-            : props.brew === 'COFFEE' ? '#000': '#fff'
-          };
+  color: ${props => props.checked ? '#ffa0d7' : '#fff'};
 
   align-items: center;
   display: flex;
   color: {}
 
   &:hover {
-    color: ${props => props.brew === 'COFFEE' ? '#ff0095': '#ffa0d7'};
+    color: #ffa0d7;
   }
 
   @media only screen and (min-width: 700px) {
@@ -83,7 +80,7 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
         <Image src="/beat.png" alt="bike" width={110} height={90} priority={true} />
       </Logo>
       <Moods>
-        <Label checked={mood === MOOD.SWEAT} brew={brew}>
+        <Label checked={mood === MOOD.SWEAT}>
           <input
             type="checkbox"
             checked={mood === MOOD.SWEAT}
@@ -91,7 +88,7 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
           />
           <Selection>{`${MOOD.SWEAT}`}</Selection>
         </Label>
-        <Label checked={mood === MOOD.RELAX} brew={brew}>
+        <Label checked={mood === MOOD.RELAX}>
           <input
             type="checkbox"
             checked={mood === MOOD.RELAX}
@@ -99,7 +96,7 @@ export const BeatSearch: React.FC<BeatSearchProps> = ({
           />
           <Selection>{`${MOOD.RELAX}`}</Selection>
         </Label>
-        <Label checked={mood === MOOD.RANDOM} brew={brew}>
+        <Label checked={mood === MOOD.RANDOM}>
           <input
             type="checkbox"
             checked={mood === MOOD.RANDOM}

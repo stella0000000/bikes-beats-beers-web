@@ -17,13 +17,13 @@
 
 *[data-theme='COFFEE'] {
   cursor: default;
-  --bg-color: #C9C6BD;
-  --text-color: black;
-  --link-color: #ff0095;
-  --subtext-color: #4d4d4d;
-  --border-color: #000;
+  --bg-color: #746a5b;
+  --text-color: white;
+  --link-color: #ffa0d7;
+  --subtext-color: #dcdcdc;
+  --border-color: #b4b4b4;
   --border-active: #bbff00;
-  --placeholder-color: #636363;
+  --placeholder-color: #cccccc;
   --highlight-color: #bbff00;
 }
 
