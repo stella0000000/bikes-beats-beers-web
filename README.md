@@ -16,8 +16,8 @@
 <img width="550" alt="Screen Shot 2022-10-27 at 20 31 35 " src="https://user-images.githubusercontent.com/112890821/198422126-81eb4b55-cd08-412f-8655-53a425c2817f.png">
 <img width="550" alt="Screen Shot 2022-10-27 at 20 31 51 " src="https://user-images.githubusercontent.com/112890821/198422138-44dade1b-b9fa-4360-bd62-bfc9c41c9d76.png">
 
-## Get which brew
-```
+## Get brew type
+```javascript
 export const getBrew = (hour: number) => {
   // between 5:00 - 15:00 coffee
   if (5 < hour && hour < 15) {
@@ -28,8 +28,8 @@ export const getBrew = (hour: number) => {
 }
 ```
 
-## Use the brew to find a destination: cafe or bar
-```
+## Feed the brew type to find a destination: cafe or bar
+```javascript
 export const fetchBrew = async (
   brew: string | string[] | undefined,
   lat: string | string[],
