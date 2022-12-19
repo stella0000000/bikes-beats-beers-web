@@ -1,6 +1,7 @@
 ## Bikes beats and brews
 - Share your location, desired transit time, and cycling mood.
 - Be surprised with a playlist that suits your mood, and a destination to meet a friend.
+- Local time is used to determine the brew type (coffee or beer), which then modulates the global theme and destination API call.
 
 ## Technologies
 - Next.js
@@ -16,7 +17,7 @@
 <img width="550" alt="Screen Shot 2022-10-27 at 20 31 35 " src="https://user-images.githubusercontent.com/112890821/198422126-81eb4b55-cd08-412f-8655-53a425c2817f.png">
 <img width="550" alt="Screen Shot 2022-10-27 at 20 31 51 " src="https://user-images.githubusercontent.com/112890821/198422138-44dade1b-b9fa-4360-bd62-bfc9c41c9d76.png">
 
-## Get brew type
+## Determine brew type
 ```javascript
 export const getBrew = (hour: number) => {
   // between 5:00 - 15:00 coffee
