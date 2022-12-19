@@ -16,5 +16,48 @@
 <img width="550" alt="Screen Shot 2022-10-27 at 20 31 35 " src="https://user-images.githubusercontent.com/112890821/198422126-81eb4b55-cd08-412f-8655-53a425c2817f.png">
 <img width="550" alt="Screen Shot 2022-10-27 at 20 31 51 " src="https://user-images.githubusercontent.com/112890821/198422138-44dade1b-b9fa-4360-bd62-bfc9c41c9d76.png">
 
+## Get which brew
+```
+export const getBrew = (hour: number) => {
+  // between 5:00 - 15:00 coffee
+  if (5 < hour && hour < 15) {
+    return BREW.COFFEE
+  } else {
+    return BREW.BEER
+  }
+}
+```
+
+## Use the brew to find a destination: cafe or bar
+```
+export const fetchBrew = async (
+  brew: string | string[] | undefined,
+  lat: string | string[],
+  lng: string | string[],
+  radius: string | string[]
+):Promise<Partial<PlaceData> | string> => {
+  const keyword = brew === BREW.COFFEE ? 'coffee' : 'bar'
+
+  return new Promise(async (res, rej) => {
+    try {
+      const response = await googleMaps.placesNearby({
+        params: {
+            location: [parseFloat(lat.toString()), parseFloat(lng.toString())],
+            radius: parseFloat(radius.toString()!), // meters
+            keyword,
+            opennow: true,
+            key: process.env.GOOGLE_KEY!
+        },
+        timeout: 1000,
+      })
+      return res(response.data.results[Math.floor(Math.random()*response.data.results.length)])  
+    } catch(err: any) {
+      rej(err.response.data.error_message)
+    }
+  }
+  )
+}
+```
+
 ## Future considerations
 - `Tailwind` for performance
