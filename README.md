@@ -5,6 +5,7 @@
 
 ## Technologies
 - Next.js
+- TypeScript
 - Google Maps API
 - Spotify API
 - styled-components
