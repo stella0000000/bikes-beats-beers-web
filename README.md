@@ -1,7 +1,7 @@
 ## Bikes beats and brews
 - Share your location, desired transit time, and cycling mood.
 - Be surprised with a playlist that suits your mood, and a destination to meet a friend.
-- Local time is used to determine the brew type (coffee or beer), which then modulates the global theme and destination API call.
+- Local time is used to determine the brew type (coffee or beer), which then modulates the global theme and API calls.
 
 ## Technologies
 - Next.js
@@ -30,7 +30,7 @@ export const getBrew = (hour: number) => {
 }
 ```
 
-## Feed the brew type to find a destination: cafe or bar
+## Feed the brew type to API to locate a: cafe or bar
 ```javascript
 export const fetchBrew = async (
   brew: string | string[] | undefined,
