@@ -56,6 +56,8 @@ const Home: NextPage = () => {
                       height={110} priority={true} />
   const images = [bike, beat, beverage]
 
+  console.log(brew)
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIdx((idx + 1) % images.length)
