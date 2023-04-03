@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import { useSession, getSession } from "next-auth/react"
 import { useState, useEffect, useRef, useContext } from 'react'
-import debounce from 'lodash.debounce'
+// import debounce from 'lodash.debounce'
 import styled from 'styled-components'
 import { Screen } from '@components/screen/screen'
 import { View } from '@components/screen/view'
@@ -26,6 +27,7 @@ type Props = {
 }
 
 const Search = ({ modalOpen }: Props) => {
+  const { data: session, status } = useSession()
   const brew = useContext(BrewContext)
   const views = useRef(null)
   const [userData, setUserData] = useState<{
@@ -79,6 +81,9 @@ const Search = ({ modalOpen }: Props) => {
   //     setLocation(e?.target?.value)
   // }
   // const debouncedLocation = debounce(e => updateLocation(e), 200);
+
+  if (status === "loading") return <p>Loading...</p>
+  if (status === "unauthenticated") return <p>Please sign in</p>
 
   return (
     <SearchWrapper>

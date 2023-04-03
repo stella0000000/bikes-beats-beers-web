@@ -2,9 +2,9 @@ import Link from 'next/link'
 import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult } from 'next'
-import { useRef, useState } from 'react'
+import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { BREW, BUBBLES } from '@utils/constants'
+import { BUBBLES } from '@utils/constants'
 import {
   fetchBrew,
   fetchBikeRide,
@@ -18,6 +18,7 @@ import { View } from '@components/screen/view'
 import { BeatResult } from '@components/results/beat'
 import { BrewResult } from '@components/results/brew'
 import { BikeResult } from '@components/results/bike'
+import { useSession } from 'next-auth/react'
 
 const BubbleWrap = styled.div`
   display: flex;
@@ -43,8 +44,35 @@ const Journey = ({
   weather,
   modalOpen
 }: ServerSideProps & JourneyProps) => {
+  const { data: session, status } = useSession()
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
+
+  useEffect(() => {
+    const createJourney = async () => {
+      const newJourney = {
+        distance: bikeRide.distance,
+        destination: destination.name
+      }
+
+      const response = await fetch (`api/journey/create`, {
+        method: `POST`,
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify(newJourney)
+      })
+
+      // console.log(bikeRide.distance, destination.name)
+      const data = await response.json()
+      console.log({ data })
+    }
+
+    if (bikeRide && destination) createJourney()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [destination])
+
+
+  if (status === "loading") return <p>Loading...</p>
+  if (status === "unauthenticated") return <p>Please sign in</p>
   
   return (
     <>

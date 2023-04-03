@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['i.scdn.co', 'mosaic.scdn.co'],
+    domains: ['i.scdn.co', 'mosaic.scdn.co', 'seed-mix-image.spotifycdn.com'],
   },
 }
 
