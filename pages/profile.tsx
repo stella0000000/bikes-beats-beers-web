@@ -1,9 +1,13 @@
-import { useContext } from 'react'
 import styled from 'styled-components'
-import { BrewContext } from '@utils/context'
+import { View } from '@components/screen/view'
 import { getSession, useSession } from 'next-auth/react'
 import { GetServerSideProps } from 'next/types'
 import prisma from 'lib/prisma'
+
+const Welcome = styled.div`
+  margin: 20px;
+  font-size: 25px;
+`
 
 type ServerSideProps = {
   journeys: any
@@ -18,18 +22,34 @@ const Profile = ({
   journeys
 }: Props & ServerSideProps) => {
   const { data: session, status } = useSession()
-  const brew = useContext(BrewContext)
+  const months = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"]
 
-  // get user's journeys
-  console.log({ journeys })
+  const formatDate = (date: any) => {
+    const input = new Date(date)
+    const month = months[input.getUTCMonth()]
+    const day = input.getUTCDate()
+
+    return `${day} ${month}`
+  }
 
   if (status === "loading") return <p>Loading...</p>
   if (status === "unauthenticated") return <p>Please sign in</p>
 
   return (
-    <>
-      Welcome {session?.user?.name}!
-    </>
+    <View id={'placeholder'}>
+      <Welcome>
+        Your previous journeys, {session?.user?.name}:
+      </Welcome>
+
+      {journeys.map((journey: any) =>
+      <li key={Math.random()}>
+        <div>{formatDate(journey.created_at)}</div>
+        <div>{journey.distance} to {journey.destination}</div>
+        
+      </li>
+      )}
+    </View>
   )
 }
 

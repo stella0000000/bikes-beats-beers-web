@@ -35,14 +35,14 @@ const Icons = styled.div<{brew?: string}>`
   filter: ${props => props.brew === BREW.COFFEE ? 'none' : 'invert(100%)'};
 `
 
-const Start = styled.button`
-  margin-top: 200px;
-  cursor: default;
+// const Start = styled.button`
+//   margin-top: 200px;
+//   cursor: default;
 
-  @media only screen and (min-width: 750px) {
-    font-size: 40px;
-  }
-`
+//   @media only screen and (min-width: 750px) {
+//     font-size: 40px;
+//   }
+// `
 
 const Home: NextPage = () => {
   const brew = useContext(BrewContext)

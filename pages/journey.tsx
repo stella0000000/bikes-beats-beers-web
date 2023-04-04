@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult } from 'next'
-import { SyntheticEvent, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { BUBBLES } from '@utils/constants'
 import {
