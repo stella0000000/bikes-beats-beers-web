@@ -42,8 +42,14 @@ function MyApp({
           {router.pathname !== "/" ?
             (
               <>
-                <BurgerMenu modalOpen={modalOpen} setModalOpen={setModalOpen} />
-                <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+                <BurgerMenu
+                  modalOpen={modalOpen}
+                  setModalOpen={setModalOpen}
+                />
+                <Modal
+                  modalOpen={modalOpen}
+                  setModalOpen={setModalOpen}
+                />
               </>
             )
             : null

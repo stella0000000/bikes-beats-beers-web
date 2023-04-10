@@ -44,6 +44,7 @@ const Journey = ({
   weather,
   modalOpen
 }: ServerSideProps & JourneyProps) => {
+  console.log({ bikeRide })
   const { data: session, status } = useSession()
   const views = useRef(null)
   const [selectedBubble, setSelectedBubble] = useState<string>(BUBBLES.BIKES)
@@ -61,14 +62,14 @@ const Journey = ({
         body: JSON.stringify(newJourney)
       })
 
-      // console.log(bikeRide.distance, destination.name)
+      console.log(bikeRide.distance, destination.name)
       const data = await response.json()
       console.log({ data })
     }
 
-    if (bikeRide && destination) createJourney()
+    // if (bikeRide && destination) createJourney()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [destination])
+  }, [bikeRide, destination])
 
 
   if (status === "loading") return <p>Loading...</p>
@@ -115,7 +116,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext):
 
   if (!radius || !lat || !lng || !mood ) {
     return Promise.resolve({
-        redirect: {
+      redirect: {
         destination: '/search',
         permanent: false
       }
