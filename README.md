@@ -1,6 +1,7 @@
 ## Bikes beats and brews
 - Share your location, desired transit time, and cycling mood.
 - Be surprised with a playlist that suits your mood, and a destination to meet a friend.
+- Cycling moods are mapped to estimated cycling speeds. The product of the speed and desired transit time equates to a radius. This radius, and the user's starting location are used to locate a destination.
 - Local time is used to determine the brew type (coffee or beer), which then modulates the global theme and API calls.
 
 ## Technologies
