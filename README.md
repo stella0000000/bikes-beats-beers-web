@@ -1,3 +1,6 @@
+## Motivation
+- One day, my friend and I couldn't decide where to take a beer, so...
+
 ## Bikes beats and brews
 - Share your location, desired transit time, and cycling mood.
 - Be surprised with a playlist that suits your mood, and a destination to meet a friend.
