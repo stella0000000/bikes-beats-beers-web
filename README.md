@@ -1,5 +1,5 @@
 ## Motivation
-- One day, my friend and I couldn't decide where to take a beer, so...
+- One day, my friend and I couldn't decide where to take a beer, so... I made the site Bikes Beats and Beers and to celebrate I took a bike ride one morning. Then! I was like why would I get a beer at 10:00 in the morning? So...
 
 ## Bikes beats and brews
 - Share your location, desired transit time, and cycling mood.
